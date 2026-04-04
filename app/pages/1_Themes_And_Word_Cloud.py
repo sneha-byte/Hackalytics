@@ -13,7 +13,7 @@ st.set_page_config(
 st.title("Hackathon Themes and Word Cloud")
 st.subheader("What problems have hackers been focused on?")
 
-BASE_DIR = Path(__file__).resolve().parents[3]
+BASE_DIR = Path(__file__).resolve().parents[2]
 THEME_TREND_PATH = BASE_DIR / "data" / "theme_trend.csv"
 
 # folder where your png files live
@@ -22,24 +22,7 @@ THEME_TREND_PATH = BASE_DIR / "data" / "theme_trend.csv"
 # word_cloud_2010.png
 WORD_CLOUD_DIR = BASE_DIR / "data"
 
-st.markdown(
-    """
-    <style>
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        padding-left: 3rem;
-        padding-right: 3rem;
-    }
 
-    section[data-testid="stSidebar"] .stSlider label {
-        font-size: 1.05rem !important;
-        font-weight: 700 !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 
 @st.cache_data
