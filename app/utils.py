@@ -47,7 +47,7 @@ def get_selected_year():
     if "selected_year" not in st.session_state:
         st.session_state.selected_year = MAX_YEAR
 
-    st.sidebar.header("Filters")
+    st.sidebar.header("Year Filter")
     st.session_state.selected_year = st.sidebar.slider(
         "Select year",
         min_value=MIN_YEAR,
@@ -58,12 +58,6 @@ def get_selected_year():
     return st.session_state.selected_year
 
 def parse_themes(theme_value):
-    """
-    Handles either:
-    - plain comma-separated strings
-    - list/dict-like strings such as:
-      "[{'id': 1, 'name': 'AI'}, {'id': 2, 'name': 'Health'}]"
-    """
     if pd.isna(theme_value):
         return []
 
