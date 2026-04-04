@@ -3,6 +3,7 @@ import pandas as pd
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from utils import load_theme_trend, load_word_cloud
 import word_cloud as wc
 import matplotlib.pyplot as plt
 from io import BytesIO
@@ -18,7 +19,7 @@ def show_word_cloud():
     # Load data to get available years
     # fix file paths and columns for this function
     try:
-        df = pd.read_csv("data/processed/processed_projects.csv")
+        df = load_word_cloud()
 
         available_years = sorted(df['year'].unique())
     except FileNotFoundError:
@@ -60,41 +61,11 @@ def show_word_cloud():
     else:
         st.warning("No data available. Please check your data processing pipeline.")
 
-def show_theme_for_year():
-    try: 
-        df = pd.read_csv("../../data/theme_trend.csv")
-        available_years = sorted(df['period'].unique())
-
-        selected_year = st.selectbox(
-            "Select Year for Theme Trends:",
-            available_years
-        )
-        if st.button("Show Theme Trends", type="primary"):
-            st.subheader(f"Theme Trends for {selected_year}")
-            year_df = df[df['period'] == selected_year]
-            #make bar chart of top 10 themes, sorted descending
-            year_df = year_df.nlargest(10, 'count')
-            year_df = year_df.iloc[::-1]  # reverse order so highest value appears at the top of the horizontal bar chart
-            st.title(f"Top 10 Themes in {selected_year[0:4]}")
-
-            # Create horizontal bar chart with custom colors
-            fig, ax = plt.subplots(figsize=(10, 6))
-            colors = ["blue", "orange", "green", "red", "purple", "brown", "pink", "gray", "olive", "cyan"]
-            bars = ax.barh(year_df['theme'], year_df['count'], color=colors[:len(year_df)])
-            ax.set_xlabel('Count')
-            ax.set_title(f"Top 10 Themes in {selected_year[0:4]}")
-
-            st.pyplot(fig)
-        
-        
-    except FileNotFoundError:
-        st.error("Data file not found. Please ensure 'data/theme_trend.csv' exists.")
-        return
     
 def show_theme_trends():
     try: 
-        df = pd.read_csv("../../data/theme_trend.csv")
-        available_years = sorted(df['period'].unique())
+        df = load_theme_trend()
+        available_years = sorted(df['year'].unique())
 
         start_year = st.selectbox(
             "Select Year for Theme Trends:",
@@ -108,7 +79,7 @@ def show_theme_trends():
 
         if st.button("Show Theme Trends", type="primary"):
             st.subheader(f"Theme Trends for {start_year} to {end_year}")
-            year_df = df[(df['period'] >= start_year) & (df['period'] <= end_year)]
+            year_df = df[(df['year'] >= start_year) & (df['year'] <= end_year)]
             
             # Find top 10 most common themes across the entire time period
             top_themes = year_df.groupby('theme')['count'].sum().nlargest(10).index.tolist()
@@ -116,19 +87,19 @@ def show_theme_trends():
             # Filter to only those top themes
             trend_df = year_df[year_df['theme'].isin(top_themes)]
             
-            st.title(f"Trendline of Top Themes from {start_year[0:4]} to {end_year[0:4]}")
+            st.title(f"Trendline of Top Themes from {start_year} to {end_year}")
 
             # Create line chart
             fig, ax = plt.subplots(figsize=(12, 6))
             
             # Plot each theme as a separate line
             for theme in top_themes:
-                theme_data = trend_df[trend_df['theme'] == theme].sort_values('period')
-                ax.plot(theme_data['period'], theme_data['count'], marker='o', label=theme)
+                theme_data = trend_df[trend_df['theme'] == theme].sort_values('year')
+                ax.plot(theme_data['year'], theme_data['count'], marker='o', label=theme)
             
-            ax.set_xlabel('Period')
+            ax.set_xlabel('Year')
             ax.set_ylabel('Count')
-            ax.set_title(f"Top 10 Theme Trends from {start_year[0:4]} to {end_year[0:4]}")
+            ax.set_title(f"Top 10 Theme Trends from {start_year} to {end_year}")
             ax.legend(loc='best', fontsize=9)
             ax.grid(True, alpha=0.3)
 
@@ -141,3 +112,4 @@ def show_theme_trends():
     
 if __name__ == "__main__":
     show_theme_trends()
+    show_word_cloud()
