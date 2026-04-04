@@ -1,83 +1,275 @@
 from pathlib import Path
-import pandas as pd
-import streamlit as st
 import ast
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data" / "processed"
+import matplotlib.pyplot as plt
+import pandas as pd
+import streamlit as st
+from wordcloud import WordCloud
 
-WORD_CLOUD_PATH = DATA_DIR / "word_counts_by_year.csv"
-TOOLS_PATH = DATA_DIR / "tool_counts_by_year.csv"
-LOCATIONS_PATH = DATA_DIR / "hackathon_locations_cleaned.csv"
-HACKATHONS_PATH = DATA_DIR / "processed_hackathons.csv"
-PROJECTS_PATH = DATA_DIR / "processed_projects.csv"
+APP_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = APP_DIR.parent
+DATA_DIR = PROJECT_ROOT / "data"
+
+PROCESSED_HACKATHONS_PATH = DATA_DIR / "processed_hackathons.csv"
+PROJECTS_PATH = DATA_DIR / "projects.csv"
+THEME_TREND_PATH = DATA_DIR / "theme_trend.csv"
+TOOL_TREND_PATH = DATA_DIR / "tool_trend.csv"
+WORD_CLOUD_PATH = DATA_DIR / "word_cloud_output.csv"
+LOCATION_TREND_PATH = DATA_DIR / "location_trend.csv"
+LOCATIONS_PATH = DATA_DIR / "locations.csv"
 
 MIN_YEAR = 2009
 MAX_YEAR = 2025
 
-@st.cache_data
-def load_word_counts():
-    df = pd.read_csv(WORD_CLOUD_PATH)
-    return df
+
+def init_page():
+    st.set_page_config(
+        page_title="Hackalytics",
+        page_icon="🏆",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+    apply_global_css()
+
+    if "selected_year" not in st.session_state:
+        st.session_state["selected_year"] = MAX_YEAR
+
+
+def apply_global_css():
+    st.markdown(
+        """
+        <style>
+        .block-container {
+            padding-top: 1.5rem;
+            padding-bottom: 2rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            max-width: 1400px;
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: #667085;
+            margin-bottom: 1.25rem;
+        }
+
+        div[data-testid="stMetric"] {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 14px 16px;
+        }
+
+        div[data-testid="stSlider"] label p {
+            font-size: 1.05rem !important;
+            font-weight: 700 !important;
+        }
+
+        div[data-baseweb="slider"] > div > div {
+            height: 8px !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_sidebar(show_home_message=False):
+    with st.sidebar:
+        st.title("Hackalytics")
+        st.caption("Hackathon trend explorer")
+
+        if show_home_message:
+            st.info("Home shows overall trends across all years.")
+            st.write(f"Data range: **{MIN_YEAR}–{MAX_YEAR}**")
+            return None
+
+        year = st.slider(
+            "Select year",
+            min_value=MIN_YEAR,
+            max_value=MAX_YEAR,
+            key="selected_year",
+            help="This selected year stays the same across the other pages.",
+        )
+        st.caption(f"Currently viewing **{year}**")
+        return year
+
 
 @st.cache_data
-def load_tool_counts():
-    df = pd.read_csv(TOOLS_PATH)
-    return df
+def load_processed_hackathons():
+    return pd.read_csv(PROCESSED_HACKATHONS_PATH)
 
-@st.cache_data
-def load_locations():
-    df = pd.read_csv(LOCATIONS_PATH)
-    return df
-
-@st.cache_data
-def load_hackathons():
-    df = pd.read_csv(HACKATHONS_PATH)
-    if "submission_start" in df.columns:
-        df["submission_start"] = pd.to_datetime(df["submission_start"], errors="coerce")
-        df["year"] = df["submission_start"].dt.year
-    return df
 
 @st.cache_data
 def load_projects():
-    df = pd.read_csv(PROJECTS_PATH)
+    return pd.read_csv(PROJECTS_PATH)
+
+
+@st.cache_data
+def load_theme_trend():
+    df = pd.read_csv(THEME_TREND_PATH)
+    if "year" not in df.columns:
+        if "period" in df.columns:
+            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
 
-def get_selected_year():
-    if "selected_year" not in st.session_state:
-        st.session_state.selected_year = MAX_YEAR
 
-    st.sidebar.header("Year Filter")
-    st.session_state.selected_year = st.sidebar.slider(
-        "Select year",
-        min_value=MIN_YEAR,
-        max_value=MAX_YEAR,
-        value=st.session_state.selected_year,
-        step=1,
+@st.cache_data
+def load_tool_trend():
+    df = pd.read_csv(TOOL_TREND_PATH)
+    return df
+
+
+@st.cache_data
+def load_word_cloud():
+    df = pd.read_csv(WORD_CLOUD_PATH)
+    if "year" not in df.columns:
+        if "period" in df.columns:
+            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    return df
+
+
+@st.cache_data
+def load_location_trend():
+    df = pd.read_csv(LOCATION_TREND_PATH)
+    if "year" not in df.columns:
+        if "period" in df.columns:
+            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    return df
+
+
+@st.cache_data
+def load_locations():
+    return pd.read_csv(LOCATIONS_PATH)
+
+
+def filter_year(df, year):
+    if "year" not in df.columns:
+        return df.iloc[0:0].copy()
+    return df[df["year"] == year].copy()
+
+
+def top_n(df, group_col, value_col="count", n=10):
+    if df.empty or group_col not in df.columns:
+        return pd.DataFrame(columns=[group_col, value_col])
+
+    if value_col not in df.columns:
+        df = df.copy()
+        df[value_col] = 1
+
+    return (
+        df.groupby(group_col, as_index=False)[value_col]
+        .sum()
+        .sort_values(value_col, ascending=False)
+        .head(n)
     )
-    return st.session_state.selected_year
 
-def parse_themes(theme_value):
+
+def parse_theme_names(theme_value):
     if pd.isna(theme_value):
         return []
 
-    text = str(theme_value).strip()
-
-    if not text:
-        return []
-
     try:
-        parsed = ast.literal_eval(text)
-
+        parsed = ast.literal_eval(theme_value)
         if isinstance(parsed, list):
             names = []
             for item in parsed:
                 if isinstance(item, dict) and "name" in item:
                     names.append(str(item["name"]).strip())
-                else:
-                    names.append(str(item).strip())
-            return [x for x in names if x]
+            return names
     except Exception:
-        pass
+        return []
 
-    return [x.strip() for x in text.split(",") if x.strip()]
+    return []
+
+
+def build_home_metrics():
+    hackathons = load_processed_hackathons().copy()
+    projects = load_projects().copy()
+    theme_trend = load_theme_trend().copy()
+    tool_trend = load_tool_trend().copy()
+    locations = load_locations().copy()
+
+    all_theme_names = []
+    if "themes" in hackathons.columns:
+        for value in hackathons["themes"]:
+            all_theme_names.extend(parse_theme_names(value))
+
+    if "built-with" in projects.columns:
+        tools = (
+            projects["built-with"]
+            .fillna("")
+            .astype(str)
+            .str.split(",")
+            .explode()
+            .str.strip()
+        )
+        tools = tools[tools != ""]
+        unique_tools = int(tools.nunique())
+    else:
+        unique_tools = 0
+
+    location_col = "geo_location" if "geo_location" in locations.columns else "location"
+    if location_col in locations.columns:
+        clean_locations = locations[location_col].dropna().astype(str).str.strip()
+        clean_locations = clean_locations[clean_locations != ""]
+        unique_locations = int(clean_locations.nunique())
+    else:
+        unique_locations = 0
+
+    total_hackathons = len(hackathons)
+    total_projects = len(projects)
+    unique_themes = int(pd.Series(all_theme_names).nunique()) if all_theme_names else 0
+
+    top_themes_df = top_n(theme_trend, "theme", "count", 10)
+    top_tools_df = top_n(tool_trend, "tool", "count", 10)
+
+    if location_col in locations.columns:
+        top_locations_df = (
+            clean_locations.value_counts()
+            .head(10)
+            .rename_axis("location")
+            .reset_index(name="count")
+        )
+    else:
+        top_locations_df = pd.DataFrame(columns=["location", "count"])
+
+    return {
+        "total_hackathons": total_hackathons,
+        "total_projects": total_projects,
+        "unique_themes": unique_themes,
+        "unique_tools": unique_tools,
+        "unique_locations": unique_locations,
+        "top_themes": top_themes_df,
+        "top_tools": top_tools_df,
+        "top_locations": top_locations_df,
+    }
+
+
+def make_wordcloud_figure(word_df, year):
+    fig, ax = plt.subplots(figsize=(10, 4.8))
+
+    if word_df.empty:
+        ax.text(0.5, 0.5, f"No word cloud data for {year}", ha="center", va="center", fontsize=16)
+        ax.axis("off")
+        return fig
+
+    frequencies = dict(zip(word_df["word"], word_df["count"]))
+
+    wc = WordCloud(
+        width=1200,
+        height=550,
+        background_color="white",
+        collocations=False,
+        max_words=80,
+    ).generate_from_frequencies(frequencies)
+
+    ax.imshow(wc, interpolation="bilinear")
+    ax.axis("off")
+    return fig
