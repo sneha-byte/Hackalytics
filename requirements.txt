@@ -1,0 +1,6 @@
+pandas
+dotenv
+wordcloud
+matplotlib
+nltk
+pydeck
