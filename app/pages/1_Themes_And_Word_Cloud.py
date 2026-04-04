@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+
 
 st.set_page_config(
     page_title="Themes and Word Cloud",
@@ -13,10 +13,14 @@ st.set_page_config(
 st.title("Hackathon Themes and Word Cloud")
 st.subheader("What problems have hackers been focused on?")
 
-
 BASE_DIR = Path(__file__).resolve().parents[3]
 THEME_TREND_PATH = BASE_DIR / "data" / "theme_trend.csv"
-WORD_CLOUD_PATH = BASE_DIR / "data" / "word_cloud_output.csv"
+
+# folder where your png files live
+# example filenames:
+# word_cloud_2009.png
+# word_cloud_2010.png
+WORD_CLOUD_DIR = BASE_DIR / "data"
 
 st.markdown(
     """
@@ -46,15 +50,6 @@ def load_theme_trend():
     df["year"] = df["period"].dt.year
 
     df["theme"] = df["theme"].fillna("").astype(str).str.strip()
-    df["count"] = pd.to_numeric(df["count"], errors="coerce").fillna(0)
-
-    return df
-
-
-@st.cache_data
-def load_word_cloud():
-    df = pd.read_csv(WORD_CLOUD_PATH)
-    df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["count"] = pd.to_numeric(df["count"], errors="coerce").fillna(0)
 
     return df
@@ -94,10 +89,8 @@ def make_theme_chart(df: pd.DataFrame):
         ax.axis("off")
         return fig
 
-    # Sort ascending so largest bar appears at top in barh
     df = df.sort_values(value_col_name, ascending=True).copy()
 
-    # Shorten very long labels a bit
     df[group_col_name] = df[group_col_name].apply(
         lambda x: x if len(str(x)) <= 28 else str(x)[:28] + "..."
     )
@@ -115,7 +108,6 @@ def make_theme_chart(df: pd.DataFrame):
     ax.tick_params(axis="y", labelsize=11)
     ax.tick_params(axis="x", labelsize=10)
 
-    # Add value labels
     max_val = df[value_col_name].max()
     offset = max(1, max_val * 0.01)
 
@@ -132,46 +124,13 @@ def make_theme_chart(df: pd.DataFrame):
     return fig
 
 
-def make_wordcloud_figure(df: pd.DataFrame):
-    fig, ax = plt.subplots(figsize=(10, 7))
-
-    if df.empty or df["count"].sum() == 0:
-        ax.text(
-            0.5,
-            0.5,
-            "No word cloud data available for this year",
-            ha="center",
-            va="center",
-            fontsize=14,
-            transform=ax.transAxes,
-        )
-        ax.axis("off")
-        return fig
-
-    freq = dict(zip(df["word"], df["count"]))
-
-    wordcloud = WordCloud(
-        width=1200,
-        height=700,
-        background_color="white",
-        collocations=False,
-    ).generate_from_frequencies(freq)
-
-    ax.imshow(wordcloud, interpolation="bilinear")
-    ax.axis("off")
-    ax.set_title("Word Cloud", fontsize=17, weight="bold", pad=12)
-
-    plt.tight_layout()
-    return fig
+def get_wordcloud_image_path(year: int) -> Path:
+    return WORD_CLOUD_DIR / f"word_cloud_{year}.png"
 
 
 theme_df = load_theme_trend()
-word_df = load_word_cloud()
 
-available_years = sorted(
-    set(theme_df["year"].dropna().astype(int).tolist())
-    | set(word_df["year"].dropna().astype(int).tolist() if "year" in word_df.columns else [])
-)
+available_years = sorted(theme_df["year"].dropna().astype(int).tolist())
 
 if available_years:
     min_year = int(min(available_years))
@@ -193,30 +152,15 @@ year = st.sidebar.slider(
 st.session_state["selected_year"] = year
 
 theme_year = filter_year(theme_df, year)
-word_year = filter_year(word_df, year) if "year" in word_df.columns else word_df.copy()
 
-# Remove blank theme names
 theme_year = theme_year[theme_year["theme"] != ""].copy()
 
-# Keep top themes
 group_col_name = "theme"
 value_col_name = "count"
 top_themes_df = top_n(theme_year, group_col_name, value_col_name, n=10)
-
 top_themes_df = top_themes_df[top_themes_df["count"] > 0].copy()
 
-# Keep strongest words
-if not word_year.empty and "word" in word_year.columns and "count" in word_year.columns:
-    word_year = (
-        word_year.groupby("word", as_index=False)["count"]
-        .sum()
-        .sort_values("count", ascending=False)
-        .head(100)
-    )
-else:
-    word_year = pd.DataFrame(columns=["word", "count"])
-
-
+wordcloud_image_path = get_wordcloud_image_path(year)
 
 st.subheader(f"{year} Overview")
 
@@ -228,7 +172,6 @@ with metric_col1:
 with metric_col2:
     st.metric("Total theme mentions", int(theme_year["count"].sum()))
 
-
 col1, col2 = st.columns([1.1, 1])
 
 with col1:
@@ -238,9 +181,10 @@ with col1:
 
 with col2:
     st.markdown("### Word Cloud")
-    wc_fig = make_wordcloud_figure(word_year)
-    st.pyplot(wc_fig, use_container_width=True)
-
+    if wordcloud_image_path.exists():
+        st.image(str(wordcloud_image_path), use_container_width=True)
+    else:
+        st.info(f"No word cloud image found for {year}")
 
 with st.expander("Preview filtered theme data"):
     st.dataframe(theme_year, use_container_width=True)
