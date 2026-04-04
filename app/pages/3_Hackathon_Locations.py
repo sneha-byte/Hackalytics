@@ -3,6 +3,7 @@ import re
 import pandas as pd
 import streamlit as st
 import pydeck as pdk
+from utils import init_page
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -93,6 +94,7 @@ def load_hackathon_data():
 
 df = load_hackathon_data()
 
+init_page()
 # Slider
 min_year = int(df["year"].min())
 max_year = int(df["year"].max())

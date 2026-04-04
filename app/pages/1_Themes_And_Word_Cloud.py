@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from utils import init_page
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -110,6 +110,7 @@ def get_wordcloud_image_path(year: int) -> Path:
 
 
 theme_df = load_theme_trend()
+init_page()
 
 available_years = sorted(theme_df["year"].dropna().astype(int).tolist())
 

@@ -10,6 +10,8 @@ from utils import (
     load_tool_trend
 )
 
+init_page()
+
 # Slider
 min_year = 2009
 max_year = 2025
