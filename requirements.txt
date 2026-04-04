@@ -8,3 +8,4 @@ pydeck
 tqdm
 requests
 streamlit
+dotenv
