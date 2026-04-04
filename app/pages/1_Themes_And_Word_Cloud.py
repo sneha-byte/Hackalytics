@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from utils import load_theme_trend, load_word_cloud
+from utils import load_theme_trend, load_word_cloud, make_wordcloud_figure
 import word_cloud as wc
 import matplotlib.pyplot as plt
 from io import BytesIO
@@ -36,7 +36,7 @@ def show_word_cloud():
             with st.spinner("Generating word cloud..."):
                 try:
                     # Generate the word cloud and get the figure
-                    fig = wc.generate_word_cloud(selected_year, df)
+                    fig = make_wordcloud_figure(df, selected_year)
 
                     # Display in streamlit
                     st.pyplot(fig)
@@ -86,8 +86,6 @@ def show_theme_trends():
             
             # Filter to only those top themes
             trend_df = year_df[year_df['theme'].isin(top_themes)]
-            
-            st.title(f"Trendline of Top Themes from {start_year} to {end_year}")
 
             # Create line chart
             fig, ax = plt.subplots(figsize=(12, 6))
