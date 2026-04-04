@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
@@ -8,7 +10,22 @@ def load_processed_projects():
 
 # Generate word cloud for a given year
 def generate_word_cloud(year):
-    df = load_processed_projects()
+    #df = load_processed_projects()
+
+    font_paths = [
+    "C:\\Windows\\Fonts\\arial.ttf",
+    "C:\\Windows\\Fonts\\Arial.ttf",
+    ]
+
+    font_path = next((f for f in font_paths if os.path.exists(f)), None)
+
+
+    test_df = pd.DataFrame({
+        'year': [2020, 2020, 2021, 2021],
+        'clean_text': ['data science machine learning', 'deep learning ai', 'data analysis visualization', 'machine learning ai']
+    })
+    df=test_df
+
     year_df = df[df["year"] == year]
 
     # Join all cleaned text from that year into one big string
@@ -19,7 +36,7 @@ def generate_word_cloud(year):
     text = ' '.join(word for word in text.split() if word not in stopwords and len(word) > 2)
 
     # Generate the word cloud
-    wordcloud = WordCloud(width=800, height=400, background_color="white").generate(text)
+    wordcloud = WordCloud(width=800, height=400, background_color="white", font_path=font_path).generate(text)
 
     # Display the word cloud
     plt.figure(figsize=(10, 5))
@@ -27,3 +44,6 @@ def generate_word_cloud(year):
     plt.axis("off")
     plt.title(f"Word Cloud for Year {year}")
     plt.show()
+
+if "__main__" == __name__:
+    generate_word_cloud(2020)
