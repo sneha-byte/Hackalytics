@@ -14,38 +14,34 @@ init_page()
 year = render_sidebar()
 
 st.title("Tool Trends")
-st.caption('Answers: "What tools have hackers been using?"')
+st.write("What tools have hackers been using?")
 
 tool_df = load_tool_trend()
 tool_year = filter_year(tool_df, year)
-top_tools_df = top_n(tool_year, "tool", "count", 15)
+top_tools_df = top_n(tool_year, "tool", "count", 10)
+top_tools_df.sort_values("count", ascending=False)
 
-col1, col2 = st.columns([1.2, 0.8])
-
-with col1:
+with st.container():
     st.subheader(f"Most used tools in {year}")
     if top_tools_df.empty:
         st.warning(f"No tool data found for {year}.")
     else:
-        st.bar_chart(top_tools_df.set_index("tool"))
+        st.bar_chart(top_tools_df, x="tool", y="count", use_container_width=True, sort=False)
 
-with col2:
+with st.container():
     st.subheader("Takeaway")
-    if top_tools_df.empty:
-        st.info("No tool trend data is available for this year.")
-    else:
-        top_tools = top_tools_df["tool"].head(5).tolist()
-        st.markdown(
-            f"""
-            In **{year}**, the most common tools were:
+    st.write(f"In **{year}**, hackers were using the following tools:")
 
-            1. **{top_tools[0]}**
-            2. **{top_tools[1]}**
-            3. **{top_tools[2]}**
-            4. **{top_tools[3]}**
-            5. **{top_tools[4]}**
-            """
-        )
+    top5_tools = top_tools_df.head(5)
+    columns = st.columns(min(len(top5_tools), 5))
+    for column, tool_name in zip(columns, top5_tools["tool"].tolist()):
+        with column:
+            current_count = top5_tools.loc[top5_tools["tool"] == tool_name, "count"].iloc[0]
+            try:
+                prev_value = tool_df[(tool_df["year"] == year - 1) & (tool_df["tool"] == tool_name)]["count"].iloc[0]
+            except:
+                prev_value = current_count
+            st.metric(tool_name, current_count, delta=current_count - prev_value)
 
 st.divider()
 st.subheader("Tool detail table")

@@ -12,12 +12,11 @@ st.markdown(
 
 metrics = build_home_metrics()
 
-c1, c2, c3, c4, c5 = st.columns(5)
+c1, c2, c3, c4 = st.columns(4)
 c1.metric("Total Hackathons", f"{metrics['total_hackathons']:,}")
 c2.metric("Total Projects", f"{metrics['total_projects']:,}")
 c3.metric("Unique Themes", f"{metrics['unique_themes']:,}")
 c4.metric("Unique Tools", f"{metrics['unique_tools']:,}")
-c5.metric("Unique Locations", f"{metrics['unique_locations']:,}")
 
 st.divider()
 
@@ -25,23 +24,14 @@ left, right = st.columns(2)
 
 with left:
     st.subheader("What problems have hackers been focused on?")
-    if not metrics["top_themes"].empty:
-        st.bar_chart(metrics["top_themes"].set_index("theme"))
-    else:
-        st.info("No theme data found.")
+    st.bar_chart(metrics["top_themes"], x="theme", y="count", horizontal=True, sort=False)
 
     st.subheader("What tools have hackers been using?")
-    if not metrics["top_tools"].empty:
-        st.bar_chart(metrics["top_tools"].set_index("tool"))
-    else:
-        st.info("No tool data found.")
+    st.bar_chart(metrics["top_tools"], x="tool", y="count", horizontal=True, sort=False)
 
 with right:
     st.subheader("Where are hackathons being held?")
-    if not metrics["top_locations"].empty:
-        st.bar_chart(metrics["top_locations"].set_index("location"))
-    else:
-        st.info("No location data found.")
+    st.bar_chart(metrics["top_locations"], x="location", y="count", horizontal=True, sort=False)
 
 st.divider()
 st.info(
