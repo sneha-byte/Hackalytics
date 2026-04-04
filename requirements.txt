@@ -1,6 +1,9 @@
+scrapy
 pandas
 dotenv
 wordcloud
 matplotlib
 nltk
 pydeck
+tqdm
+requests
