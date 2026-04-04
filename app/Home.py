@@ -1,5 +1,5 @@
 import streamlit as st
-from app.utils import init_page, render_sidebar, build_home_metrics
+from utils import init_page, render_sidebar, build_home_metrics
 
 init_page()
 render_sidebar(show_home_message=True)

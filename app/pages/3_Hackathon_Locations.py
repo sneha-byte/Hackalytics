@@ -1,5 +1,5 @@
 import streamlit as st
-from app.utils import (
+from utils import (
     init_page,
     render_sidebar,
     load_location_trend,

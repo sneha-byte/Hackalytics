@@ -8,7 +8,7 @@ from wordcloud import WordCloud
 
 APP_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_DIR.parent
-DATA_DIR = PROJECT_ROOT / "data" / "processed"
+DATA_DIR = PROJECT_ROOT / "data"
 
 PROCESSED_HACKATHONS_PATH = DATA_DIR / "processed_hackathons.csv"
 PROJECTS_PATH = DATA_DIR / "projects.csv"
@@ -123,9 +123,6 @@ def load_theme_trend():
 @st.cache_data
 def load_tool_trend():
     df = pd.read_csv(TOOL_TREND_PATH)
-    if "year" not in df.columns:
-        if "period" in df.columns:
-            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
 
 

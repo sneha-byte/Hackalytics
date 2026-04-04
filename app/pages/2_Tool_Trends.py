@@ -1,5 +1,5 @@
 import streamlit as st
-from app.utils import (
+from utils import (
     init_page,
     render_sidebar,
     load_theme_trend,
@@ -7,6 +7,7 @@ from app.utils import (
     filter_year,
     top_n,
     make_wordcloud_figure,
+    load_tool_trend
 )
 
 init_page()
