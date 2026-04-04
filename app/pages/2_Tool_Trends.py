@@ -10,8 +10,20 @@ from utils import (
     load_tool_trend
 )
 
-init_page()
-year = render_sidebar()
+# Slider
+min_year = 2009
+max_year = 2025
+default_year = st.session_state.get("selected_year", max_year)
+
+year = st.sidebar.slider(
+    "Select Year",
+    min_value=min_year,
+    max_value=max_year,
+    value=default_year,
+    step=1,
+)
+
+st.session_state["selected_year"] = year
 
 st.title("Tool Trends")
 st.write("What tools have hackers been using?")
