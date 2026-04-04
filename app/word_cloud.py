@@ -10,7 +10,7 @@ def load_processed_projects():
 
 # Generate word cloud for a given year
 def generate_word_cloud(year):
-    #df = load_processed_projects()
+    df = load_processed_projects()
 
     font_paths = [
     "C:\\Windows\\Fonts\\arial.ttf",
@@ -18,13 +18,6 @@ def generate_word_cloud(year):
     ]
 
     font_path = next((f for f in font_paths if os.path.exists(f)), None)
-
-
-    test_df = pd.DataFrame({
-        'year': [2020, 2020, 2021, 2021],
-        'clean_text': ['data science machine learning', 'deep learning ai', 'data analysis visualization', 'machine learning ai']
-    })
-    df=test_df
 
     year_df = df[df["year"] == year]
 
@@ -45,5 +38,3 @@ def generate_word_cloud(year):
     plt.title(f"Word Cloud for Year {year}")
     plt.show()
 
-if "__main__" == __name__:
-    generate_word_cloud(2020)
