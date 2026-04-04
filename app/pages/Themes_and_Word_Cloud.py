@@ -16,6 +16,7 @@ Explore the most common themes and keywords from hackathon projects over differe
 
 def show_word_cloud():
     # Load data to get available years
+    # fix file paths and columns for this function
     try:
         df = pd.read_csv("data/processed/processed_projects.csv")
 
@@ -59,3 +60,36 @@ def show_word_cloud():
     else:
         st.warning("No data available. Please check your data processing pipeline.")
 
+def show_theme_trends():
+    try: 
+        df = pd.read_csv("../../data/theme_trend.csv")
+        available_years = sorted(df['period'].unique())
+
+        selected_year = st.selectbox(
+            "Select Year for Theme Trends:",
+            available_years
+        )
+        if st.button("Show Theme Trends", type="primary"):
+            st.subheader(f"Theme Trends for {selected_year}")
+            year_df = df[df['period'] == selected_year]
+            #make bar chart of top 10 themes, sorted descending
+            year_df = year_df.nlargest(10, 'count')
+            year_df = year_df.iloc[::-1]  # reverse order so highest value appears at the top of the horizontal bar chart
+            st.title(f"Top 10 Themes in {selected_year[0:4]}")
+
+            # Create horizontal bar chart with custom colors
+            fig, ax = plt.subplots(figsize=(10, 6))
+            colors = ["blue", "orange", "green", "red", "purple", "brown", "pink", "gray", "olive", "cyan"]
+            bars = ax.barh(year_df['theme'], year_df['count'], color=colors[:len(year_df)])
+            ax.set_xlabel('Count')
+            ax.set_title(f"Top 10 Themes in {selected_year[0:4]}")
+
+            st.pyplot(fig)
+        
+        
+    except FileNotFoundError:
+        st.error("Data file not found. Please ensure 'data/theme_trend.csv' exists.")
+        return
+    
+if __name__ == "__main__":
+    show_theme_trends()
