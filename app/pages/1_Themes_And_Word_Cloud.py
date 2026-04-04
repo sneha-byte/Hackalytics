@@ -20,7 +20,8 @@ THEME_TREND_PATH = BASE_DIR / "data" / "theme_trend.csv"
 # example filenames:
 # word_cloud_2009.png
 # word_cloud_2010.png
-WORD_CLOUD_DIR = BASE_DIR / "data"
+WORD_CLOUD_DIR = BASE_DIR / "data" / "word_clouds"
+
 
 @st.cache_data
 def load_theme_trend():
