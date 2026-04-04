@@ -54,7 +54,7 @@ def build_processed_projects():
     # Pull out just the year
     hackathons["year"] = hackathons["submission_start"].dt.year
 
-    # Keep only id and year so we can merge year into the projects table
+    # Keep only id and year to merge year into the projects table
     # Rename hackathon id column to match projects table key
     hackathon_years = hackathons[["id", "year"]].copy()
     hackathon_years = hackathon_years.rename(columns={"id": "hackathon_id"})
