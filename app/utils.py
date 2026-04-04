@@ -1,3 +1,4 @@
+from collections import defaultdict
 from pathlib import Path
 import ast
 
@@ -105,49 +106,38 @@ def render_sidebar(show_home_message=False):
 def load_processed_hackathons():
     return pd.read_csv(PROCESSED_HACKATHONS_PATH)
 
-
 @st.cache_data
 def load_projects():
     return pd.read_csv(PROJECTS_PATH)
 
-
 @st.cache_data
 def load_theme_trend():
     df = pd.read_csv(THEME_TREND_PATH)
-    if "year" not in df.columns:
-        if "period" in df.columns:
-            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
-
 
 @st.cache_data
 def load_tool_trend():
     df = pd.read_csv(TOOL_TREND_PATH)
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
-
 
 @st.cache_data
 def load_word_cloud():
     df = pd.read_csv(WORD_CLOUD_PATH)
-    if "year" not in df.columns:
-        if "period" in df.columns:
-            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
-
 
 @st.cache_data
 def load_location_trend():
     df = pd.read_csv(LOCATION_TREND_PATH)
-    if "year" not in df.columns:
-        if "period" in df.columns:
-            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
 
 
 @st.cache_data
 def load_locations():
     return pd.read_csv(LOCATIONS_PATH)
-
 
 def filter_year(df, year):
     if "year" not in df.columns:
@@ -170,85 +160,43 @@ def top_n(df, group_col, value_col="count", n=10):
         .head(n)
     )
 
-
-def parse_theme_names(theme_value):
-    if pd.isna(theme_value):
-        return []
-
-    try:
-        parsed = ast.literal_eval(theme_value)
-        if isinstance(parsed, list):
-            names = []
-            for item in parsed:
-                if isinstance(item, dict) and "name" in item:
-                    names.append(str(item["name"]).strip())
-            return names
-    except Exception:
-        return []
-
-    return []
-
-
+@st.cache_data
 def build_home_metrics():
-    hackathons = load_processed_hackathons().copy()
-    projects = load_projects().copy()
-    theme_trend = load_theme_trend().copy()
-    tool_trend = load_tool_trend().copy()
-    locations = load_locations().copy()
+    hackathons = load_processed_hackathons()
+    projects = load_projects()
+    theme_trend = load_theme_trend()
+    tool_trend = load_tool_trend()
+    location_trend = load_location_trend()
 
-    all_theme_names = []
-    if "themes" in hackathons.columns:
-        for value in hackathons["themes"]:
-            all_theme_names.extend(parse_theme_names(value))
-
-    if "built-with" in projects.columns:
-        tools = (
-            projects["built-with"]
-            .fillna("")
-            .astype(str)
-            .str.split(",")
-            .explode()
-            .str.strip()
-        )
-        tools = tools[tools != ""]
-        unique_tools = int(tools.nunique())
-    else:
-        unique_tools = 0
-
-    location_col = "geo_location" if "geo_location" in locations.columns else "location"
-    if location_col in locations.columns:
-        clean_locations = locations[location_col].dropna().astype(str).str.strip()
-        clean_locations = clean_locations[clean_locations != ""]
-        unique_locations = int(clean_locations.nunique())
-    else:
-        unique_locations = 0
+    all_theme_names = theme_trend["theme"].unique()
+    unique_tools = len(tool_trend["tool"].unique())
 
     total_hackathons = len(hackathons)
     total_projects = len(projects)
-    unique_themes = int(pd.Series(all_theme_names).nunique()) if all_theme_names else 0
+    unique_themes = len(all_theme_names)
 
     top_themes_df = top_n(theme_trend, "theme", "count", 10)
     top_tools_df = top_n(tool_trend, "tool", "count", 10)
 
-    if location_col in locations.columns:
-        top_locations_df = (
-            clean_locations.value_counts()
-            .head(10)
-            .rename_axis("location")
-            .reset_index(name="count")
-        )
-    else:
-        top_locations_df = pd.DataFrame(columns=["location", "count"])
+    location_counts = defaultdict(int)
+    for _, row in location_trend.iterrows():
+        location = row["location"]
+        location_counts[location] += row["count"]
+    location_counts.pop("Online", None)
+    location_counts = dict(sorted(location_counts.items(), key=lambda x: x[1], reverse=True)[:10])
+    location_df = pd.DataFrame([
+        {"location": location, "count": count}
+        for location, count in location_counts.items()
+    ])
 
     return {
         "total_hackathons": total_hackathons,
         "total_projects": total_projects,
         "unique_themes": unique_themes,
         "unique_tools": unique_tools,
-        "unique_locations": unique_locations,
         "top_themes": top_themes_df,
         "top_tools": top_tools_df,
-        "top_locations": top_locations_df,
+        "top_locations": location_df,
     }
 
 
