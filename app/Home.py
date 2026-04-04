@@ -24,14 +24,14 @@ left, right = st.columns(2)
 
 with left:
     st.subheader("What problems have hackers been focused on?")
-    st.bar_chart(metrics["top_themes"], x="theme", y="count", horizontal=True, sort=True)
+    st.bar_chart(metrics["top_themes"], x="theme", y="count", horizontal=True, sort=False)
 
     st.subheader("What tools have hackers been using?")
-    st.bar_chart(metrics["top_tools"], x="tool", y="count", horizontal=True, sort=True)
+    st.bar_chart(metrics["top_tools"], x="tool", y="count", horizontal=True, sort=False)
 
 with right:
     st.subheader("Where are hackathons being held?")
-    st.bar_chart(metrics["top_locations"], x="location", y="count", horizontal=True, sort=True)
+    st.bar_chart(metrics["top_locations"], x="location", y="count", horizontal=True, sort=False)
 
 st.divider()
 st.info(
