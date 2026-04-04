@@ -22,9 +22,6 @@ THEME_TREND_PATH = BASE_DIR / "data" / "theme_trend.csv"
 # word_cloud_2010.png
 WORD_CLOUD_DIR = BASE_DIR / "data"
 
-
-
-
 @st.cache_data
 def load_theme_trend():
     df = pd.read_csv(THEME_TREND_PATH)
@@ -103,16 +100,8 @@ def make_theme_chart(df: pd.DataFrame):
             fontsize=10,
         )
 
-<<<<<<< HEAD
-        if st.button("Generate Word Cloud", type="primary"):
-            with st.spinner("Generating word cloud..."):
-                try:
-                    # Generate the word cloud and get the figure
-                    fig = make_wordcloud_figure(df, selected_year)
-=======
     plt.tight_layout()
     return fig
->>>>>>> be02b7efde36abc398a738401665281727e97ed3
 
 
 def get_wordcloud_image_path(year: int) -> Path:
@@ -176,6 +165,21 @@ with col2:
         st.image(str(wordcloud_image_path), use_container_width=True)
     else:
         st.info(f"No word cloud image found for {year}")
+
+with st.container():
+    st.subheader("Takeaway")
+    st.write(f"In **{year}**, hackers were solving the following types of projects:")
+
+    top5_themes = top_themes_df.head(5)
+    columns = st.columns(min(len(top5_themes), 5))
+    for column, theme_name in zip(columns, top5_themes["theme"].tolist()):
+        with column:
+            current_count = top5_themes.loc[top5_themes["theme"] == theme_name, "count"].iloc[0]
+            try:
+                prev_value = theme_df[(theme_df["year"] == year - 1) & (theme_df["theme"] == theme_name)]["count"].iloc[0]
+            except:
+                prev_value = current_count
+            st.metric(theme_name, current_count, delta=current_count - prev_value)
 
 with st.expander("Preview filtered theme data"):
     st.dataframe(theme_year, use_container_width=True)

@@ -5,7 +5,7 @@ import streamlit as st
 import pydeck as pdk
 
 
-BASE_DIR = Path(__file__).resolve().parents[3]
+BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data" / "processed_hackathons.csv"
 
 st.set_page_config(
