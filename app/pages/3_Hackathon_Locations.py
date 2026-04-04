@@ -4,7 +4,6 @@ import pandas as pd
 import streamlit as st
 import pydeck as pdk
 
-
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data" / "processed_hackathons.csv"
 
@@ -15,6 +14,71 @@ st.set_page_config(
 
 st.title("Hackathon Locations")
 st.subheader("Where are hackathons being held?")
+
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+
+ .location-card {
+    background: #f8f9fb;
+    border: 1px solid #e3e7ee;
+    border-radius: 16px;          /* slightly smaller roundness */
+    padding: 12px 14px;           /* ↓ less padding */
+    margin-bottom: 10px;          /* ↓ less space between boxes */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+ .location-name {
+    font-size: 0.95rem;           /* ↓ smaller title */
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+   .location-count {
+    font-size: 1.5rem;            /* ↓ smaller number */
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+    .change-pill-up {
+        display: inline-block;
+        background: #e8f5ea;
+        color: #1f7a3f;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+    }
+
+    .change-pill-down {
+        display: inline-block;
+        background: #fdeaea;
+        color: #b42318;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+    }
+
+    .change-pill-flat {
+        display: inline-block;
+        background: #eef2f7;
+        color: #475467;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 def parse_coordinates(coord):
@@ -39,8 +103,8 @@ def extract_year(date_text):
             return None
 
         text = str(date_text).strip()
-
         matches = re.findall(r"(20\d{2}|19\d{2})", text)
+
         if matches:
             return int(matches[-1])
 
@@ -53,15 +117,12 @@ def extract_year(date_text):
 def load_hackathon_data():
     df = pd.read_csv(DATA_PATH)
 
-    # Extract year
     df["year"] = df["submission_period_dates"].apply(extract_year)
 
-    # Parse coordinates
     df[["latitude", "longitude"]] = df["coordinate"].apply(
         lambda x: pd.Series(parse_coordinates(x))
     )
 
-    # Clean columns safely
     df["title"] = df["title"].fillna("Unknown Hackathon")
 
     if "geo_location" not in df.columns:
@@ -84,16 +145,56 @@ def load_hackathon_data():
     if "url" not in df.columns:
         df["url"] = ""
 
-    # Keep valid rows
     df = df.dropna(subset=["latitude", "longitude", "year"]).copy()
     df["year"] = df["year"].astype(int)
 
     return df
 
 
+def build_top_locations_with_change(df, year):
+    current_df = df[df["year"] == year].copy()
+    previous_df = df[df["year"] == year - 1].copy()
+
+    current_df = current_df[
+        current_df["locality"].notna() & (current_df["locality"].str.strip() != "")
+    ].copy()
+    previous_df = previous_df[
+        previous_df["locality"].notna() & (previous_df["locality"].str.strip() != "")
+    ].copy()
+
+    current_counts = (
+        current_df.groupby("locality")
+        .size()
+        .reset_index(name="count")
+    )
+
+    previous_counts = (
+        previous_df.groupby("locality")
+        .size()
+        .reset_index(name="prev_count")
+    )
+
+    merged = current_counts.merge(previous_counts, on="locality", how="left")
+    merged["prev_count"] = merged["prev_count"].fillna(0).astype(int)
+    merged["change"] = merged["count"] - merged["prev_count"]
+
+    merged = merged.sort_values(
+        ["count", "locality"], ascending=[False, True]
+    ).head(5)
+
+    return merged
+
+
+def render_change_pill(change):
+    if change > 0:
+        return f'<span class="change-pill-up">↑ {change}</span>'
+    if change < 0:
+        return f'<span class="change-pill-down">↓ {abs(change)}</span>'
+    return '<span class="change-pill-flat">— 0</span>'
+
+
 df = load_hackathon_data()
 
-# Slider
 min_year = int(df["year"].min())
 max_year = int(df["year"].max())
 default_year = st.session_state.get("selected_year", max_year)
@@ -118,20 +219,12 @@ year_df = year_df.drop_duplicates(
     subset=["title", "latitude", "longitude"]
 ).copy()
 
-# Radius for map bubbles
 year_df["radius"] = year_df["registrations_count"].clip(lower=20)
 year_df["radius"] = year_df["radius"].apply(
     lambda x: max(20000, min(x * 800, 120000))
 )
 
-# Top 5 locations for selected year
-top_locations = (
-    year_df.groupby("geo_location")
-    .size()
-    .reset_index(name="count")
-    .sort_values(["count", "geo_location"], ascending=[False, True])
-    .head(5)
-)
+top_locations = build_top_locations_with_change(df, year)
 
 view_state = pdk.ViewState(
     latitude=year_df["latitude"].mean(),
@@ -164,12 +257,11 @@ tooltip = {
     """,
     "style": {
         "backgroundColor": "white",
-        "color": "black"
+        "color": "black",
     },
 }
 
-# Layout: map on left, top 5 on right
-left_col, right_col = st.columns([3, 1])
+left_col, right_col = st.columns([3, 1.15])
 
 with left_col:
     st.pydeck_chart(
@@ -184,22 +276,24 @@ with left_col:
     )
 
 with right_col:
-    st.subheader(f"Top 5 Locations in {year}")
+    st.markdown(f"### Top 5 Locations in {year}")
 
-    clean_df = year_df[
-            year_df["locality"].notna() & (year_df["locality"].str.strip() != "")
-        ].copy()
+    if top_locations.empty:
+        st.info("No locality data available for this year.")
+    else:
+        for row in top_locations.itertuples(index=False):
+            pill_html = render_change_pill(row.change)
 
-    top_locations = (
-        clean_df.groupby("locality")
-        .size()
-        .reset_index(name="count")
-        .sort_values("count", ascending=False)
-        .head(5)
-    )
-
-    for row in top_locations.itertuples(index=False):
-        st.markdown(f"- **{row.locality}** ({row.count})")
+            st.markdown(
+                f"""
+                <div class="location-card">
+                    <div class="location-name">{row.locality}</div>
+                    <div class="location-count">{int(row.count)}</div>
+                    {pill_html}
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
 st.subheader(f"Locations in {year}")
 
