@@ -12,9 +12,10 @@ st.set_page_config(
     page_title="Hackathon Locations",
     layout="wide",
 )
+init_page()
 
 st.title("Hackathon Locations")
-st.subheader("Where are hackathons being held?")
+st.write("Where are hackathons being held?")
 
 st.markdown(
     """
@@ -186,17 +187,8 @@ def build_top_locations_with_change(df, year):
     return merged
 
 
-def render_change_pill(change):
-    if change > 0:
-        return f'<span class="change-pill-up">↑ {change}</span>'
-    if change < 0:
-        return f'<span class="change-pill-down">↓ {abs(change)}</span>'
-    return '<span class="change-pill-flat">— 0</span>'
-
-
 df = load_hackathon_data()
 
-init_page()
 # Slider
 min_year = int(df["year"].min())
 max_year = int(df["year"].max())
@@ -263,10 +255,7 @@ tooltip = {
         "color": "black",
     },
 }
-
-left_col, right_col = st.columns([3, 1.15])
-
-with left_col:
+with st.container():
     st.pydeck_chart(
         pdk.Deck(
             map_style="dark",
@@ -278,25 +267,17 @@ with left_col:
         height=600,
     )
 
-with right_col:
+with st.container():
     st.markdown(f"### Top 5 Locations in {year}")
 
     if top_locations.empty:
         st.info("No locality data available for this year.")
     else:
-        for row in top_locations.itertuples(index=False):
-            pill_html = render_change_pill(row.change)
+        columns = st.columns(min(len(top_locations), 5))
+        for column, row in zip(columns, top_locations.itertuples(index=False)):
+            with column:
+                st.metric(row.locality, row.count, delta=row.change)
 
-            st.markdown(
-                f"""
-                <div class="location-card">
-                    <div class="location-name">{row.locality}</div>
-                    <div class="location-count">{int(row.count)}</div>
-                    {pill_html}
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
 
 st.subheader(f"Locations in {year}")
 
