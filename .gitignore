@@ -1,2 +1,4 @@
-# Ignore JetBrains IDE settings
-.idea/
+.idea
+.venv
+*.csv
+*.txt
