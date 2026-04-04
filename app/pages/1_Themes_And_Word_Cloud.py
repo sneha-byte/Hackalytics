@@ -1,143 +1,249 @@
-import streamlit as st
+from pathlib import Path
+
 import pandas as pd
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-import word_cloud as wc
+import streamlit as st
 import matplotlib.pyplot as plt
-from io import BytesIO
+from wordcloud import WordCloud
 
-st.title("Themes and Word Cloud Analysis")
+st.set_page_config(
+    page_title="Themes and Word Cloud",
+    layout="wide",
+)
 
-st.markdown("""
-Explore the most common themes and keywords from hackathon projects over different years.
-""")
+st.title("Hackathon Themes and Word Cloud")
+st.subheader("What problems have hackers been focused on?")
 
 
-def show_word_cloud():
-    # Load data to get available years
-    # fix file paths and columns for this function
-    try:
-        df = pd.read_csv("data/processed/processed_projects.csv")
+BASE_DIR = Path(__file__).resolve().parents[3]
+THEME_TREND_PATH = BASE_DIR / "data" / "theme_trend.csv"
+WORD_CLOUD_PATH = BASE_DIR / "data" / "word_cloud_output.csv"
 
-        available_years = sorted(df['year'].unique())
-    except FileNotFoundError:
-        st.error("Data file not found. Please ensure 'data/processed/processed_projects.csv' exists.")
-        available_years = []
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
 
-    if available_years:
-        selected_year = st.selectbox(
-            "Select Year:",
-            available_years
+    section[data-testid="stSidebar"] .stSlider label {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+@st.cache_data
+def load_theme_trend():
+    df = pd.read_csv(THEME_TREND_PATH)
+
+    df["period"] = pd.to_datetime(df["period"], errors="coerce")
+    df["year"] = df["period"].dt.year
+
+    df["theme"] = df["theme"].fillna("").astype(str).str.strip()
+    df["count"] = pd.to_numeric(df["count"], errors="coerce").fillna(0)
+
+    return df
+
+
+@st.cache_data
+def load_word_cloud():
+    df = pd.read_csv(WORD_CLOUD_PATH)
+    df["year"] = pd.to_numeric(df["year"], errors="coerce")
+    df["count"] = pd.to_numeric(df["count"], errors="coerce").fillna(0)
+
+    return df
+
+
+def filter_year(df: pd.DataFrame, year: int) -> pd.DataFrame:
+    if "year" not in df.columns:
+        return df.copy()
+    return df[df["year"] == year].copy()
+
+
+def top_n(df: pd.DataFrame, group_col: str, value_col: str, n: int = 10) -> pd.DataFrame:
+    if df.empty:
+        return pd.DataFrame(columns=[group_col, value_col])
+
+    return (
+        df.groupby(group_col, as_index=False)[value_col]
+        .sum()
+        .sort_values(value_col, ascending=False)
+        .head(n)
+    )
+
+
+def make_theme_chart(df: pd.DataFrame):
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    if df.empty or df[value_col_name].sum() == 0:
+        ax.text(
+            0.5,
+            0.5,
+            "No non-zero theme data available for this year",
+            ha="center",
+            va="center",
+            fontsize=14,
+            transform=ax.transAxes,
+        )
+        ax.axis("off")
+        return fig
+
+    # Sort ascending so largest bar appears at top in barh
+    df = df.sort_values(value_col_name, ascending=True).copy()
+
+    # Shorten very long labels a bit
+    df[group_col_name] = df[group_col_name].apply(
+        lambda x: x if len(str(x)) <= 28 else str(x)[:28] + "..."
+    )
+
+    bars = ax.barh(df[group_col_name], df[value_col_name])
+
+    ax.set_title("Top Hackathon Themes", fontsize=17, weight="bold", pad=12)
+    ax.set_xlabel("Count", fontsize=12)
+    ax.set_ylabel("")
+
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.grid(axis="x", linestyle="--", alpha=0.3)
+
+    ax.tick_params(axis="y", labelsize=11)
+    ax.tick_params(axis="x", labelsize=10)
+
+    # Add value labels
+    max_val = df[value_col_name].max()
+    offset = max(1, max_val * 0.01)
+
+    for bar, value in zip(bars, df[value_col_name]):
+        ax.text(
+            bar.get_width() + offset,
+            bar.get_y() + bar.get_height() / 2,
+            f"{int(value)}",
+            va="center",
+            fontsize=10,
         )
 
-        if st.button("Generate Word Cloud", type="primary"):
-            with st.spinner("Generating word cloud..."):
-                try:
-                    # Generate the word cloud and get the figure
-                    fig = wc.generate_word_cloud(selected_year, df)
+    plt.tight_layout()
+    return fig
 
-                    # Display in streamlit
-                    st.pyplot(fig)
 
-                    # Add download button
-                    buf = BytesIO()
-                    fig.savefig(buf, format="png", dpi=300, bbox_inches='tight')
-                    buf.seek(0)
+def make_wordcloud_figure(df: pd.DataFrame):
+    fig, ax = plt.subplots(figsize=(10, 7))
 
-                    st.download_button(
-                        label="Download Word Cloud",
-                        data=buf,
-                        file_name=f"wordcloud_{selected_year}.png",
-                        mime="image/png",
-                        help="Download the word cloud as a PNG image"
-                    )
-
-                except Exception as e:
-                    st.error(f" Error generating word cloud: {str(e)}")
-                    st.info("Make sure you have the required data and dependencies installed.")
-
-    else:
-        st.warning("No data available. Please check your data processing pipeline.")
-
-def show_theme_for_year():
-    try: 
-        df = pd.read_csv("../../data/theme_trend.csv")
-        available_years = sorted(df['period'].unique())
-
-        selected_year = st.selectbox(
-            "Select Year for Theme Trends:",
-            available_years
+    if df.empty or df["count"].sum() == 0:
+        ax.text(
+            0.5,
+            0.5,
+            "No word cloud data available for this year",
+            ha="center",
+            va="center",
+            fontsize=14,
+            transform=ax.transAxes,
         )
-        if st.button("Show Theme Trends", type="primary"):
-            st.subheader(f"Theme Trends for {selected_year}")
-            year_df = df[df['period'] == selected_year]
-            #make bar chart of top 10 themes, sorted descending
-            year_df = year_df.nlargest(10, 'count')
-            year_df = year_df.iloc[::-1]  # reverse order so highest value appears at the top of the horizontal bar chart
-            st.title(f"Top 10 Themes in {selected_year[0:4]}")
+        ax.axis("off")
+        return fig
 
-            # Create horizontal bar chart with custom colors
-            fig, ax = plt.subplots(figsize=(10, 6))
-            colors = ["blue", "orange", "green", "red", "purple", "brown", "pink", "gray", "olive", "cyan"]
-            bars = ax.barh(year_df['theme'], year_df['count'], color=colors[:len(year_df)])
-            ax.set_xlabel('Count')
-            ax.set_title(f"Top 10 Themes in {selected_year[0:4]}")
+    freq = dict(zip(df["word"], df["count"]))
 
-            st.pyplot(fig)
-        
-        
-    except FileNotFoundError:
-        st.error("Data file not found. Please ensure 'data/theme_trend.csv' exists.")
-        return
-    
-def show_theme_trends():
-    try: 
-        df = pd.read_csv("../../data/theme_trend.csv")
-        available_years = sorted(df['period'].unique())
+    wordcloud = WordCloud(
+        width=1200,
+        height=700,
+        background_color="white",
+        collocations=False,
+    ).generate_from_frequencies(freq)
 
-        start_year = st.selectbox(
-            "Select Year for Theme Trends:",
-            available_years
-        )
-        end_year = st.selectbox(
-            "Select End Year for Theme Trends:",
-            available_years,
-            index=len(available_years)-1
-        )
+    ax.imshow(wordcloud, interpolation="bilinear")
+    ax.axis("off")
+    ax.set_title("Word Cloud", fontsize=17, weight="bold", pad=12)
 
-        if st.button("Show Theme Trends", type="primary"):
-            st.subheader(f"Theme Trends for {start_year} to {end_year}")
-            year_df = df[(df['period'] >= start_year) & (df['period'] <= end_year)]
-            
-            # Find top 10 most common themes across the entire time period
-            top_themes = year_df.groupby('theme')['count'].sum().nlargest(10).index.tolist()
-            
-            # Filter to only those top themes
-            trend_df = year_df[year_df['theme'].isin(top_themes)]
-            
-            st.title(f"Trendline of Top Themes from {start_year[0:4]} to {end_year[0:4]}")
+    plt.tight_layout()
+    return fig
 
-            # Create line chart
-            fig, ax = plt.subplots(figsize=(12, 6))
-            
-            # Plot each theme as a separate line
-            for theme in top_themes:
-                theme_data = trend_df[trend_df['theme'] == theme].sort_values('period')
-                ax.plot(theme_data['period'], theme_data['count'], marker='o', label=theme)
-            
-            ax.set_xlabel('Period')
-            ax.set_ylabel('Count')
-            ax.set_title(f"Top 10 Theme Trends from {start_year[0:4]} to {end_year[0:4]}")
-            ax.legend(loc='best', fontsize=9)
-            ax.grid(True, alpha=0.3)
 
-            st.pyplot(fig)
-        
-        
-    except FileNotFoundError:
-        st.error("Data file not found. Please ensure 'data/theme_trend.csv' exists.")
-        return
-    
-if __name__ == "__main__":
-    show_theme_trends()
+theme_df = load_theme_trend()
+word_df = load_word_cloud()
+
+available_years = sorted(
+    set(theme_df["year"].dropna().astype(int).tolist())
+    | set(word_df["year"].dropna().astype(int).tolist() if "year" in word_df.columns else [])
+)
+
+if available_years:
+    min_year = int(min(available_years))
+    max_year = int(max(available_years))
+else:
+    min_year = 2009
+    max_year = 2025
+
+default_year = st.session_state.get("selected_year", max_year)
+
+year = st.sidebar.slider(
+    "Select Year",
+    min_value=min_year,
+    max_value=max_year,
+    value=default_year,
+    step=1,
+)
+
+st.session_state["selected_year"] = year
+
+theme_year = filter_year(theme_df, year)
+word_year = filter_year(word_df, year) if "year" in word_df.columns else word_df.copy()
+
+# Remove blank theme names
+theme_year = theme_year[theme_year["theme"] != ""].copy()
+
+# Keep top themes
+group_col_name = "theme"
+value_col_name = "count"
+top_themes_df = top_n(theme_year, group_col_name, value_col_name, n=10)
+
+top_themes_df = top_themes_df[top_themes_df["count"] > 0].copy()
+
+# Keep strongest words
+if not word_year.empty and "word" in word_year.columns and "count" in word_year.columns:
+    word_year = (
+        word_year.groupby("word", as_index=False)["count"]
+        .sum()
+        .sort_values("count", ascending=False)
+        .head(100)
+    )
+else:
+    word_year = pd.DataFrame(columns=["word", "count"])
+
+
+
+st.subheader(f"{year} Overview")
+
+metric_col1, metric_col2 = st.columns(2)
+
+with metric_col1:
+    st.metric("Themes with non-zero count", int((theme_year["count"] > 0).sum()))
+
+with metric_col2:
+    st.metric("Total theme mentions", int(theme_year["count"].sum()))
+
+
+col1, col2 = st.columns([1.1, 1])
+
+with col1:
+    st.markdown("### Theme Chart")
+    theme_fig = make_theme_chart(top_themes_df)
+    st.pyplot(theme_fig, use_container_width=True)
+
+with col2:
+    st.markdown("### Word Cloud")
+    wc_fig = make_wordcloud_figure(word_year)
+    st.pyplot(wc_fig, use_container_width=True)
+
+
+with st.expander("Preview filtered theme data"):
+    st.dataframe(theme_year, use_container_width=True)
+
+with st.expander("Preview top themes used in chart"):
+    st.dataframe(top_themes_df, use_container_width=True)
