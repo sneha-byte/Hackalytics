@@ -110,44 +110,34 @@ def load_processed_hackathons():
 def load_projects():
     return pd.read_csv(PROJECTS_PATH)
 
-
 @st.cache_data
 def load_theme_trend():
     df = pd.read_csv(THEME_TREND_PATH)
-    if "year" not in df.columns:
-        if "period" in df.columns:
-            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
-
 
 @st.cache_data
 def load_tool_trend():
     df = pd.read_csv(TOOL_TREND_PATH)
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
-
 
 @st.cache_data
 def load_word_cloud():
     df = pd.read_csv(WORD_CLOUD_PATH)
-    if "year" not in df.columns:
-        if "period" in df.columns:
-            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
-
 
 @st.cache_data
 def load_location_trend():
     df = pd.read_csv(LOCATION_TREND_PATH)
-    if "year" not in df.columns:
-        if "period" in df.columns:
-            df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
     return df
 
 
 @st.cache_data
 def load_locations():
     return pd.read_csv(LOCATIONS_PATH)
-
 
 def filter_year(df, year):
     if "year" not in df.columns:
