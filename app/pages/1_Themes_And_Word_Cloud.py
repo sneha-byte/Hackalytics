@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils import load_theme_trend, load_word_cloud, make_wordcloud_figure
-import word_cloud as wc
+
 import matplotlib.pyplot as plt
 from io import BytesIO
 
