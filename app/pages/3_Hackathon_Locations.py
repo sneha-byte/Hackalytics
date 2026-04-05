@@ -53,10 +53,10 @@ def load_hackathon_data():
     if "url" not in df.columns:
         df["url"] = ""
 
-    df = df.dropna(subset=["latitude", "longitude", "year"]).copy()
-    df["year"] = df["year"].astype(int)
+    df_filtered = df.dropna(subset=["latitude", "longitude", "year"]).copy()
+    df_filtered["year"] = df["year"].astype(int)
 
-    return df, online_percentage_map
+    return df_filtered, online_percentage_map, df
 
 
 def build_top_locations_with_change(df, year):
@@ -93,16 +93,12 @@ def build_top_locations_with_change(df, year):
     return merged
 
 
-df, percentages = load_hackathon_data()
+df, percentages, df_non_filtered = load_hackathon_data()
 
 # Slider
 year = render_sidebar()
 
 year_df = df[df["year"] == year].copy()
-
-if year_df.empty:
-    st.warning(f"No location data found for {year}.")
-    st.stop()
 
 year_df = year_df.drop_duplicates(
     subset=["title", "latitude", "longitude"]
@@ -117,20 +113,23 @@ top_locations = build_top_locations_with_change(df, year)
 
 left, right = st.columns([0.7, 0.3])
 with left:
-    tooltip = {
-        "html": """
-            <b>{title}</b><br/>
-            Year: {year}<br/>
-            Location: {geo_location}<br/>
-            Locality: {locality}<br/>
-            Registrations: {registrations_count}
-        """,
-        "style": {
-            "backgroundColor": "white",
-            "color": "black",
-        },
-    }
-    render_map(year_df, tooltip)
+    if year_df.empty:
+        st.warning(f"No location data found for {year}.")
+    else:
+        tooltip = {
+            "html": """
+                <b>{title}</b><br/>
+                Year: {year}<br/>
+                Location: {geo_location}<br/>
+                Locality: {locality}<br/>
+                Registrations: {registrations_count}
+            """,
+            "style": {
+                "backgroundColor": "white",
+                "color": "black",
+            },
+        }
+        render_map(year_df, tooltip)
 
 with right:
     online_pct = percentages.get(year, 0) * 100
@@ -170,8 +169,8 @@ with st.container():
 
 
 st.subheader(f"Locations in {year}")
-
-display_df = year_df[
+df_non_filtered = df_non_filtered[df_non_filtered["year"] == year].copy()
+display_df = df_non_filtered[
     ["title", "geo_location", "locality", "registrations_count", "url"]
 ].sort_values("registrations_count", ascending=False)
 
