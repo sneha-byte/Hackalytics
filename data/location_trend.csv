@@ -1,0 +1,1126 @@
+period,location,count
+2012-01-01,"New York, US",1
+2013-01-01,"Massachusetts, US",2
+2013-01-01,"California, US",9
+2013-01-01,"Berlin, DE",1
+2013-01-01,"Ohio, US",1
+2013-01-01,"New York, US",4
+2013-01-01,"Pennsylvania, US",2
+2013-01-01,"Saskatchewan, CA",1
+2013-01-01,"Michigan, US",1
+2013-01-01,"Västra Götalands län, SE",1
+2013-01-01,"Minnesota, US",1
+2014-01-01,"California, US",41
+2014-01-01,"Tbilisi, GE",1
+2014-01-01,"New York, US",27
+2014-01-01,"Tokyo, JP",1
+2014-01-01,"Pennsylvania, US",8
+2014-01-01,"Al Rayyan Municipality, QA",1
+2014-01-01,"England, GB",10
+2014-01-01,"New South Wales, AU",1
+2014-01-01,"Baja California, MX",1
+2014-01-01,"Jönköpings län, SE",1
+2014-01-01,"Massachusetts, US",10
+2014-01-01,"Illinois, US",2
+2014-01-01,"British Columbia, CA",1
+2014-01-01,"Karnataka, IN",3
+2014-01-01,"Ontario, CA",7
+2014-01-01,"North Carolina, US",1
+2014-01-01,"Ohio, US",4
+2014-01-01,"New Jersey, US",3
+2014-01-01,"Texas, US",9
+2014-01-01,"Virginia, US",4
+2014-01-01,"Connecticut, US",1
+2014-01-01,"Nevada, US",2
+2014-01-01,"Województwo małopolskie, PL",1
+2014-01-01,"Tel Aviv District, IL",2
+2014-01-01,"Indiana, US",2
+2014-01-01,"Washington, US",2
+2014-01-01,"Tamil Nadu, IN",2
+2014-01-01,"Arizona, US",1
+2014-01-01,"Delaware, US",1
+2014-01-01,"Missouri, US",2
+2014-01-01,Sweden,1
+2014-01-01,"Georgia, US",1
+2014-01-01,"Michigan, US",2
+2014-01-01,"Maryland, US",3
+2014-01-01,"Louisiana, US",1
+2014-01-01,"San Juan, PR",1
+2014-01-01,"Ho Chi Minh, VN",1
+2014-01-01,"Hà Nội, VN",1
+2014-01-01,"Auckland, NZ",1
+2014-01-01,"Iowa, US",1
+2014-01-01,Georgia,1
+2014-01-01,"Québec, CA",1
+2014-01-01,"Khyber Pakhtunkhwa, PK",1
+2014-01-01,"Punjab, PK",1
+2014-01-01,Singapore,1
+2015-01-01,"Tbilisi, GE",2
+2015-01-01,"New York, US",38
+2015-01-01,"England, GB",16
+2015-01-01,"New Jersey, US",9
+2015-01-01,"California, US",51
+2015-01-01,"Ontario, CA",13
+2015-01-01,"São Paulo, BR",2
+2015-01-01,"Karnataka, IN",3
+2015-01-01,"Tamil Nadu, IN",1
+2015-01-01,"Special Region of Yogyakarta, ID",1
+2015-01-01,"Nairobi County, KE",1
+2015-01-01,"Illinois, US",6
+2015-01-01,"Hong Kong Island, HK",1
+2015-01-01,"Respublika Tatarstan, RU",1
+2015-01-01,"Florida, US",6
+2015-01-01,"Tel Aviv District, IL",1
+2015-01-01,"Massachusetts, US",14
+2015-01-01,"Washington, US",3
+2015-01-01,"Morelos, MX",1
+2015-01-01,"North Carolina, US",5
+2015-01-01,"Maryland, US",7
+2015-01-01,"Connecticut, US",1
+2015-01-01,"Uusimaa, FI",1
+2015-01-01,"Bayern, DE",2
+2015-01-01,"Nevada, US",1
+2015-01-01,"Guanajuato, MX",2
+2015-01-01,"Gujarat, IN",2
+2015-01-01,"Casablanca-Settat, MA",1
+2015-01-01,"Jalisco, MX",1
+2015-01-01,"Minnesota, US",3
+2015-01-01,"Georgia, US",2
+2015-01-01,"Województwo małopolskie, PL",1
+2015-01-01,"Colima, MX",1
+2015-01-01,"Indiana, US",2
+2015-01-01,"Bremen, DE",1
+2015-01-01,"Arizona, US",1
+2015-01-01,"Ohio, US",2
+2015-01-01,"Texas, US",8
+2015-01-01,"Ciudad de México, MX",2
+2015-01-01,"San Juan, PR",1
+2015-01-01,"Québec, CA",3
+2015-01-01,"Tennessee, US",3
+2015-01-01,"New Hampshire, US",2
+2015-01-01,"Nebraska, US",1
+2015-01-01,"Berlin, DE",3
+2015-01-01,"Virginia, US",4
+2015-01-01,"Pennsylvania, US",7
+2015-01-01,"Uppsala län, SE",1
+2015-01-01,"Mayagüez, PR",1
+2015-01-01,"Missouri, US",3
+2015-01-01,"Iowa, US",3
+2015-01-01,"New South Wales, AU",1
+2015-01-01,"Michigan, US",3
+2015-01-01,"Baja California, MX",1
+2015-01-01,"Victoria, AU",1
+2015-01-01,"Colorado, US",2
+2015-01-01,"San Luis Potosí, MX",1
+2015-01-01,"Oregon, US",1
+2015-01-01,"British Columbia, CA",2
+2015-01-01,"Île-de-France, FR",1
+2015-01-01,"Vermont, US",1
+2015-01-01,"Australian Capital Territory, AU",1
+2015-01-01,"Quebec, CA",2
+2015-01-01,"Wisconsin, US",2
+2015-01-01,"Louisiana, US",1
+2015-01-01,"Nuevo León, MX",1
+2015-01-01,"Western Australia, AU",1
+2015-01-01,"Rajasthan, IN",2
+2015-01-01,"Scotland, GB",2
+2015-01-01,"Catalunya, ES",1
+2015-01-01,"Greater Accra Region, GH",1
+2015-01-01,"Islamabad Capital Territory, PK",1
+2015-01-01,"Kyiv, UA",1
+2015-01-01,"Rhode Island, US",1
+2015-01-01,Singapore,1
+2016-01-01,"New York, US",34
+2016-01-01,"Pennsylvania, US",13
+2016-01-01,"England, GB",23
+2016-01-01,"Texas, US",16
+2016-01-01,"Karnataka, IN",5
+2016-01-01,"California, US",50
+2016-01-01,"Berlin, DE",5
+2016-01-01,"New Jersey, US",10
+2016-01-01,"Georgia, US",9
+2016-01-01,"Ontario, CA",20
+2016-01-01,"Uusimaa, FI",3
+2016-01-01,"Victoria, AU",3
+2016-01-01,"Massachusetts, US",20
+2016-01-01,"North Carolina, US",3
+2016-01-01,"Illinois, US",6
+2016-01-01,"Colorado, US",3
+2016-01-01,"Noord-Holland, NL",1
+2016-01-01,"Delhi, IN",4
+2016-01-01,"Vaud, CH",1
+2016-01-01,"Județul Timiș, RO",2
+2016-01-01,"Sharjah, AE",1
+2016-01-01,"Kaduna, NG",1
+2016-01-01,"Ciudad de México, MX",2
+2016-01-01,"Kansas, US",3
+2016-01-01,"Tennessee, US",4
+2016-01-01,"Connecticut, US",1
+2016-01-01,"District of Columbia, US",3
+2016-01-01,"Tamil Nadu, IN",1
+2016-01-01,"Bayern, DE",4
+2016-01-01,"Utah, US",2
+2016-01-01,"Kerala, IN",1
+2016-01-01,"Arizona, US",3
+2016-01-01,"Missouri, US",5
+2016-01-01,"São Paulo, BR",2
+2016-01-01,"İstanbul, TR",2
+2016-01-01,"New South Wales, AU",3
+2016-01-01,"Morelos, MX",1
+2016-01-01,"Oregon, US",3
+2016-01-01,"Wien, AT",1
+2016-01-01,"Washington, US",4
+2016-01-01,"Buskerud, NO",1
+2016-01-01,"București, RO",1
+2016-01-01,"Florida, US",11
+2016-01-01,"Maryland, US",6
+2016-01-01,"Minnesota, US",3
+2016-01-01,"Île-de-France, FR",1
+2016-01-01,Puerto Rico,1
+2016-01-01,"Indiana, US",1
+2016-01-01,"Bremen, DE",1
+2016-01-01,Singapore,3
+2016-01-01,"Iowa, US",3
+2016-01-01,"Ohio, US",7
+2016-01-01,"Michigan, US",4
+2016-01-01,"County Galway, IE",1
+2016-01-01,"Catalunya, ES",1
+2016-01-01,"Scotland, GB",3
+2016-01-01,"Virginia, US",6
+2016-01-01,"New Territories, HK",2
+2016-01-01,"Saskatchewan, CA",1
+2016-01-01,"New Hampshire, US",2
+2016-01-01,"Baja California, MX",1
+2016-01-01,"Hawaii, US",1
+2016-01-01,"Zürich, CH",1
+2016-01-01,"Haryana, IN",2
+2016-01-01,"Nuevo Leon, MX",1
+2016-01-01,"Tasmania, AU",1
+2016-01-01,"Daerah Khusus Ibukota Jakarta, ID",1
+2016-01-01,"Gujarat, IN",1
+2016-01-01,"Gauteng, ZA",1
+2016-01-01,"Nevada, US",1
+2016-01-01,"Catalonia, ES",2
+2016-01-01,"Islamabad Capital Territory, PK",1
+2016-01-01,"Québec, CA",4
+2016-01-01,"Shang Hai Shi, CN",1
+2016-01-01,"Jalisco, MX",1
+2016-01-01,"Brandenburg, DE",1
+2016-01-01,"Nordrhein-Westfalen, DE",1
+2016-01-01,"Center District, IL",1
+2016-01-01,"Ljubljana, SI",1
+2016-01-01,"Tokyo, JP",1
+2016-01-01,"Provence-Alpes-Côte d'Azur, FR",1
+2016-01-01,"Wisconsin, US",1
+2016-01-01,"Puebla, MX",1
+2016-01-01,"Tel Aviv District, IL",1
+2016-01-01,"Kentucky, US",1
+2016-01-01,"Hà Nội, VN",1
+2016-01-01,Denmark,1
+2016-01-01,"Beijing, CN",1
+2016-01-01,"State of São Paulo, BR",1
+2016-01-01,"Quebec, CA",2
+2016-01-01,"St. Gallen, CH",1
+2016-01-01,"Minas Gerais, BR",1
+2016-01-01,"British Columbia, CA",2
+2016-01-01,"Nuevo León, MX",1
+2016-01-01,"Hong Kong Island, HK",1
+2016-01-01,"Rhode Island, US",1
+2016-01-01,"Arkansas, US",1
+2016-01-01,"Alberta, CA",1
+2017-01-01,"Telangana, IN",1
+2017-01-01,"Greater Accra Region, GH",1
+2017-01-01,"Tel Aviv District, IL",1
+2017-01-01,"Ontario, CA",29
+2017-01-01,"New Jersey, US",18
+2017-01-01,"England, GB",25
+2017-01-01,"Pennsylvania, US",15
+2017-01-01,"Florida, US",8
+2017-01-01,"Connecticut, US",1
+2017-01-01,"Berlin, DE",7
+2017-01-01,"Maryland, US",9
+2017-01-01,"Oregon, US",1
+2017-01-01,"New York, US",38
+2017-01-01,"California, US",66
+2017-01-01,"Nevada, US",2
+2017-01-01,"Uusimaa, FI",4
+2017-01-01,"New South Wales, AU",2
+2017-01-01,"Texas, US",17
+2017-01-01,"Alberta, CA",3
+2017-01-01,"Quebec, CA",3
+2017-01-01,"Massachusetts, US",26
+2017-01-01,"Bayern, DE",5
+2017-01-01,"District of Columbia, US",3
+2017-01-01,"Illinois, US",12
+2017-01-01,"São Paulo, BR",3
+2017-01-01,"Vaud, CH",1
+2017-01-01,"North Carolina, US",3
+2017-01-01,"Alabama, US",4
+2017-01-01,"Québec, CA",5
+2017-01-01,"Ohio, US",9
+2017-01-01,"Kansas, US",2
+2017-01-01,"Georgia, US",9
+2017-01-01,"Mississippi, US",2
+2017-01-01,"Lisboa, PT",2
+2017-01-01,"Missouri, US",6
+2017-01-01,"Uttar Pradesh, IN",2
+2017-01-01,"Tennessee, US",4
+2017-01-01,"Minnesota, US",1
+2017-01-01,"Buskerud, NO",1
+2017-01-01,"București, RO",1
+2017-01-01,"Washington, US",5
+2017-01-01,"Arizona, US",4
+2017-01-01,"Iowa, US",4
+2017-01-01,Hungary,1
+2017-01-01,"Catalunya, ES",2
+2017-01-01,Singapore,3
+2017-01-01,"Delhi, IN",2
+2017-01-01,"Wisconsin, US",2
+2017-01-01,"Karnataka, IN",3
+2017-01-01,"Baja California, MX",1
+2017-01-01,"Michigan, US",6
+2017-01-01,"Indiana, US",3
+2017-01-01,"County Dublin, IE",1
+2017-01-01,"Nordrhein-Westfalen, DE",1
+2017-01-01,"Saskatchewan, CA",2
+2017-01-01,"Hawaii, US",1
+2017-01-01,"Virginia, US",4
+2017-01-01,"Zürich, CH",1
+2017-01-01,"Krung Thep Maha Nakhon, TH",1
+2017-01-01,"Tasmania, AU",1
+2017-01-01,"Haryana, IN",1
+2017-01-01,"Nuevo León, MX",1
+2017-01-01,"Colorado, US",3
+2017-01-01,"Islamabad Capital Territory, PK",1
+2017-01-01,"Victoria, AU",1
+2017-01-01,"St. Andrew Parish, JM",1
+2017-01-01,"Shang Hai Shi, CN",1
+2017-01-01,"Hlavní město Praha, CZ",1
+2017-01-01,"Brandenburg, DE",1
+2017-01-01,India,1
+2017-01-01,"Michoacán, MX",1
+2017-01-01,"Județul Timiș, RO",1
+2017-01-01,"Oklahoma, US",1
+2017-01-01,"Zuid-Holland, NL",1
+2017-01-01,"İstanbul, TR",1
+2017-01-01,"Nouvelle-Aquitaine, FR",1
+2017-01-01,"Bei Jing Shi, CN",1
+2017-01-01,"Tokyo, JP",2
+2017-01-01,Denmark,2
+2017-01-01,"Kentucky, US",2
+2017-01-01,"New Hampshire, US",1
+2017-01-01,"Dubai, AE",1
+2017-01-01,"British Columbia, CA",3
+2017-01-01,"Scotland, GB",3
+2017-01-01,"Savannah Region, GH",1
+2017-01-01,"Sankt Gallen, CH",1
+2017-01-01,"Guangdong Province, CN",1
+2017-01-01,"Puebla, MX",1
+2017-01-01,"Rhode Island, US",1
+2017-01-01,"Chhattisgarh, IN",1
+2017-01-01,"Nairobi County, KE",1
+2017-01-01,"Comunidad de Madrid, ES",1
+2017-01-01,"Kowloon, HK",1
+2018-01-01,"California, US",72
+2018-01-01,"Karnataka, IN",4
+2018-01-01,"Maharashtra, IN",1
+2018-01-01,"Virginia, US",14
+2018-01-01,"Haryana, IN",3
+2018-01-01,"Pennsylvania, US",13
+2018-01-01,"Wilaya d'Alger, DZ",2
+2018-01-01,"Massachusetts, US",19
+2018-01-01,"Ontario, CA",25
+2018-01-01,"Islamabad Capital Territory, PK",1
+2018-01-01,"England, GB",21
+2018-01-01,Singapore,10
+2018-01-01,"Algiers Province, DZ",3
+2018-01-01,"Florida, US",6
+2018-01-01,"Sindh, PK",1
+2018-01-01,"British Columbia, CA",5
+2018-01-01,Hungary,1
+2018-01-01,"Kaduna, NG",1
+2018-01-01,"Nevada, US",1
+2018-01-01,"Vaud, CH",1
+2018-01-01,"Județul Timiș, RO",1
+2018-01-01,"Berlin, DE",6
+2018-01-01,"Alberta, CA",2
+2018-01-01,"Washington, US",6
+2018-01-01,"Quebec, CA",2
+2018-01-01,"Catalunya, ES",3
+2018-01-01,"Bayern, DE",5
+2018-01-01,"New York, US",29
+2018-01-01,"Texas, US",18
+2018-01-01,"Maryland, US",7
+2018-01-01,"Ohio, US",6
+2018-01-01,"Wisconsin, US",2
+2018-01-01,"Arizona, US",3
+2018-01-01,"New Jersey, US",14
+2018-01-01,"Județul Cluj, RO",1
+2018-01-01,"Colorado, US",4
+2018-01-01,"Georgia, US",11
+2018-01-01,"Tennessee, US",2
+2018-01-01,"Bremen, DE",1
+2018-01-01,"București, RO",2
+2018-01-01,Malta,1
+2018-01-01,"Noord-Holland, NL",1
+2018-01-01,"Moskva, RU",2
+2018-01-01,"Minnesota, US",2
+2018-01-01,"Buskerud, NO",1
+2018-01-01,"Stockholms län, SE",2
+2018-01-01,"Lagos, NG",1
+2018-01-01,"Illinois, US",9
+2018-01-01,"Iowa, US",3
+2018-01-01,"Indiana, US",2
+2018-01-01,"Kansas, US",2
+2018-01-01,"North Carolina, US",5
+2018-01-01,"Missouri, US",5
+2018-01-01,"Michigan, US",3
+2018-01-01,"Uusimaa, FI",1
+2018-01-01,"Hà Nội, VN",1
+2018-01-01,"Makkah Province, SA",3
+2018-01-01,"Rheinland-Pfalz, DE",1
+2018-01-01,"Delhi, IN",2
+2018-01-01,"Québec, CA",7
+2018-01-01,"Gauteng, ZA",1
+2018-01-01,"Rajasthan, IN",2
+2018-01-01,"District of Columbia, US",5
+2018-01-01,"New South Wales, AU",2
+2018-01-01,"Zürich, CH",1
+2018-01-01,"Seoul, KR",1
+2018-01-01,"Ciudad de México, MX",1
+2018-01-01,"Wyoming, US",1
+2018-01-01,"Krung Thep Maha Nakhon, TH",1
+2018-01-01,"Victoria, AU",3
+2018-01-01,"New Territories, HK",1
+2018-01-01,"Guanajuato, MX",1
+2018-01-01,"Hong Kong Island, HK",2
+2018-01-01,"Nordrhein-Westfalen, DE",1
+2018-01-01,"Tasmania, AU",1
+2018-01-01,"Région wallonne, BE",1
+2018-01-01,"Hlavní město Praha, CZ",1
+2018-01-01,"Województwo wielkopolskie, PL",1
+2018-01-01,"Ciudad Autónoma de Buenos Aires, AR",1
+2018-01-01,"Brandenburg, DE",1
+2018-01-01,"Mayagüez, PR",1
+2018-01-01,"Alabama, US",1
+2018-01-01,"New Hampshire, US",1
+2018-01-01,Denmark,2
+2018-01-01,"South Carolina, US",2
+2018-01-01,"Puebla, MX",1
+2018-01-01,"Nebraska, US",1
+2018-01-01,"Gujarat, IN",1
+2018-01-01,"Scotland, GB",2
+2018-01-01,"Lazio, IT",1
+2018-01-01,"Abu Dhabi, AE",1
+2018-01-01,"Baden-Württemberg, DE",1
+2018-01-01,"Nouvelle-Aquitaine, FR",1
+2018-01-01,"Tokyo, JP",1
+2018-01-01,"Noord-Brabant, NL",1
+2018-01-01,"Województwo małopolskie, PL",1
+2018-01-01,"Oklahoma, US",1
+2018-01-01,"Rhode Island, US",2
+2018-01-01,"Baja California, MX",1
+2018-01-01,"Sankt Gallen, CH",1
+2018-01-01,"Chhattisgarh, IN",1
+2018-01-01,"Kentucky, US",1
+2019-01-01,"Québec, CA",9
+2019-01-01,"Addis Ababa, ET",2
+2019-01-01,"Lagos, NG",1
+2019-01-01,"Ontario, CA",37
+2019-01-01,"Catalunya, ES",4
+2019-01-01,"Pennsylvania, US",20
+2019-01-01,"Berlin, DE",6
+2019-01-01,"Zuid-Holland, NL",2
+2019-01-01,"New York, US",37
+2019-01-01,"England, GB",29
+2019-01-01,"Massachusetts, US",23
+2019-01-01,"Virginia, US",10
+2019-01-01,"São Paulo, BR",1
+2019-01-01,"Islamabad Capital Territory, PK",2
+2019-01-01,"Cairo Governorate, EG",4
+2019-01-01,"Greater Accra Region, GH",1
+2019-01-01,"Nevada, US",1
+2019-01-01,"British Columbia, CA",5
+2019-01-01,"Victoria, AU",3
+2019-01-01,"Tamil Nadu, IN",1
+2019-01-01,"California, US",84
+2019-01-01,"Bayern, DE",3
+2019-01-01,"Bagmati Province, NP",1
+2019-01-01,"Dhaka Division, BD",1
+2019-01-01,"Texas, US",28
+2019-01-01,"Bogotá, CO",1
+2019-01-01,"Quebec, CA",3
+2019-01-01,"Georgia, US",10
+2019-01-01,"Moskva, RU",1
+2019-01-01,"Central Region, UG",1
+2019-01-01,"Delhi, IN",2
+2019-01-01,"Vaud, CH",1
+2019-01-01,Puerto Rico,1
+2019-01-01,"Bern, CH",1
+2019-01-01,"Hawaii, US",1
+2019-01-01,"New Jersey, US",18
+2019-01-01,"Alberta, CA",3
+2019-01-01,"Maryland, US",8
+2019-01-01,"Missouri, US",4
+2019-01-01,"Kansas, US",2
+2019-01-01,"Bremen, DE",1
+2019-01-01,"West Bengal, IN",1
+2019-01-01,"North Carolina, US",6
+2019-01-01,"Iowa, US",2
+2019-01-01,"Tennessee, US",3
+2019-01-01,"Ohio, US",7
+2019-01-01,"Alexandria Governorate, EG",2
+2019-01-01,"Assiut Governorate, EG",1
+2019-01-01,"București, RO",1
+2019-01-01,"Jalisco, MX",1
+2019-01-01,"Connecticut, US",2
+2019-01-01,"Bali, ID",1
+2019-01-01,"Minnesota, US",2
+2019-01-01,"Wilaya d'Alger, DZ",1
+2019-01-01,Egypt,1
+2019-01-01,"Arizona, US",3
+2019-01-01,"Illinois, US",8
+2019-01-01,"Florida, US",8
+2019-01-01,"Wisconsin, US",2
+2019-01-01,"Scotland, GB",3
+2019-01-01,"District of Columbia, US",6
+2019-01-01,Singapore,5
+2019-01-01,"Washington, US",6
+2019-01-01,"Michigan, US",7
+2019-01-01,"Punjab, IN",1
+2019-01-01,"Makkah Province, SA",2
+2019-01-01,"Utah, US",1
+2019-01-01,"Rheinland-Pfalz, DE",1
+2019-01-01,"Zürich, CH",1
+2019-01-01,"Wyoming, US",1
+2019-01-01,"Haryana, IN",2
+2019-01-01,"Uttar Pradesh, IN",1
+2019-01-01,"Indiana, US",1
+2019-01-01,"Kentucky, US",2
+2019-01-01,"Wien, AT",1
+2019-01-01,"Tasmania, AU",1
+2019-01-01,"Comunidad de Madrid, ES",2
+2019-01-01,"New South Wales, AU",4
+2019-01-01,"New Providence, BS",1
+2019-01-01,"Rajasthan, IN",2
+2019-01-01,"Nuevo León, MX",1
+2019-01-01,"Alabama, US",4
+2019-01-01,"St. Andrew Parish, JM",1
+2019-01-01,"Maharashtra, IN",1
+2019-01-01,"Région wallonne, BE",1
+2019-01-01,"Hà Nội, VN",1
+2019-01-01,"Kerala, IN",1
+2019-01-01,"Mombasa County, KE",1
+2019-01-01,"Seoul, KR",3
+2019-01-01,"Provincia de Lima, PE",1
+2019-01-01,"Minskaja voblasć, BY",1
+2019-01-01,"Hồ Chí Minh, VN",1
+2019-01-01,"Saint Petersburg, RU",1
+2019-01-01,"Tokyo, JP",2
+2019-01-01,"Stockholm County, SE",1
+2019-01-01,"Brandenburg, DE",1
+2019-01-01,"Baden-Württemberg, DE",1
+2019-01-01,"Hlavní město Praha, CZ",1
+2019-01-01,"Uusimaa, FI",1
+2019-01-01,South Africa,1
+2019-01-01,"Giza Governorate, EG",1
+2019-01-01,"Lappi, FI",1
+2019-01-01,"New Hampshire, US",1
+2019-01-01,"Województwo małopolskie, PL",1
+2019-01-01,Denmark,2
+2019-01-01,"Košický kraj, SK",1
+2019-01-01,"Puebla, MX",1
+2019-01-01,"Nouvelle-Aquitaine, FR",1
+2019-01-01,"Al Madinah Province, SA",1
+2019-01-01,"Sankt Gallen, CH",1
+2019-01-01,"Île-de-France, FR",1
+2019-01-01,"Guanajuato, MX",1
+2019-01-01,"Vlaanderen, BE",1
+2019-01-01,"Colorado, US",2
+2019-01-01,"Rhode Island, US",2
+2019-01-01,"Krung Thep Maha Nakhon, TH",1
+2019-01-01,"Oklahoma, US",1
+2019-01-01,"Reykjavíkurborg, IS",1
+2019-01-01,"Andhra Pradesh, IN",1
+2019-01-01,"South Carolina, US",1
+2019-01-01,"Karnataka, IN",1
+2019-01-01,"Nebraska, US",1
+2019-01-01,"Tel Aviv District, IL",1
+2019-01-01,"Oregon, US",1
+2020-01-01,India,1
+2020-01-01,"București, RO",1
+2020-01-01,"Pennsylvania, US",9
+2020-01-01,"Stockholms län, SE",2
+2020-01-01,Pakistan,1
+2020-01-01,"Quebec, CA",7
+2020-01-01,Türkiye,1
+2020-01-01,"Catalunya, ES",1
+2020-01-01,"Georgia, US",5
+2020-01-01,"Zurich, CH",1
+2020-01-01,"Texas, US",11
+2020-01-01,"Hawaii, US",1
+2020-01-01,"Nuevo León, MX",1
+2020-01-01,"Massachusetts, US",13
+2020-01-01,"New Jersey, US",6
+2020-01-01,"Genf, CH",1
+2020-01-01,"New York, US",12
+2020-01-01,"Colorado, US",5
+2020-01-01,"Veneto, IT",1
+2020-01-01,"Bern, CH",1
+2020-01-01,"Ontario, CA",14
+2020-01-01,"Berlin, DE",3
+2020-01-01,"Victoria, AU",1
+2020-01-01,"Delta, NG",1
+2020-01-01,"Valais, CH",1
+2020-01-01,"State of Paraíba, BR",1
+2020-01-01,"Oregon, US",3
+2020-01-01,"Rio de Janeiro, BR",2
+2020-01-01,"Hà Nội, VN",1
+2020-01-01,"California, US",40
+2020-01-01,United States,1
+2020-01-01,"Hamburg, DE",1
+2020-01-01,"Valencian Community, ES",1
+2020-01-01,"Giza Governorate, EG",1
+2020-01-01,"Khyber Pakhtunkhwa, PK",1
+2020-01-01,"Minnesota, US",2
+2020-01-01,"Central Region, UG",1
+2020-01-01,"Baden-Württemberg, DE",2
+2020-01-01,"Washington, US",3
+2020-01-01,"Marrakesh-Safi, MA",1
+2020-01-01,"Western Province, LK",1
+2020-01-01,Singapore,4
+2020-01-01,"San Salvador Department, SV",1
+2020-01-01,Canada,1
+2020-01-01,"Bayern, DE",1
+2020-01-01,"Chandigarh, IN",1
+2020-01-01,"Krung Thep Maha Nakhon, TH",1
+2020-01-01,"Nairobi County, KE",1
+2020-01-01,"Delhi, IN",1
+2020-01-01,"Bavaria, DE",1
+2020-01-01,"Riyadh Province, SA",2
+2020-01-01,"England, GB",10
+2020-01-01,"Alabama, US",3
+2020-01-01,"British Columbia, CA",4
+2020-01-01,"Lagos, NG",2
+2020-01-01,"Rhode Island, US",2
+2020-01-01,"Québec, CA",2
+2020-01-01,"Illinois, US",5
+2020-01-01,"Ohio, US",5
+2020-01-01,"Scotland, GB",1
+2020-01-01,"Maryland, US",1
+2020-01-01,"District of Columbia, US",2
+2020-01-01,"Maharashtra, IN",1
+2020-01-01,"Virginia, US",2
+2020-01-01,"Arizona, US",2
+2020-01-01,"North Carolina, US",1
+2020-01-01,"Michigan, US",1
+2020-01-01,"Alberta, CA",2
+2020-01-01,"Reykjavíkurborg, IS",1
+2020-01-01,"Punjab, PK",1
+2020-01-01,"Oklahoma, US",1
+2020-01-01,"Kansas, US",1
+2020-01-01,"Florida, US",2
+2020-01-01,"Madhya Pradesh, IN",1
+2020-01-01,"South Carolina, US",1
+2020-01-01,"Indiana, US",1
+2020-01-01,"Bagmati Province, NP",1
+2020-01-01,"Uttarakhand, IN",1
+2020-01-01,"Karnataka, IN",1
+2020-01-01,"Nebraska, US",1
+2020-01-01,"Gujarat, IN",1
+2020-01-01,"Mississippi, US",1
+2021-01-01,Singapore,2
+2021-01-01,"Jawa Barat, ID",2
+2021-01-01,"Islamabad Capital Territory, PK",1
+2021-01-01,"British Columbia, CA",3
+2021-01-01,"Catalunya, ES",3
+2021-01-01,"Cataño, PR",1
+2021-01-01,"Bremen, DE",1
+2021-01-01,"California, US",8
+2021-01-01,"Hawaii, US",1
+2021-01-01,"Algiers Province, DZ",1
+2021-01-01,"Hồ Chí Minh, VN",1
+2021-01-01,"Texas, US",9
+2021-01-01,"Massachusetts, US",1
+2021-01-01,"New Jersey, US",1
+2021-01-01,"Missouri, US",2
+2021-01-01,"Kansas, US",1
+2021-01-01,"Ohio, US",1
+2021-01-01,"Georgia, US",4
+2021-01-01,"North Carolina, US",1
+2021-01-01,"New York, US",2
+2021-01-01,"Lisboa, PT",1
+2021-01-01,"Wisconsin, US",1
+2021-01-01,"Khyber Pakhtunkhwa, PK",1
+2021-01-01,"Bern, CH",1
+2021-01-01,"Pennsylvania, US",1
+2021-01-01,"Zürich, CH",1
+2021-01-01,"Tamil Nadu, IN",1
+2021-01-01,Denmark,1
+2021-01-01,"Indiana, US",1
+2021-01-01,"Florida, US",1
+2021-01-01,"England, GB",2
+2021-01-01,"Delhi, IN",1
+2021-01-01,"Tabuk Province, SA",1
+2021-01-01,"Vlaanderen, BE",1
+2021-01-01,Germany,1
+2021-01-01,"Schleswig-Holstein, DE",1
+2021-01-01,"Krung Thep Maha Nakhon, TH",1
+2021-01-01,"Bayern, DE",1
+2021-01-01,"Chișinău, MD",1
+2021-01-01,"Maryland, US",1
+2021-01-01,"Tel Aviv District, IL",1
+2021-01-01,South Africa,1
+2021-01-01,"Nunavut, CA",1
+2022-01-01,"Pennsylvania, US",13
+2022-01-01,Singapore,7
+2022-01-01,"Paramaribo, SR",1
+2022-01-01,"Algiers Province, DZ",6
+2022-01-01,"California, US",24
+2022-01-01,"Catalunya, ES",4
+2022-01-01,"Telangana, IN",2
+2022-01-01,"Ontario, CA",12
+2022-01-01,"Michigan, US",4
+2022-01-01,"Illinois, US",5
+2022-01-01,"Andhra Pradesh, IN",2
+2022-01-01,"Oromia, ET",1
+2022-01-01,"Akwa Ibom, NG",1
+2022-01-01,"Vaud, CH",1
+2022-01-01,"British Columbia, CA",3
+2022-01-01,"Bayern, DE",4
+2022-01-01,Latvia,2
+2022-01-01,"Jalisco, MX",1
+2022-01-01,"Lagos, NG",1
+2022-01-01,"Alberta, CA",3
+2022-01-01,"Quebec, CA",2
+2022-01-01,"New York, US",20
+2022-01-01,"England, GB",18
+2022-01-01,"Mombasa County, KE",1
+2022-01-01,India,2
+2022-01-01,"Tamil Nadu, IN",6
+2022-01-01,"Massachusetts, US",8
+2022-01-01,"Texas, US",21
+2022-01-01,"Virginia, US",8
+2022-01-01,"Kansas, US",2
+2022-01-01,"New Jersey, US",11
+2022-01-01,"Baja California, MX",3
+2022-01-01,"New South Wales, AU",5
+2022-01-01,"Missouri, US",2
+2022-01-01,"Arizona, US",2
+2022-01-01,"North Carolina, US",3
+2022-01-01,"Bremen, DE",1
+2022-01-01,"Québec, CA",1
+2022-01-01,"Panamá Province, PA",1
+2022-01-01,"Central Region, UG",1
+2022-01-01,"Washington, US",1
+2022-01-01,"Tennessee, US",1
+2022-01-01,"Georgia, US",8
+2022-01-01,"Florida, US",6
+2022-01-01,"Distrito Nacional, DO",1
+2022-01-01,"Zürich, CH",2
+2022-01-01,"Iowa, US",1
+2022-01-01,"Ohio, US",1
+2022-01-01,"Maryland, US",7
+2022-01-01,"Scotland, GB",3
+2022-01-01,"Dubai, AE",2
+2022-01-01,"Punjab, IN",2
+2022-01-01,"Bogotá, CO",1
+2022-01-01,"Delta, NG",1
+2022-01-01,"Louisiana, US",1
+2022-01-01,"Victoria, AU",4
+2022-01-01,"Nuevo León, MX",1
+2022-01-01,"Indiana, US",1
+2022-01-01,"Lisboa, PT",1
+2022-01-01,"County Dublin, IE",1
+2022-01-01,"Województwo mazowieckie, PL",1
+2022-01-01,"Edo, NG",2
+2022-01-01,South Korea,1
+2022-01-01,"Niedersachsen, DE",1
+2022-01-01,"Jakarta, ID",1
+2022-01-01,"Uasin Gishu County, KE",1
+2022-01-01,"Berlin, DE",1
+2022-01-01,"Hlavní město Praha, CZ",1
+2022-01-01,"São Paulo, BR",1
+2022-01-01,"Buenos Aires, AR",1
+2022-01-01,"Kerala, IN",1
+2022-01-01,"Noord-Holland, NL",1
+2022-01-01,"Alabama, US",3
+2022-01-01,"Košický kraj, SK",1
+2022-01-01,"New Hampshire, US",1
+2022-01-01,"București, RO",1
+2022-01-01,"Kentucky, US",1
+2022-01-01,"Connecticut, US",1
+2022-01-01,"Gujarat, IN",1
+2022-01-01,"Województwo małopolskie, PL",1
+2022-01-01,"Maharashtra, IN",2
+2022-01-01,"West Bengal, IN",1
+2022-01-01,"Brandenburg, DE",1
+2022-01-01,"Vlaanderen, BE",1
+2022-01-01,"Sindh, PK",1
+2022-01-01,"Colorado, US",2
+2022-01-01,Saudi Arabia,1
+2022-01-01,"Wisconsin, US",1
+2022-01-01,"Rhode Island, US",1
+2022-01-01,"South Carolina, US",1
+2022-01-01,"Minnesota, US",1
+2023-01-01,"California, US",82
+2023-01-01,"Ontario, CA",40
+2023-01-01,"Pennsylvania, US",22
+2023-01-01,Singapore,9
+2023-01-01,"Bagmati Province, NP",3
+2023-01-01,"Catalunya, ES",4
+2023-01-01,"Bayern, DE",7
+2023-01-01,"Illinois, US",6
+2023-01-01,"New York, US",31
+2023-01-01,"Virginia, US",11
+2023-01-01,"Islamabad Capital Territory, PK",1
+2023-01-01,"Vaud, CH",2
+2023-01-01,"Telangana, IN",1
+2023-01-01,"Bogotá, CO",1
+2023-01-01,"Washington, US",10
+2023-01-01,"Machakos County, KE",1
+2023-01-01,"England, GB",17
+2023-01-01,"Doha Municipality, QA",1
+2023-01-01,"Seoul, KR",2
+2023-01-01,"British Columbia, CA",9
+2023-01-01,"Quebec, CA",4
+2023-01-01,"Alberta, CA",9
+2023-01-01,"Michigan, US",5
+2023-01-01,"Massachusetts, US",15
+2023-01-01,"Georgia, US",11
+2023-01-01,"İstanbul, TR",1
+2023-01-01,"Texas, US",27
+2023-01-01,"Wisconsin, US",5
+2023-01-01,"New Jersey, US",12
+2023-01-01,"Lisboa, PT",1
+2023-01-01,"Heredia Province, CR",1
+2023-01-01,"Distrito Nacional, DO",1
+2023-01-01,"Québec, CA",7
+2023-01-01,"Arizona, US",5
+2023-01-01,"Missouri, US",3
+2023-01-01,"North Carolina, US",8
+2023-01-01,"Ohio, US",5
+2023-01-01,"Kansas, US",2
+2023-01-01,"Kerala, IN",1
+2023-01-01,"Tennessee, US",1
+2023-01-01,"Haryana, IN",2
+2023-01-01,"Meghalaya, IN",1
+2023-01-01,"Dubai, AE",1
+2023-01-01,"Iowa, US",2
+2023-01-01,"Maryland, US",6
+2023-01-01,Latvia,3
+2023-01-01,"Idaho, US",1
+2023-01-01,"Reykjavíkurborg, IS",1
+2023-01-01,"Mombasa County, KE",1
+2023-01-01,"Florida, US",10
+2023-01-01,"Tamil Nadu, IN",7
+2023-01-01,"Colorado, US",3
+2023-01-01,"South Carolina, US",4
+2023-01-01,"Morelos, MX",1
+2023-01-01,"Louisiana, US",1
+2023-01-01,"Chhattisgarh, IN",1
+2023-01-01,"Bali, ID",1
+2023-01-01,"Rajasthan, IN",2
+2023-01-01,"Nuevo León, MX",3
+2023-01-01,"Tbilisi, GE",1
+2023-01-01,"Indiana, US",2
+2023-01-01,"Zürich, CH",1
+2023-01-01,"Hồ Chí Minh, VN",1
+2023-01-01,"Chișinău, MD",1
+2023-01-01,"Victoria, AU",5
+2023-01-01,Vietnam,1
+2023-01-01,"Województwo mazowieckie, PL",1
+2023-01-01,"New South Wales, AU",2
+2023-01-01,"Algiers Province, DZ",2
+2023-01-01,"Uusimaa, FI",1
+2023-01-01,"Daerah Khusus Ibukota Jakarta, ID",1
+2023-01-01,"Île-de-France, FR",1
+2023-01-01,"Hessen, DE",1
+2023-01-01,Greece,2
+2023-01-01,"Baden-Württemberg, DE",1
+2023-01-01,"Littoral Region, CM",1
+2023-01-01,"Tabuk Province, SA",1
+2023-01-01,"Comunidad de Madrid, ES",1
+2023-01-01,"Delaware, US",1
+2023-01-01,"New Providence, BS",1
+2023-01-01,"București, RO",1
+2023-01-01,"Delhi, IN",2
+2023-01-01,"New Hampshire, US",1
+2023-01-01,"Kentucky, US",1
+2023-01-01,"Brandenburg, DE",1
+2023-01-01,"Madhya Pradesh, IN",1
+2023-01-01,"Oklahoma, US",2
+2023-01-01,"Newfoundland and Labrador, CA",1
+2023-01-01,"Województwo małopolskie, PL",1
+2023-01-01,"Košický kraj, SK",1
+2023-01-01,"Metro Manila, PH",1
+2023-01-01,"Andhra Pradesh, IN",1
+2023-01-01,"Uttarakhand, IN",1
+2023-01-01,"Utah, US",1
+2023-01-01,"Vlaanderen, BE",1
+2023-01-01,"Jalisco, MX",1
+2023-01-01,"Alabama, US",2
+2023-01-01,"Abu Dhabi, AE",1
+2023-01-01,"Scotland, GB",1
+2023-01-01,"Amman Governorate, JO",1
+2023-01-01,"Maharashtra, IN",2
+2023-01-01,"Nakuru County, KE",2
+2023-01-01,Spain,1
+2023-01-01,"Wilayah Persekutuan Kuala Lumpur, MY",1
+2023-01-01,"Uttar Pradesh, IN",1
+2023-01-01,"Gujarat, IN",1
+2023-01-01,"Minnesota, US",1
+2023-01-01,"Rhode Island, US",1
+2023-01-01,"District of Columbia, US",1
+2023-01-01,"Koshi Province, NP",1
+2023-01-01,"Punjab, PK",1
+2024-01-01,"Alberta, CA",8
+2024-01-01,"Zhejiang, CN",1
+2024-01-01,"New Jersey, US",17
+2024-01-01,"Gauteng, ZA",2
+2024-01-01,"Région de Dakar, SN",1
+2024-01-01,"Maharashtra, IN",3
+2024-01-01,"California, US",74
+2024-01-01,"Bono Region, GH",1
+2024-01-01,"New Mexico, US",1
+2024-01-01,"Nabeul Governorate, TN",1
+2024-01-01,"Shang Hai Shi, CN",1
+2024-01-01,"Madhya Pradesh, IN",1
+2024-01-01,"Pennsylvania, US",16
+2024-01-01,"Illinois, US",9
+2024-01-01,"Islamabad Capital Territory, PK",1
+2024-01-01,"England, GB",19
+2024-01-01,"Catalunya, ES",3
+2024-01-01,"Ontario, CA",44
+2024-01-01,"Batna Province, DZ",1
+2024-01-01,"New York, US",27
+2024-01-01,Greece,1
+2024-01-01,"Bayern, DE",5
+2024-01-01,"Karnataka, IN",5
+2024-01-01,"Assam, IN",2
+2024-01-01,"British Columbia, CA",13
+2024-01-01,"Quebec, CA",6
+2024-01-01,"Košický kraj, SK",2
+2024-01-01,"Metro Manila, PH",1
+2024-01-01,"Harju maakond, EE",1
+2024-01-01,"Sicilia, IT",2
+2024-01-01,"Iowa, US",1
+2024-01-01,"Texas, US",25
+2024-01-01,"Connecticut, US",3
+2024-01-01,Latvia,2
+2024-01-01,"Bihar, IN",1
+2024-01-01,"Wisconsin, US",2
+2024-01-01,"Massachusetts, US",14
+2024-01-01,"Kansas, US",2
+2024-01-01,"Missouri, US",3
+2024-01-01,"North Carolina, US",11
+2024-01-01,"Florida, US",9
+2024-01-01,"Arizona, US",4
+2024-01-01,"Georgia, US",7
+2024-01-01,"Maryland, US",6
+2024-01-01,"Michigan, US",9
+2024-01-01,"South Carolina, US",4
+2024-01-01,"Virginia, US",13
+2024-01-01,"Western Cape, ZA",2
+2024-01-01,"Tunis, TN",1
+2024-01-01,"Kerala, IN",1
+2024-01-01,"Idaho, US",1
+2024-01-01,"Delhi, IN",1
+2024-01-01,"Washington, US",8
+2024-01-01,"Île-de-France, FR",2
+2024-01-01,"Francisco Morazán Department, HN",1
+2024-01-01,"İstanbul, TR",2
+2024-01-01,"Tamil Nadu, IN",2
+2024-01-01,"Tennessee, US",1
+2024-01-01,"New South Wales, AU",3
+2024-01-01,"Nairobi County, KE",2
+2024-01-01,"Nuevo León, MX",2
+2024-01-01,"Vaud, CH",2
+2024-01-01,"Yucatán, MX",1
+2024-01-01,"Kigali City, RW",2
+2024-01-01,"Victoria, AU",5
+2024-01-01,"Stockholms län, SE",1
+2024-01-01,"Gyeonggi-do, KR",1
+2024-01-01,"Lagos, NG",3
+2024-01-01,"Uttar Pradesh, IN",3
+2024-01-01,Singapore,7
+2024-01-01,"Nordrhein-Westfalen, DE",2
+2024-01-01,"Andhra Pradesh, IN",2
+2024-01-01,"Colorado, US",7
+2024-01-01,"Banten, ID",1
+2024-01-01,"Berlin, DE",1
+2024-01-01,"Bagmati Province, NP",2
+2024-01-01,Azerbaijan,1
+2024-01-01,"Punjab, PK",1
+2024-01-01,"Zug, CH",1
+2024-01-01,"Jalisco, MX",1
+2024-01-01,"Morelos, MX",1
+2024-01-01,"Provincia de Lima, PE",1
+2024-01-01,"Rhode Island, US",2
+2024-01-01,"Atlántico, CO",1
+2024-01-01,"Algiers Province, DZ",2
+2024-01-01,"North-Kivu, CD",1
+2024-01-01,"Dubai, AE",1
+2024-01-01,"Telangana, IN",4
+2024-01-01,"Ohio, US",5
+2024-01-01,"New Hampshire, US",1
+2024-01-01,"Querétaro, MX",1
+2024-01-01,"București, RO",1
+2024-01-01,"Arkansas, US",1
+2024-01-01,"Kentucky, US",1
+2024-01-01,"Mississippi, US",1
+2024-01-01,"Louisiana, US",2
+2024-01-01,"Województwo małopolskie, PL",1
+2024-01-01,"Brandenburg, DE",1
+2024-01-01,"Indiana, US",3
+2024-01-01,"Québec, CA",4
+2024-01-01,"Jiang Su Sheng, CN",1
+2024-01-01,"Guang Dong Sheng, CN",1
+2024-01-01,"District of Columbia, US",2
+2024-01-01,"Oregon, US",2
+2024-01-01,"Alabama, US",2
+2024-01-01,"Delaware, US",1
+2024-01-01,"Scotland, GB",2
+2024-01-01,"Gujarat, IN",1
+2024-01-01,"Bogotá, CO",1
+2024-01-01,Spain,1
+2024-01-01,"Ajman, AE",1
+2024-01-01,"Oklahoma, US",1
+2024-01-01,"Minnesota, US",1
+2024-01-01,"Ondo, NG",1
+2024-01-01,"Nova Scotia, CA",1
+2025-01-01,"Delhi, IN",3
+2025-01-01,"Zaporiz'ka oblast, UA",1
+2025-01-01,"Karnataka, IN",10
+2025-01-01,"Pennsylvania, US",21
+2025-01-01,"Maharashtra, IN",3
+2025-01-01,"Rhode Island, US",3
+2025-01-01,"New York, US",55
+2025-01-01,"Catalunya, ES",7
+2025-01-01,"Imereti, GE",2
+2025-01-01,"Odisha, IN",2
+2025-01-01,Singapore,13
+2025-01-01,"Punjab, IN",2
+2025-01-01,"England, GB",32
+2025-01-01,"Chhattisgarh, IN",1
+2025-01-01,"California, US",143
+2025-01-01,"Madhya Pradesh, IN",2
+2025-01-01,"Kerala, IN",4
+2025-01-01,"Taitung County, TW",1
+2025-01-01,"Andhra Pradesh, IN",3
+2025-01-01,"Harare Province, ZW",1
+2025-01-01,"Maryland, US",9
+2025-01-01,"Ontario, CA",66
+2025-01-01,"Selangor, MY",1
+2025-01-01,"Delaware, US",2
+2025-01-01,"Oberösterreich, AT",1
+2025-01-01,"Michigan, US",11
+2025-01-01,"County Dublin, IE",3
+2025-01-01,"Nuevo León, MX",2
+2025-01-01,"Košický kraj, SK",1
+2025-01-01,"Vilniaus apskritis, LT",1
+2025-01-01,"Punjab, PK",3
+2025-01-01,"British Columbia, CA",20
+2025-01-01,"Kiambu County, KE",1
+2025-01-01,"Illinois, US",13
+2025-01-01,"Ciudad de México, MX",2
+2025-01-01,"Wisconsin, US",4
+2025-01-01,"Massachusetts, US",24
+2025-01-01,"Scotland, GB",3
+2025-01-01,"Bayern, DE",4
+2025-01-01,"Florida, US",18
+2025-01-01,"Maritime Region, TG",1
+2025-01-01,"Gombe, NG",1
+2025-01-01,"Texas, US",39
+2025-01-01,"Washington, US",15
+2025-01-01,"Oregon, US",3
+2025-01-01,"New Jersey, US",25
+2025-01-01,"Iowa, US",1
+2025-01-01,"Quebec, CA",10
+2025-01-01,"Georgia, US",15
+2025-01-01,"Virginia, US",15
+2025-01-01,"Ohio, US",7
+2025-01-01,"Uttar Pradesh, IN",4
+2025-01-01,"Alberta, CA",10
+2025-01-01,"Arizona, US",9
+2025-01-01,"Missouri, US",8
+2025-01-01,"North Carolina, US",11
+2025-01-01,"Indiana, US",7
+2025-01-01,"São Paulo, BR",1
+2025-01-01,"Tamil Nadu, IN",8
+2025-01-01,"West Bengal, IN",2
+2025-01-01,"Oklahoma, US",2
+2025-01-01,"Seoul, KR",1
+2025-01-01,"Telangana, IN",3
+2025-01-01,"Nuevo Leon, MX",1
+2025-01-01,Denmark,1
+2025-01-01,"Al Rayyan Municipality, QA",1
+2025-01-01,"Idaho, US",1
+2025-01-01,"Victoria, AU",5
+2025-01-01,"Machakos County, KE",1
+2025-01-01,"Kigali City, RW",2
+2025-01-01,"Kansas, US",3
+2025-01-01,Latvia,3
+2025-01-01,"Veracruz, MX",1
+2025-01-01,"Utah, US",1
+2025-01-01,"Gauteng, ZA",2
+2025-01-01,"South Carolina, US",2
+2025-01-01,"Uttarakhand, IN",1
+2025-01-01,"Berlin, DE",1
+2025-01-01,"New South Wales, AU",8
+2025-01-01,"South Australia, AU",1
+2025-01-01,"Vaud, CH",2
+2025-01-01,Hong Kong,2
+2025-01-01,"Tunis, TN",1
+2025-01-01,"Lagos, NG",3
+2025-01-01,"Gujarat, IN",2
+2025-01-01,"Nordrhein-Westfalen, DE",1
+2025-01-01,"Puebla, MX",1
+2025-01-01,"Koshi Province, NP",1
+2025-01-01,"New Territories, HK",1
+2025-01-01,"State of Rio de Janeiro, BR",1
+2025-01-01,"Analamanga, MG",1
+2025-01-01,"Banten, ID",1
+2025-01-01,"Greater Accra Region, GH",1
+2025-01-01,"District Autonome d'Abidjan, CI",1
+2025-01-01,"Nairobi County, KE",1
+2025-01-01,"Moskva, RU",1
+2025-01-01,"Wilayah Persekutuan Kuala Lumpur, MY",1
+2025-01-01,"Johor Darul Ta'zim, MY",1
+2025-01-01,"Gaborone City, BW",1
+2025-01-01,"Marrakech-Safi, MA",1
+2025-01-01,"Cần Thơ, VN",1
+2025-01-01,"Île-de-France, FR",4
+2025-01-01,Greece,2
+2025-01-01,"Delta, NG",1
+2025-01-01,"Haryana, IN",1
+2025-01-01,"Jalisco, MX",1
+2025-01-01,"Santa Catarina, BR",2
+2025-01-01,"București, RO",1
+2025-01-01,"Atlántico, CO",1
+2025-01-01,"Dubai, AE",1
+2025-01-01,"Noord-Holland, NL",1
+2025-01-01,"Québec, CA",7
+2025-01-01,"New Hampshire, US",1
+2025-01-01,"Jiang Su Sheng, CN",1
+2025-01-01,"Connecticut, US",1
+2025-01-01,"Województwo małopolskie, PL",1
+2025-01-01,"Kentucky, US",1
+2025-01-01,"Colorado, US",3
+2025-01-01,"Gyeongsangbuk-do, KR",1
+2025-01-01,"Querétaro, MX",1
+2025-01-01,"Louisiana, US",1
+2025-01-01,"District of Columbia, US",5
+2025-01-01,"Brandenburg, DE",1
+2025-01-01,"St. Gallen, CH",1
+2025-01-01,"St. Andrew Parish, JM",1
+2025-01-01,"Alabama, US",1
+2025-01-01,"Gouvernorat de l'Ariana, TN",1
+2025-01-01,Spain,1
+2025-01-01,"Manitoba, CA",1
+2025-01-01,"Bagmati Province, NP",2
+2025-01-01,"Wilaya d'Alger, DZ",1
+2025-01-01,"Khyber Pakhtunkhwa, PK",1
+2025-01-01,"Nova Scotia, CA",1
+2025-01-01,"Metro Manila, PH",1
+2025-01-01,"Algiers Province, DZ",1
