@@ -24,11 +24,11 @@ c4.metric("Unique Tools", f"{metrics['unique_tools']:,}")
 
 st.divider()
 
-def plot_top(trend_file, column_name):
+def plot_top(trend_file, column_name, default_selection=None):
     trend_df = load_trend_file(trend_file)
 
     all_options = trend_df[column_name].unique().tolist()
-    options = st.multiselect("Select keywords", all_options, default=all_options[:5])
+    options = st.multiselect("Select keywords", all_options, default=default_selection or all_options[:5])
 
     trend_df = trend_df[trend_df[column_name].isin(options)]
 
@@ -56,7 +56,11 @@ def plot_top(trend_file, column_name):
 
 with st.container():
     st.subheader("What problems have hackers been focused on?")
-    plot_top(THEME_TREND_PATH, "theme")
+    plot_top(
+        THEME_TREND_PATH,
+        "theme",
+        ["COVID-19", "Social Good", "Beginner Friendly", "Open Ended", "Machine Learning/AI", "Gaming"]
+    )
 
 with st.container():
     st.subheader("What tools have hackers been using?")
