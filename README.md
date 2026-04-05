@@ -14,3 +14,6 @@ Hackalytics answers three main questions about hackathons across the years 2009 
 - Where are hackathons being held?
 -   <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/d40c4672-2067-4ee6-bb56-153cdce61e7b" />
 
+## How to Set Up
+
+First, clone this repository on your local machine. A virtual environment is strongly recommended to run this app, so create one using python -m venv .venv. Once your virtual environment is set up, activate it, and then install the required dependencies via pip install -r requirements.txt. Then, navigate to the app folder and run the app with the command streamlit run Home.py. You can also run each individual page via streamlit run {page_name}.py.
