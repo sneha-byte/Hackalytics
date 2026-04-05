@@ -242,12 +242,26 @@ layer = pdk.Layer(
     line_width_min_pixels=1,
 )
 
+tooltip = {
+    "html": """
+        <b>{title}</b><br/>
+        Year: {year}<br/>
+        Location: {geo_location}<br/>
+        Locality: {locality}<br/>
+        Registrations: {registrations_count}
+    """,
+    "style": {
+        "backgroundColor": "white",
+        "color": "black",
+    },
+}
 with st.container():
     st.pydeck_chart(
         pdk.Deck(
             map_style="dark",
             initial_view_state=view_state,
             layers=[layer],
+            tooltip=tooltip,
         ),
         use_container_width=True,
         height=600,
