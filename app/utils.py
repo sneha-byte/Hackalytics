@@ -40,18 +40,6 @@ def apply_global_css():
     st.markdown(
         """
         <style>
-        .main-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-        }
-
-        .subtitle {
-            font-size: 1.05rem;
-            color: #667085;
-            margin-bottom: 1.25rem;
-        }
-
         div[data-testid="stMetric"] {
             background: #f8fafc;
             border: 1px solid #e5e7eb;
