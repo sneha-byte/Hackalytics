@@ -120,15 +120,16 @@ with st.container():
     st.write(f"In **{year}**, hackers were solving the following types of projects:")
 
     top5_themes = top_themes_df.head(5)
-    columns = st.columns(min(len(top5_themes), 5))
-    for column, theme_name in zip(columns, top5_themes["theme"].tolist()):
-        with column:
-            current_count = top5_themes.loc[top5_themes["theme"] == theme_name, "count"].iloc[0]
-            try:
-                prev_value = theme_df[(theme_df["year"] == year - 1) & (theme_df["theme"] == theme_name)]["count"].iloc[0]
-            except:
-                prev_value = current_count
-            st.metric(theme_name, current_count, delta=current_count - prev_value)
+    if not top5_themes.empty:
+        columns = st.columns(min(len(top5_themes), 5))
+        for column, theme_name in zip(columns, top5_themes["theme"].tolist()):
+            with column:
+                current_count = top5_themes.loc[top5_themes["theme"] == theme_name, "count"].iloc[0]
+                try:
+                    prev_value = theme_df[(theme_df["year"] == year - 1) & (theme_df["theme"] == theme_name)]["count"].iloc[0]
+                except:
+                    prev_value = current_count
+                st.metric(theme_name, current_count, delta=current_count - prev_value)
 
 with st.expander("Preview filtered theme data"):
     st.dataframe(theme_year, use_container_width=True)
