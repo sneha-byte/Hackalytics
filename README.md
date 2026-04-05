@@ -94,7 +94,7 @@ cd Hackalytics
      ```
   - Run process.ipynb
   - Run analysis.ipynb
-5. Deplot streamlit dashboard
+6. Deploy streamlit dashboard
 ```bash
   cd app
   streamlit run Home.py
