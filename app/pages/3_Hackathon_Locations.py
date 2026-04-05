@@ -1,3 +1,4 @@
+import math
 from pathlib import Path
 import re
 import pandas as pd
@@ -140,6 +141,13 @@ year = st.sidebar.slider(
     value=default_year,
     step=1,
 )
+radius_factor = st.sidebar.slider(
+    "Radius Factor",
+    min_value=50.0,
+    max_value=10000.0,
+    value=10000.0,
+    step=1.0,
+)
 
 st.session_state["selected_year"] = year
 
@@ -155,7 +163,7 @@ year_df = year_df.drop_duplicates(
 
 year_df["radius"] = year_df["registrations_count"].clip(lower=20)
 year_df["radius"] = year_df["radius"].apply(
-    lambda x: max(20000, min(x * 800, 120000))
+    lambda x: math.log(x) * radius_factor
 )
 
 top_locations = build_top_locations_with_change(df, year)
