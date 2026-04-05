@@ -3,7 +3,6 @@ import streamlit as st
 from utils import (
     init_page,
     render_sidebar,
-    load_word_cloud,
     filter_year,
     top_n,
     make_wordcloud_figure,

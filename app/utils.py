@@ -40,14 +40,6 @@ def apply_global_css():
     st.markdown(
         """
         <style>
-        .block-container {
-            padding-top: 1.5rem;
-            padding-bottom: 2rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            max-width: 1400px;
-        }
-
         .main-title {
             font-size: 2.8rem;
             font-weight: 800;

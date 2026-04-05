@@ -1,7 +1,4 @@
-import datetime
-
 import streamlit as st
-from utils import init_page, render_sidebar, build_home_metrics
 from pathlib import Path
 import pandas as pd
 import pydeck as pdk
@@ -14,11 +11,8 @@ render_sidebar(show_home_message=True)
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_PATH = BASE_DIR / "data" / "processed_hackathons.csv"
 
-st.markdown('<div class="main-title">Hackalytics</div>', unsafe_allow_html=True)
-st.markdown(
-    '<div class="subtitle">Overall dashboard across all years. Use the other pages to explore one year at a time.</div>',
-    unsafe_allow_html=True,
-)
+st.title('Hackalytics')
+st.write("Overall dashboard across all years. Use the other pages to explore one year at a time.")
 
 metrics = build_home_metrics()
 
