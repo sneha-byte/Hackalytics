@@ -53,58 +53,6 @@ def top_n(df: pd.DataFrame, group_col: str, value_col: str, n: int = 10) -> pd.D
         .head(n)
     )
 
-
-def make_theme_chart(df: pd.DataFrame):
-    fig, ax = plt.subplots(figsize=(10, 7))
-
-    if df.empty or df[value_col_name].sum() == 0:
-        ax.text(
-            0.5,
-            0.5,
-            "No non-zero theme data available for this year",
-            ha="center",
-            va="center",
-            fontsize=14,
-            transform=ax.transAxes,
-        )
-        ax.axis("off")
-        return fig
-
-    df = df.sort_values(value_col_name, ascending=True).copy()
-
-    df[group_col_name] = df[group_col_name].apply(
-        lambda x: x if len(str(x)) <= 28 else str(x)[:28] + "..."
-    )
-
-    bars = ax.barh(df[group_col_name], df[value_col_name])
-
-    ax.set_title("Top Hackathon Themes", fontsize=17, weight="bold", pad=12)
-    ax.set_xlabel("Count", fontsize=12)
-    ax.set_ylabel("")
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.grid(axis="x", linestyle="--", alpha=0.3)
-
-    ax.tick_params(axis="y", labelsize=11)
-    ax.tick_params(axis="x", labelsize=10)
-
-    max_val = df[value_col_name].max()
-    offset = max(1, max_val * 0.01)
-
-    for bar, value in zip(bars, df[value_col_name]):
-        ax.text(
-            bar.get_width() + offset,
-            bar.get_y() + bar.get_height() / 2,
-            f"{int(value)}",
-            va="center",
-            fontsize=10,
-        )
-
-    plt.tight_layout()
-    return fig
-
-
 def get_wordcloud_image_path(year: int) -> Path:
     return WORD_CLOUD_DIR / f"word_cloud_{year}.png"
 
@@ -158,8 +106,7 @@ col1, col2 = st.columns([1.1, 1])
 
 with col1:
     st.markdown("### Theme Chart")
-    theme_fig = make_theme_chart(top_themes_df)
-    st.pyplot(theme_fig, use_container_width=True)
+    st.bar_chart(top_themes_df, x="theme", y="count", use_container_width=True, sort=False, horizontal=True)
 
 with col2:
     st.markdown("### Word Cloud")

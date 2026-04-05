@@ -20,16 +20,16 @@ c4.metric("Unique Tools", f"{metrics['unique_tools']:,}")
 
 st.divider()
 
-left, right = st.columns(2)
 
-with left:
+with st.container():
     st.subheader("What problems have hackers been focused on?")
     st.bar_chart(metrics["top_themes"], x="theme", y="count", horizontal=True, sort=False)
 
+with st.container():
     st.subheader("What tools have hackers been using?")
     st.bar_chart(metrics["top_tools"], x="tool", y="count", horizontal=True, sort=False)
 
-with right:
+with st.container():
     st.subheader("Where are hackathons being held?")
     st.bar_chart(metrics["top_locations"], x="location", y="count", horizontal=True, sort=False)
 
