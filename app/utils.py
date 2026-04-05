@@ -1,7 +1,5 @@
 from collections import defaultdict
 from pathlib import Path
-import ast
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
@@ -12,7 +10,6 @@ PROJECT_ROOT = APP_DIR.parent
 DATA_DIR = PROJECT_ROOT / "data"
 
 PROCESSED_HACKATHONS_PATH = DATA_DIR / "processed_hackathons.csv"
-PROJECTS_PATH = DATA_DIR / "projects.csv"
 THEME_TREND_PATH = DATA_DIR / "theme_trend.csv"
 TOOL_TREND_PATH = DATA_DIR / "tool_trend.csv"
 WORD_CLOUD_PATH = DATA_DIR / "word_cloud_output.csv"
@@ -87,10 +84,6 @@ def load_processed_hackathons():
     return pd.read_csv(PROCESSED_HACKATHONS_PATH)
 
 @st.cache_data
-def load_projects():
-    return pd.read_csv(PROJECTS_PATH)
-
-@st.cache_data
 def load_trend_file(file_path):
     df = pd.read_csv(file_path)
     df["period"] = pd.to_datetime(df["period"], errors="coerce")
@@ -126,7 +119,6 @@ def top_n(df, group_col, value_col="count", n=10):
 @st.cache_data
 def build_home_metrics():
     hackathons = load_processed_hackathons()
-    projects = load_projects()
     theme_trend = load_trend_file(THEME_TREND_PATH)
     tool_trend = load_trend_file(TOOL_TREND_PATH)
     location_trend = load_trend_file(LOCATION_TREND_PATH)
@@ -135,7 +127,6 @@ def build_home_metrics():
     unique_tools = len(tool_trend["tool"].unique())
 
     total_hackathons = len(hackathons)
-    total_projects = len(projects)
     unique_themes = len(all_theme_names)
 
     location_counts = defaultdict(int)
@@ -151,7 +142,7 @@ def build_home_metrics():
 
     return {
         "total_hackathons": total_hackathons,
-        "total_projects": total_projects,
+        "total_projects": 147760,
         "unique_themes": unique_themes,
         "unique_tools": unique_tools,
         "top_locations": location_df,
