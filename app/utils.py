@@ -1,9 +1,7 @@
 from collections import defaultdict
 from pathlib import Path
-import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-from wordcloud import WordCloud
 import pydeck as pdk
 
 APP_DIR = Path(__file__).resolve().parent
@@ -69,14 +67,15 @@ def render_sidebar(show_home_message=False):
             st.write(f"Data range: **{MIN_YEAR}–{MAX_YEAR}**")
             return None
 
+        default_year = st.session_state.get("selected_year", MAX_YEAR)
         year = st.slider(
             "Select year",
             min_value=MIN_YEAR,
             max_value=MAX_YEAR,
+            value=default_year,
             key="selected_year",
             help="This selected year stays the same across the other pages.",
         )
-        st.caption(f"Currently viewing **{year}**")
         return year
 
 
@@ -148,29 +147,6 @@ def build_home_metrics():
         "unique_tools": unique_tools,
         "top_locations": location_df,
     }
-
-
-def make_wordcloud_figure(word_df, year):
-    fig, ax = plt.subplots(figsize=(10, 4.8))
-
-    if word_df.empty:
-        ax.text(0.5, 0.5, f"No word cloud data for {year}", ha="center", va="center", fontsize=16)
-        ax.axis("off")
-        return fig
-
-    frequencies = dict(zip(word_df["word"], word_df["count"]))
-
-    wc = WordCloud(
-        width=1200,
-        height=550,
-        background_color="white",
-        collocations=False,
-        max_words=80,
-    ).generate_from_frequencies(frequencies)
-
-    ax.imshow(wc, interpolation="bilinear")
-    ax.axis("off")
-    return fig
 
 def render_map(df, tooltip):
     layer = pdk.Layer(

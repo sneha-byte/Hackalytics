@@ -5,28 +5,17 @@ from utils import (
     render_sidebar,
     filter_year,
     top_n,
-    make_wordcloud_figure,
     load_trend_file,
-    TOOL_TREND_PATH
+    TOOL_TREND_PATH,
+    MAX_YEAR,
+    MIN_YEAR,
 )
 from matplotlib import pyplot as plt
 
 init_page()
 
 # Slider
-min_year = 2009
-max_year = 2025
-default_year = st.session_state.get("selected_year", max_year)
-
-year = st.sidebar.slider(
-    "Select Year",
-    min_value=min_year,
-    max_value=max_year,
-    value=default_year,
-    step=1,
-)
-
-st.session_state["selected_year"] = year
+year = render_sidebar()
 
 st.title("Tool Trends")
 st.write("What tools have hackers been using?")

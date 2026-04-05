@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 import pandas as pd
 import streamlit as st
-from utils import init_page, render_map
+from utils import init_page, render_map, render_sidebar
 from matplotlib import pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -129,19 +129,7 @@ def build_top_locations_with_change(df, year):
 df, percentages = load_hackathon_data()
 
 # Slider
-min_year = int(df["year"].min())
-max_year = int(df["year"].max())
-default_year = st.session_state.get("selected_year", max_year)
-
-year = st.sidebar.slider(
-    "Select Year",
-    min_value=min_year,
-    max_value=max_year,
-    value=default_year,
-    step=1,
-)
-
-st.session_state["selected_year"] = year
+year = render_sidebar()
 
 year_df = df[df["year"] == year].copy()
 

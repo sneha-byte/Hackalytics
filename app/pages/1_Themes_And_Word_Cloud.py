@@ -1,9 +1,7 @@
 from pathlib import Path
-from utils import init_page
+from utils import init_page, MIN_YEAR, MAX_YEAR, render_sidebar
 import pandas as pd
 import streamlit as st
-import matplotlib.pyplot as plt
-
 
 st.set_page_config(
     page_title="Themes and Word Cloud",
@@ -60,27 +58,7 @@ def get_wordcloud_image_path(year: int) -> Path:
 theme_df = load_theme_trend()
 init_page()
 
-available_years = sorted(theme_df["year"].dropna().astype(int).tolist())
-
-if available_years:
-    min_year = int(min(available_years))
-    max_year = int(max(available_years))
-else:
-    min_year = 2009
-    max_year = 2025
-
-default_year = st.session_state.get("selected_year", max_year)
-
-year = st.sidebar.slider(
-    "Select Year",
-    min_value=min_year,
-    max_value=max_year,
-    value=default_year,
-    step=1,
-)
-
-st.session_state["selected_year"] = year
-
+year = render_sidebar()
 theme_year = filter_year(theme_df, year)
 
 theme_year = theme_year[theme_year["theme"] != ""].copy()
