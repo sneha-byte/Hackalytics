@@ -77,3 +77,25 @@ To improve performance, we used caching so data only loads once instead of repro
 ```bash
 git clone https://github.com/sneha-byte/Hackalytics.git
 cd Hackalytics
+```
+
+2. Set up python virtual environment and install dependencies
+3. Scrape data
+```bash
+  cd scraping
+  python3 scrape_hackathons.py
+  python3 run_chunks 0 9
+  scrapy crawl HackathonLocationSpider -O ../data/locations.csv -a dataset="../data/hackathons.csv"
+```
+5. Process data.
+  - Set up .env file for geocoding
+     ```.env
+      GOOGLE_MAPS_API_KEY=<your key>
+     ```
+  - Run process.ipynb
+  - Run analysis.ipynb
+5. Deplot streamlit dashboard
+```bash
+  cd app
+  streamlit run Home.py
+ ```
