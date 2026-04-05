@@ -1,5 +1,8 @@
+import datetime
+
 import streamlit as st
-from utils import init_page, render_sidebar, build_home_metrics
+from matplotlib import pyplot as plt
+from utils import init_page, render_sidebar, build_home_metrics, THEME_TREND_PATH, load_trend_file, TOOL_TREND_PATH
 
 init_page()
 render_sidebar(show_home_message=True)
@@ -20,14 +23,43 @@ c4.metric("Unique Tools", f"{metrics['unique_tools']:,}")
 
 st.divider()
 
+def plot_top(trend_file, column_name):
+    trend_df = load_trend_file(trend_file)
+
+    all_options = trend_df[column_name].unique().tolist()
+    options = st.multiselect("Select keywords", all_options, default=all_options[:3])
+
+    trend_df = trend_df[trend_df[column_name].isin(options)]
+
+    top = trend_df.groupby(column_name)["count"].sum().sort_values(ascending=False).index.tolist()
+    df_top = trend_df[trend_df[column_name].isin(top)]
+
+    df_top["period"] = df_top["period"].dt.year
+    pivot = df_top.pivot(index="period", columns=column_name, values="count").fillna(0)
+
+    # --- Step 3: Plot with Matplotlib ---
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    for tool in pivot.columns:
+        ax.plot(pivot.index, pivot[tool], label=tool)
+
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Count")
+    ax.set_xlim(2008, 2026)
+    ax.set_title(f"Usage of {column_name} Over Time")
+    ax.legend()
+    ax.grid(True)
+
+    # Show in Streamlit
+    st.pyplot(fig)
 
 with st.container():
     st.subheader("What problems have hackers been focused on?")
-    st.bar_chart(metrics["top_themes"], x="theme", y="count", horizontal=True, sort=False)
+    plot_top(THEME_TREND_PATH, "theme")
 
 with st.container():
     st.subheader("What tools have hackers been using?")
-    st.bar_chart(metrics["top_tools"], x="tool", y="count", horizontal=True, sort=False)
+    plot_top(TOOL_TREND_PATH, "tool")
 
 with st.container():
     st.subheader("Where are hackathons being held?")

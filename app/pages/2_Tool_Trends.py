@@ -3,12 +3,12 @@ import streamlit as st
 from utils import (
     init_page,
     render_sidebar,
-    load_theme_trend,
     load_word_cloud,
     filter_year,
     top_n,
     make_wordcloud_figure,
-    load_tool_trend
+    load_trend_file,
+    TOOL_TREND_PATH
 )
 from matplotlib import pyplot as plt
 
@@ -32,7 +32,7 @@ st.session_state["selected_year"] = year
 st.title("Tool Trends")
 st.write("What tools have hackers been using?")
 
-tool_df = load_tool_trend()
+tool_df = load_trend_file(TOOL_TREND_PATH)
 tool_year = filter_year(tool_df, year)
 top_tools_df = top_n(tool_year, "tool", "count", 9)
 top_tools_df.sort_values("count", ascending=False)
