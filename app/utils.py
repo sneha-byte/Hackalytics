@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from wordcloud import WordCloud
+import pydeck as pdk
 
 APP_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_DIR.parent
@@ -170,3 +171,37 @@ def make_wordcloud_figure(word_df, year):
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
     return fig
+
+def render_map(df, tooltip):
+    layer = pdk.Layer(
+        "ScatterplotLayer",
+        data=df,
+        get_position="[longitude, latitude]",
+        get_radius="radius",
+        get_fill_color=[255, 99, 132, 180],
+        get_line_color=[255, 255, 255, 200],
+        pickable=True,
+        opacity=0.8,
+        stroked=True,
+        filled=True,
+        radius_min_pixels=4,
+        radius_max_pixels=40,
+        line_width_min_pixels=1,
+    )
+
+    view_state = pdk.ViewState(
+        latitude=20,
+        longitude=0,
+        zoom=1.2,
+        pitch=0,
+    )
+
+    st.pydeck_chart(
+        pdk.Deck(
+            layers=[layer],
+            initial_view_state=view_state,
+            tooltip=tooltip,
+            map_style="road",
+        ),
+        use_container_width=True,
+    )

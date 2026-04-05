@@ -1,9 +1,11 @@
+import math
+
 import streamlit as st
 from pathlib import Path
 import pandas as pd
-import pydeck as pdk
 from matplotlib import pyplot as plt
-from utils import init_page, render_sidebar, build_home_metrics, THEME_TREND_PATH, load_trend_file, TOOL_TREND_PATH
+from utils import init_page, render_sidebar, build_home_metrics, THEME_TREND_PATH, load_trend_file, TOOL_TREND_PATH, \
+    render_map
 
 init_page()
 render_sidebar(show_home_message=True)
@@ -92,24 +94,17 @@ def load_map_data():
         lambda x: pd.Series(parse_coordinates(x))
     )
 
-    if "locality" in df.columns:
-        df["location_label"] = df["locality"].fillna("Unknown")
-    elif "geo_location" in df.columns:
-        df["location_label"] = df["geo_location"].fillna("Unknown")
-    else:
-        df["location_label"] = "Unknown"
-
     df = df.dropna(subset=["latitude", "longitude"]).copy()
 
     # group same locations together so circle size reflects number of hackathons there
     map_df = (
-        df.groupby(["location_label", "latitude", "longitude"])
+        df.groupby(["geo_location", "latitude", "longitude"])
         .size()
         .reset_index(name="count")
     )
 
     # circle size
-    map_df["radius"] = map_df["count"] * 20000
+    map_df["radius"] = map_df["count"].apply(lambda x: math.log(x) * 15000)
 
     return map_df
 
@@ -121,43 +116,12 @@ with st.container():
 
     st.caption("Each circle represents a hackathon location. Bigger circles mean more hackathons were held there.")
 
-    layer = pdk.Layer(
-        "ScatterplotLayer",
-        data=map_df,
-        get_position="[longitude, latitude]",
-        get_radius="radius",
-        get_fill_color=[255, 99, 132, 180],
-        get_line_color=[255, 255, 255, 200],
-        pickable=True,
-        opacity=0.8,
-        stroked=True,
-        filled=True,
-        radius_min_pixels=4,
-        radius_max_pixels=45,
-        line_width_min_pixels=1,
-    )
-
-    view_state = pdk.ViewState(
-        latitude=20,
-        longitude=0,
-        zoom=1.2,
-        pitch=0,
-    )
-
     tooltip = {
-        "html": "<b>{location_label}</b><br/>Hackathons: {count}",
+        "html": "<b>{geo_location}</b><br/>Hackathons: {count}",
         "style": {
             "backgroundColor": "rgba(0, 0, 0, 0.75)",
             "color": "white",
         },
     }
 
-    st.pydeck_chart(
-        pdk.Deck(
-            layers=[layer],
-            initial_view_state=view_state,
-            tooltip=tooltip,
-            map_style="road",
-        ),
-        use_container_width=True,
-    )
+    render_map(map_df, tooltip)

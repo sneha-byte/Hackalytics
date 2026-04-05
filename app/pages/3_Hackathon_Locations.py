@@ -3,8 +3,7 @@ from pathlib import Path
 import re
 import pandas as pd
 import streamlit as st
-import pydeck as pdk
-from utils import init_page
+from utils import init_page, render_map
 from matplotlib import pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -141,13 +140,6 @@ year = st.sidebar.slider(
     value=default_year,
     step=1,
 )
-radius_factor = st.sidebar.slider(
-    "Radius Factor",
-    min_value=50.0,
-    max_value=20000.0,
-    value=20000.0,
-    step=10.0,
-)
 
 st.session_state["selected_year"] = year
 
@@ -163,56 +155,27 @@ year_df = year_df.drop_duplicates(
 
 year_df["radius"] = year_df["registrations_count"].clip(lower=20)
 year_df["radius"] = year_df["radius"].apply(
-    lambda x: math.log(x) * radius_factor
+    lambda x: math.log(x) * 15000
 )
 
 top_locations = build_top_locations_with_change(df, year)
 
-view_state = pdk.ViewState(
-    latitude=year_df["latitude"].mean(),
-    longitude=year_df["longitude"].mean(),
-    zoom=1.2,
-    pitch=0,
-)
-
-layer = pdk.Layer(
-    "ScatterplotLayer",
-    data=year_df,
-    get_position="[longitude, latitude]",
-    get_radius="radius",
-    get_fill_color=[255, 99, 132, 180],
-    get_line_color=[255, 255, 255, 200],
-    pickable=True,
-    opacity=0.8,
-    stroked=True,
-    filled=True,
-    line_width_min_pixels=1,
-)
-
-tooltip = {
-    "html": """
-        <b>{title}</b><br/>
-        Year: {year}<br/>
-        Location: {geo_location}<br/>
-        Locality: {locality}<br/>
-        Registrations: {registrations_count}
-    """,
-    "style": {
-        "backgroundColor": "white",
-        "color": "black",
-    },
-}
 left, right = st.columns([0.7, 0.3])
 with left:
-    st.pydeck_chart(
-        pdk.Deck(
-            layers=[layer],
-            initial_view_state=view_state,
-            tooltip=tooltip,
-            map_style="road",
-        ),
-        use_container_width=True,
-    )
+    tooltip = {
+        "html": """
+            <b>{title}</b><br/>
+            Year: {year}<br/>
+            Location: {geo_location}<br/>
+            Locality: {locality}<br/>
+            Registrations: {registrations_count}
+        """,
+        "style": {
+            "backgroundColor": "white",
+            "color": "black",
+        },
+    }
+    render_map(year_df, tooltip)
 
 with right:
     online_pct = percentages.get(year, 0) * 100
