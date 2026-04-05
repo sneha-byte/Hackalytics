@@ -38,7 +38,7 @@ def apply_global_css():
         """
         <style>
         div[data-testid="stMetric"] {
-            background: #f8fafc;
+            background: light-dark(#f8fafc, #0e1117);
             border: 1px solid #e5e7eb;
             border-radius: 16px;
             padding: 14px 16px;
