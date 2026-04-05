@@ -144,9 +144,9 @@ year = st.sidebar.slider(
 radius_factor = st.sidebar.slider(
     "Radius Factor",
     min_value=50.0,
-    max_value=10000.0,
-    value=10000.0,
-    step=1.0,
+    max_value=15000.0,
+    value=15000.0,
+    step=10.0,
 )
 
 st.session_state["selected_year"] = year
