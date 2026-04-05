@@ -1,9 +1,8 @@
 import math
 from pathlib import Path
-import re
 import pandas as pd
 import streamlit as st
-from utils import init_page, render_map, render_sidebar
+from utils import init_page, render_map, render_sidebar, parse_coordinates
 from matplotlib import pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -18,43 +17,11 @@ init_page()
 st.title("Hackathon Locations")
 st.write("Where are hackathons being held?")
 
-def parse_coordinates(coord):
-    try:
-        if pd.isna(coord):
-            return None, None
-
-        coord = str(coord).strip().strip("(").strip(")")
-        lat_str, lon_str = coord.split(",")
-
-        latitude = float(lat_str.strip())
-        longitude = float(lon_str.strip())
-
-        return latitude, longitude
-    except Exception:
-        return None, None
-
-
-def extract_year(date_text):
-    try:
-        if pd.isna(date_text):
-            return None
-
-        text = str(date_text).strip()
-        matches = re.findall(r"(20\d{2}|19\d{2})", text)
-
-        if matches:
-            return int(matches[-1])
-
-        return None
-    except Exception:
-        return None
-
-
 @st.cache_data
 def load_hackathon_data():
     df = pd.read_csv(DATA_PATH)
-
-    df["year"] = df["submission_period_dates"].apply(extract_year)
+    df["submission_start"] = pd.to_datetime(df["submission_start"], errors="coerce")
+    df["year"] = df["submission_start"].dt.year
 
     online_percentage_map = {}
     for year, group in df.groupby("year"):

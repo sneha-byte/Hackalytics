@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 from matplotlib import pyplot as plt
 from utils import init_page, render_sidebar, build_home_metrics, THEME_TREND_PATH, load_trend_file, TOOL_TREND_PATH, \
-    render_map
+    render_map, parse_coordinates
 
 init_page()
 render_sidebar(show_home_message=True)
@@ -67,23 +67,6 @@ with st.container():
 with st.container():
     st.subheader("What tools have hackers been using?")
     plot_top(TOOL_TREND_PATH, "tool", ["python", "javascript", "html", "web", "ios", "gemini"])
-
-
-def parse_coordinates(coord):
-    try:
-        if pd.isna(coord):
-            return None, None
-
-        coord = str(coord).strip().strip("(").strip(")")
-        lat_str, lon_str = coord.split(",")
-
-        latitude = float(lat_str.strip())
-        longitude = float(lon_str.strip())
-
-        return latitude, longitude
-    except Exception:
-        return None, None
-
 
 @st.cache_data
 def load_map_data():

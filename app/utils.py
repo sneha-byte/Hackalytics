@@ -181,3 +181,18 @@ def render_map(df, tooltip):
         ),
         use_container_width=True,
     )
+
+def parse_coordinates(coord):
+    try:
+        if pd.isna(coord):
+            return None, None
+
+        coord = str(coord).strip().strip("(").strip(")")
+        lat_str, lon_str = coord.split(",")
+
+        latitude = float(lat_str.strip())
+        longitude = float(lon_str.strip())
+
+        return latitude, longitude
+    except Exception:
+        return None, None
