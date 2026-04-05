@@ -111,27 +111,10 @@ def load_projects():
     return pd.read_csv(PROJECTS_PATH)
 
 @st.cache_data
-def load_theme_trend():
-    df = pd.read_csv(THEME_TREND_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
-    return df
-
-@st.cache_data
-def load_tool_trend():
-    df = pd.read_csv(TOOL_TREND_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
-    return df
-
-@st.cache_data
-def load_word_cloud():
-    df = pd.read_csv(WORD_CLOUD_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
-    return df
-
-@st.cache_data
-def load_location_trend():
-    df = pd.read_csv(LOCATION_TREND_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+def load_trend_file(file_path):
+    df = pd.read_csv(file_path)
+    df["period"] = pd.to_datetime(df["period"], errors="coerce")
+    df["year"] = df["period"].dt.year
     return df
 
 
@@ -164,9 +147,9 @@ def top_n(df, group_col, value_col="count", n=10):
 def build_home_metrics():
     hackathons = load_processed_hackathons()
     projects = load_projects()
-    theme_trend = load_theme_trend()
-    tool_trend = load_tool_trend()
-    location_trend = load_location_trend()
+    theme_trend = load_trend_file(THEME_TREND_PATH)
+    tool_trend = load_trend_file(TOOL_TREND_PATH)
+    location_trend = load_trend_file(LOCATION_TREND_PATH)
 
     all_theme_names = theme_trend["theme"].unique()
     unique_tools = len(tool_trend["tool"].unique())
@@ -174,9 +157,6 @@ def build_home_metrics():
     total_hackathons = len(hackathons)
     total_projects = len(projects)
     unique_themes = len(all_theme_names)
-
-    top_themes_df = top_n(theme_trend, "theme", "count", 10)
-    top_tools_df = top_n(tool_trend, "tool", "count", 10)
 
     location_counts = defaultdict(int)
     for _, row in location_trend.iterrows():
@@ -194,8 +174,6 @@ def build_home_metrics():
         "total_projects": total_projects,
         "unique_themes": unique_themes,
         "unique_tools": unique_tools,
-        "top_themes": top_themes_df,
-        "top_tools": top_tools_df,
         "top_locations": location_df,
     }
 
