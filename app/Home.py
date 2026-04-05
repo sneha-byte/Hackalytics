@@ -64,7 +64,7 @@ with st.container():
 
 with st.container():
     st.subheader("What tools have hackers been using?")
-    plot_top(TOOL_TREND_PATH, "tool")
+    plot_top(TOOL_TREND_PATH, "tool", ["python", "javascript", "html", "web", "ios", "gemini"])
 
 
 def parse_coordinates(coord):
