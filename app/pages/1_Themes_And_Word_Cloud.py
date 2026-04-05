@@ -1,6 +1,6 @@
 from pathlib import Path
-from utils import init_page, MIN_YEAR, MAX_YEAR, render_sidebar
-import pandas as pd
+from utils import (init_page, MIN_YEAR, MAX_YEAR, render_sidebar,
+                   load_trend_file, THEME_TREND_PATH, filter_year, top_n)
 import streamlit as st
 
 st.set_page_config(
@@ -12,50 +12,13 @@ st.title("Hackathon Themes and Word Cloud")
 st.subheader("What problems have hackers been focused on?")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-THEME_TREND_PATH = BASE_DIR / "data" / "theme_trend.csv"
-
-# folder where your png files live
-# example filenames:
-# word_cloud_2009.png
-# word_cloud_2010.png
 WORD_CLOUD_DIR = BASE_DIR / "data" / "word_clouds"
-
-
-@st.cache_data
-def load_theme_trend():
-    df = pd.read_csv(THEME_TREND_PATH)
-
-    df["period"] = pd.to_datetime(df["period"], errors="coerce")
-    df["year"] = df["period"].dt.year
-
-    df["theme"] = df["theme"].fillna("").astype(str).str.strip()
-    df["count"] = pd.to_numeric(df["count"], errors="coerce").fillna(0)
-
-    return df
-
-
-def filter_year(df: pd.DataFrame, year: int) -> pd.DataFrame:
-    if "year" not in df.columns:
-        return df.copy()
-    return df[df["year"] == year].copy()
-
-
-def top_n(df: pd.DataFrame, group_col: str, value_col: str, n: int = 10) -> pd.DataFrame:
-    if df.empty:
-        return pd.DataFrame(columns=[group_col, value_col])
-
-    return (
-        df.groupby(group_col, as_index=False)[value_col]
-        .sum()
-        .sort_values(value_col, ascending=False)
-        .head(n)
-    )
 
 def get_wordcloud_image_path(year: int) -> Path:
     return WORD_CLOUD_DIR / f"word_cloud_{year}.png"
 
 
-theme_df = load_theme_trend()
+theme_df = load_trend_file(THEME_TREND_PATH)
 init_page()
 
 year = render_sidebar()
