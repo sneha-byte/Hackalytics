@@ -264,13 +264,12 @@ left, right = st.columns([0.7, 0.3])
 with left:
     st.pydeck_chart(
         pdk.Deck(
-            map_style="dark",
-            initial_view_state=view_state,
             layers=[layer],
+            initial_view_state=view_state,
             tooltip=tooltip,
+            map_style="road",
         ),
         use_container_width=True,
-        height=600,
     )
 
 with right:
