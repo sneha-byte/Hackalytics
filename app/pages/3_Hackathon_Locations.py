@@ -144,8 +144,8 @@ year = st.sidebar.slider(
 radius_factor = st.sidebar.slider(
     "Radius Factor",
     min_value=50.0,
-    max_value=15000.0,
-    value=15000.0,
+    max_value=20000.0,
+    value=20000.0,
     step=10.0,
 )
 
@@ -169,9 +169,7 @@ year_df["radius"] = year_df["radius"].apply(
 top_locations = build_top_locations_with_change(df, year)
 
 view_state = pdk.ViewState(
-    latitude=year_df["latitude"].mean(),
-    longitude=year_df["longitude"].mean(),
-    zoom=1.2,
+    zoom=1,
     pitch=0,
 )
 
