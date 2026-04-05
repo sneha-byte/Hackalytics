@@ -27,7 +27,7 @@ def plot_top(trend_file, column_name):
     trend_df = load_trend_file(trend_file)
 
     all_options = trend_df[column_name].unique().tolist()
-    options = st.multiselect("Select keywords", all_options, default=all_options[:3])
+    options = st.multiselect("Select keywords", all_options, default=all_options[:5])
 
     trend_df = trend_df[trend_df[column_name].isin(options)]
 
@@ -46,7 +46,7 @@ def plot_top(trend_file, column_name):
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
     ax.set_xlim(2008, 2026)
-    ax.set_title(f"Usage of {column_name} Over Time")
+    ax.set_title(f"Usage of {column_name.title()} Over Time")
     ax.legend()
     ax.grid(True)
 
