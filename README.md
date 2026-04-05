@@ -1,19 +1,79 @@
-# Hackalytics
-Deployed App: https://hackalytics-eq2iqkxqwylq3pzbp9vf7b.streamlit.app
+# Hackalytics 📊
 
-Hackalytics answers three main questions about hackathons across the years 2009 to 2025: 
-- What problems are hackers focused on?
--   Below I have our visualizations of themes and common words for 2025
+🔗 **Live App:** https://hackalytics-eq2iqkxqwylq3pzbp9vf7b.streamlit.app  
 
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/392fa722-99a8-40d8-a6ec-c80dc4227701" /> <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/afcf1f0d-836d-4a3e-96c1-0e299fc71cf7" />
+Hackalytics is an interactive data dashboard that analyzes hackathon trends from **2009 → 2025** using real project data. It helps answer a simple but powerful question:
 
-- What tools are hackers using?
--   This is a bar graph and pie chart showing common tools in 2025
-  <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/2ca6d9e6-3d74-46ca-bb63-60cd2482c557" />
+> *What are hackers building, using, and focusing on over time?*
 
-- Where are hackathons being held?
--   <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/d40c4672-2067-4ee6-bb56-153cdce61e7b" />
+---
 
-## How to Set Up
+## 🚀 What It Does
 
-First, clone this repository on your local machine. A virtual environment is strongly recommended to run this app, so create one using python -m venv .venv. Once your virtual environment is set up, activate it, and then install the required dependencies via pip install -r requirements.txt. Then, navigate to the app folder and run the app with the command streamlit run Home.py. You can also run each individual page via streamlit run {page_name}.py.
+Hackalytics breaks down hackathon trends into three core insights:
+
+### 1. What problems are hackers focused on?
+We analyze project descriptions to surface recurring themes and keywords.
+
+- Word cloud of common ideas  
+- Theme trends over time  
+
+**Example (2025):**  
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/392fa722-99a8-40d8-a6ec-c80dc4227701" />
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/afcf1f0d-836d-4a3e-96c1-0e299fc71cf7" />
+
+---
+
+### 2. What tools are hackers using?
+We track the technologies used in projects across years.
+
+- Bar chart of most-used tools  
+- Distribution breakdown of tech stacks  
+
+**Example (2025):**  
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/2ca6d9e6-3d74-46ca-bb63-60cd2482c557" />
+
+---
+
+### 3. Where are hackathons being held?
+We visualize global hackathon distribution using location data.
+
+- Interactive map  
+- Top locations by year  
+
+**Example:**  
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/d40c4672-2067-4ee6-bb56-153cdce61e7b" />
+
+---
+
+## 🧠 How It Works
+
+- Cleaned and processed hackathon + project datasets  
+- Extracted:
+  - Themes  
+  - Tools ("built with")  
+  - Locations  
+- Aggregated trends by year  
+- Built an interactive dashboard using **Streamlit**
+
+To improve performance, we used caching so data only loads once instead of reprocessing on every interaction.
+
+---
+
+## 🛠 Tech Stack
+
+- **Python**
+- **Pandas**
+- **Streamlit**
+- **PyDeck**
+- **Matplotlib**
+- **WordCloud**
+
+---
+
+## ⚙️ How to Run Locally
+
+1. Clone the repository:
+```bash
+git clone https://github.com/sneha-byte/Hackalytics.git
+cd Hackalytics
