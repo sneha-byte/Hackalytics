@@ -1,6 +1,6 @@
-# Hackalytics 📊
+# Hackalytics 
 
-🔗 **Live App:** https://hackalytics-eq2iqkxqwylq3pzbp9vf7b.streamlit.app  
+ **Live App:** https://hackalytics-eq2iqkxqwylq3pzbp9vf7b.streamlit.app  
 
 Hackalytics is an interactive data dashboard that analyzes hackathon trends from **2009 → 2025** using real project data. It helps answer a simple but powerful question:
 
@@ -8,7 +8,7 @@ Hackalytics is an interactive data dashboard that analyzes hackathon trends from
 
 ---
 
-## 🚀 What It Does
+##  What It Does
 
 Hackalytics breaks down hackathon trends into three core insights:
 
@@ -46,7 +46,7 @@ We visualize global hackathon distribution using location data.
 
 ---
 
-## 🧠 How It Works
+##  How It Works
 
 - Cleaned and processed hackathon + project datasets  
 - Extracted:
@@ -60,7 +60,7 @@ To improve performance, we used caching so data only loads once instead of repro
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - **Python**
 - **Pandas**
@@ -71,7 +71,7 @@ To improve performance, we used caching so data only loads once instead of repro
 
 ---
 
-## ⚙️ How to Run Locally
+##  How to Run Locally
 
 1. Clone the repository:
 ```bash
