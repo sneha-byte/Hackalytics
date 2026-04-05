@@ -169,7 +169,9 @@ year_df["radius"] = year_df["radius"].apply(
 top_locations = build_top_locations_with_change(df, year)
 
 view_state = pdk.ViewState(
-    zoom=1,
+    latitude=year_df["latitude"].mean(),
+    longitude=year_df["longitude"].mean(),
+    zoom=1.2,
     pitch=0,
 )
 
