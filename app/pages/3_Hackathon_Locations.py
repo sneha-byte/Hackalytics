@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 import pydeck as pdk
 from utils import init_page
+from matplotlib import pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data" / "processed_hackathons.csv"
@@ -121,6 +122,10 @@ def load_hackathon_data():
 
     df["year"] = df["submission_period_dates"].apply(extract_year)
 
+    online_percentage_map = {}
+    for year, group in df.groupby("year"):
+        online_percentage_map[year] = (group["geo_location"] == "Online").mean()
+
     df[["latitude", "longitude"]] = df["coordinate"].apply(
         lambda x: pd.Series(parse_coordinates(x))
     )
@@ -150,7 +155,7 @@ def load_hackathon_data():
     df = df.dropna(subset=["latitude", "longitude", "year"]).copy()
     df["year"] = df["year"].astype(int)
 
-    return df
+    return df, online_percentage_map
 
 
 def build_top_locations_with_change(df, year):
@@ -187,7 +192,7 @@ def build_top_locations_with_change(df, year):
     return merged
 
 
-df = load_hackathon_data()
+df, percentages = load_hackathon_data()
 
 # Slider
 min_year = int(df["year"].min())
@@ -255,7 +260,8 @@ tooltip = {
         "color": "black",
     },
 }
-with st.container():
+left, right = st.columns([0.7, 0.3])
+with left:
     st.pydeck_chart(
         pdk.Deck(
             map_style="dark",
@@ -266,6 +272,31 @@ with st.container():
         use_container_width=True,
         height=600,
     )
+
+with right:
+    online_pct = percentages.get(year, 0) * 100
+    other_pct = 100 - online_pct
+
+    st.markdown(f"### Online Percentage in {year}")
+    # Data
+    labels = ["Online", "Other"]
+    sizes = [online_pct, other_pct]
+
+    # Plot
+    fig, ax = plt.subplots()
+
+    ax.pie(
+        sizes,
+        labels=labels,
+        autopct="%1.1f%%",
+        startangle=90
+    )
+
+    ax.set_title("Online vs Other Locations")
+    ax.axis("equal")
+
+    # Show in Streamlit
+    st.pyplot(fig)
 
 with st.container():
     st.markdown(f"### Top 5 Locations in {year}")

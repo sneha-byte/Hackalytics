@@ -1,3 +1,4 @@
+import pandas as pd
 import streamlit as st
 from utils import (
     init_page,
@@ -9,6 +10,7 @@ from utils import (
     make_wordcloud_figure,
     load_tool_trend
 )
+from matplotlib import pyplot as plt
 
 init_page()
 
@@ -32,15 +34,45 @@ st.write("What tools have hackers been using?")
 
 tool_df = load_tool_trend()
 tool_year = filter_year(tool_df, year)
-top_tools_df = top_n(tool_year, "tool", "count", 10)
+top_tools_df = top_n(tool_year, "tool", "count", 9)
 top_tools_df.sort_values("count", ascending=False)
 
-with st.container():
+left, right = st.columns(2)
+with left:
     st.subheader(f"Most used tools in {year}")
     if top_tools_df.empty:
         st.warning(f"No tool data found for {year}.")
     else:
         st.bar_chart(top_tools_df, x="tool", y="count", use_container_width=True, sort=False)
+
+with right:
+    st.subheader("Tool usage pie chart")
+
+    top_tool_names = top_tools_df["tool"].tolist()
+    others_count = 0
+    for _, row in tool_year.iterrows():
+        if row["tool"] not in top_tool_names:
+            others_count += row["count"]
+
+    all_tools = pd.concat([
+        top_tools_df,
+        pd.DataFrame([{"tool": "Others", "count": others_count}])
+    ])
+
+    # Create figure
+    fig, ax = plt.subplots()
+
+    ax.pie(
+        all_tools["count"],
+        labels=all_tools["tool"],
+        autopct="%1.1f%%",
+        startangle=90
+    )
+
+    ax.axis("equal")
+
+    # Show in Streamlit
+    st.pyplot(fig)
 
 with st.container():
     st.subheader("Takeaway")
