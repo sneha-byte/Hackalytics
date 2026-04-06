@@ -26,7 +26,7 @@ c4.metric("Unique Tools", f"{metrics['unique_tools']:,}")
 
 st.divider()
 
-def plot_top(trend_file, column_name, default_selection=None, y_lim=None):
+def plot_top(trend_file, column_name, default_selection=None):
     trend_df = load_trend_file(trend_file)
 
     all_options = trend_df[column_name].unique().tolist()
@@ -49,9 +49,6 @@ def plot_top(trend_file, column_name, default_selection=None, y_lim=None):
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
     ax.set_xlim(2008, 2026)
-    if y_lim:
-        ax.set_ylim(0, y_lim)
-
     ax.set_title(f"Usage of {column_name.title()} Over Time")
     ax.legend()
     ax.grid(True)
@@ -64,13 +61,12 @@ with st.container():
     plot_top(
         THEME_TREND_PATH,
         "theme",
-        ["COVID-19", "Social Good", "Beginner Friendly", "Open Ended", "Machine Learning/AI", "Gaming"],
-        850
+        ["COVID-19", "Social Good", "Beginner Friendly", "Open Ended", "Machine Learning/AI", "Gaming"]
     )
 
 with st.container():
     st.subheader("What tools have hackers been using?")
-    plot_top(TOOL_TREND_PATH, "tool", ["python", "javascript", "html", "web", "ios", "gemini"], 9000)
+    plot_top(TOOL_TREND_PATH, "tool", ["python", "javascript", "html", "web", "ios", "gemini"])
 
 @st.cache_data
 def load_map_data():
