@@ -1,9 +1,8 @@
 import math
-
+import plotly.graph_objects as go
 import streamlit as st
 from pathlib import Path
 import pandas as pd
-from matplotlib import pyplot as plt
 from utils import init_page, render_sidebar, build_home_metrics, THEME_TREND_PATH, load_trend_file, TOOL_TREND_PATH, \
     render_map, parse_coordinates
 
@@ -30,31 +29,53 @@ def plot_top(trend_file, column_name, default_selection=None):
     trend_df = load_trend_file(trend_file)
 
     all_options = trend_df[column_name].unique().tolist()
-    options = st.multiselect("Select keywords", all_options, default=default_selection or all_options[:5])
+    options = st.multiselect(
+        "Select keywords",
+        all_options,
+        default=default_selection or all_options[:5]
+    )
 
     trend_df = trend_df[trend_df[column_name].isin(options)]
 
-    top = trend_df.groupby(column_name)["count"].sum().sort_values(ascending=False).index.tolist()
-    df_top = trend_df[trend_df[column_name].isin(top)]
+    top = (
+        trend_df.groupby(column_name)["count"]
+        .sum()
+        .sort_values(ascending=False)
+        .index
+        .tolist()
+    )
+    df_top = trend_df[trend_df[column_name].isin(top)].copy()
 
     df_top["period"] = df_top["period"].dt.year
-    pivot = df_top.pivot(index="period", columns=column_name, values="count").fillna(0)
+    pivot = (
+        df_top.pivot(index="period", columns=column_name, values="count")
+        .fillna(0)
+    )
 
-    # --- Step 3: Plot with Matplotlib ---
-    fig, ax = plt.subplots(figsize=(10, 6))
+    # --- Plot with Plotly ---
+    fig = go.Figure()
 
     for tool in pivot.columns:
-        ax.plot(pivot.index, pivot[tool], label=tool)
+        fig.add_trace(
+            go.Scatter(
+                x=pivot.index,
+                y=pivot[tool],
+                mode="lines+markers",
+                name=tool
+            )
+        )
 
-    ax.set_xlabel("Year")
-    ax.set_ylabel("Count")
-    ax.set_xlim(2008, 2026)
-    ax.set_title(f"Usage of {column_name.title()} Over Time")
-    ax.legend()
-    ax.grid(True)
+    fig.update_layout(
+        title=f"Usage of {column_name.title()} Over Time",
+        xaxis_title="Year",
+        yaxis_title="Count",
+        xaxis=dict(range=[2008, 2026]),
+        template="plotly_white",
+        hovermode="x unified"
+    )
 
     # Show in Streamlit
-    st.pyplot(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 with st.container():
     st.subheader("What problems have hackers been focused on?")

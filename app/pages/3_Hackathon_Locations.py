@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from utils import init_page, render_map, render_sidebar, parse_coordinates
-from matplotlib import pyplot as plt
+import plotly.express as px
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data" / "processed_hackathons.csv"
@@ -15,7 +15,6 @@ st.set_page_config(
 init_page()
 
 st.title("Hackathon Locations")
-st.write("Where are hackathons being held?")
 
 @st.cache_data
 def load_hackathon_data():
@@ -111,8 +110,10 @@ year_df["radius"] = year_df["radius"].apply(
 
 top_locations = build_top_locations_with_change(df, year)
 
-left, right = st.columns([0.7, 0.3])
+left, right = st.columns([0.7, 0.3], gap="medium")
 with left:
+    st.subheader(f"Locations Map in {year}")
+
     if year_df.empty:
         st.warning(f"No location data found for {year}.")
     else:
@@ -132,29 +133,22 @@ with left:
         render_map(year_df, tooltip)
 
 with right:
+    st.subheader(f"Online vs In-person Locations in {year}")
     online_pct = percentages.get(year, 0) * 100
     other_pct = 100 - online_pct
 
-    st.markdown(f"### Online Percentage in {year}")
     # Data
-    labels = ["Online", "Other"]
+    labels = ["Online", "In-person"]
     sizes = [online_pct, other_pct]
 
+    pie_df = pd.DataFrame({"label": labels, "size": sizes})
     # Plot
-    fig, ax = plt.subplots()
-
-    ax.pie(
-        sizes,
-        labels=labels,
-        autopct="%1.1f%%",
-        startangle=90
+    fig = px.pie(
+        pie_df,
+        values="size",
+        names="label",
     )
-
-    ax.set_title("Online vs Other Locations")
-    ax.axis("equal")
-
-    # Show in Streamlit
-    st.pyplot(fig)
+    st.plotly_chart(fig)
 
 with st.container():
     st.markdown(f"### Top 5 Locations in {year}")

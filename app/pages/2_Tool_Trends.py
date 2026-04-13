@@ -10,7 +10,7 @@ from utils import (
     MAX_YEAR,
     MIN_YEAR,
 )
-from matplotlib import pyplot as plt
+import plotly.express as px
 
 init_page()
 
@@ -34,7 +34,7 @@ with left:
         st.bar_chart(top_tools_df, x="tool", y="count", use_container_width=True, sort=False)
 
 with right:
-    st.subheader("Tool usage pie chart")
+    st.subheader(f"Tool usage in {year}")
 
     top_tool_names = top_tools_df["tool"].tolist()
     others_count = 0
@@ -48,19 +48,14 @@ with right:
     ])
 
     # Create figure
-    fig, ax = plt.subplots()
-
-    ax.pie(
-        all_tools["count"],
-        labels=all_tools["tool"],
-        autopct="%1.1f%%",
-        startangle=90
+    fig = px.pie(
+        all_tools,
+        values="count",
+        names="tool",
     )
 
-    ax.axis("equal")
-
     # Show in Streamlit
-    st.pyplot(fig)
+    st.plotly_chart(fig)
 
 with st.container():
     st.subheader("Takeaway")
