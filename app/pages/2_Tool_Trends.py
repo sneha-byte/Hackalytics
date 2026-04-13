@@ -1,44 +1,61 @@
+import pandas as pd
 import streamlit as st
 from utils import (
     init_page,
     render_sidebar,
-    load_theme_trend,
-    load_word_cloud,
     filter_year,
     top_n,
-    make_wordcloud_figure,
-    load_tool_trend
+    load_trend_file,
+    TOOL_TREND_PATH,
+    MAX_YEAR,
+    MIN_YEAR,
 )
+import plotly.express as px
+
+init_page()
 
 # Slider
-min_year = 2009
-max_year = 2025
-default_year = st.session_state.get("selected_year", max_year)
-
-year = st.sidebar.slider(
-    "Select Year",
-    min_value=min_year,
-    max_value=max_year,
-    value=default_year,
-    step=1,
-)
-
-st.session_state["selected_year"] = year
+year = render_sidebar()
 
 st.title("Tool Trends")
 st.write("What tools have hackers been using?")
 
-tool_df = load_tool_trend()
+tool_df = load_trend_file(TOOL_TREND_PATH)
 tool_year = filter_year(tool_df, year)
-top_tools_df = top_n(tool_year, "tool", "count", 10)
+top_tools_df = top_n(tool_year, "tool", "count", 9)
 top_tools_df.sort_values("count", ascending=False)
 
-with st.container():
+left, right = st.columns(2)
+with left:
     st.subheader(f"Most used tools in {year}")
     if top_tools_df.empty:
         st.warning(f"No tool data found for {year}.")
     else:
-        st.bar_chart(top_tools_df, x="tool", y="count", use_container_width=True, sort=False)
+        st.bar_chart(top_tools_df, x="tool", y="count", sort=False)
+
+with right:
+    st.subheader(f"Tool usage in {year}")
+
+    top_tool_names = top_tools_df["tool"].tolist()
+    others_count = 0
+    for _, row in tool_year.iterrows():
+        if row["tool"] not in top_tool_names:
+            others_count += row["count"]
+
+    all_tools = pd.concat([
+        top_tools_df,
+        pd.DataFrame([{"tool": "Others", "count": others_count}])
+    ])
+
+    # Create figure
+    fig = px.pie(
+        all_tools,
+        values="count",
+        names="tool",
+    )
+
+    # Show in Streamlit
+    st.plotly_chart(fig)
 
 with st.container():
     st.subheader("Takeaway")
@@ -57,4 +74,4 @@ with st.container():
 
 st.divider()
 st.subheader("Tool detail table")
-st.dataframe(top_tools_df, use_container_width=True, hide_index=True)
+st.dataframe(top_tools_df, hide_index=True)

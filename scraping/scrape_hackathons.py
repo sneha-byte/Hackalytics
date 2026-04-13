@@ -78,6 +78,6 @@ def chunk_df():
         chunk.to_csv(CHUNK_ROOT / f"hackathon_{i // chunk_size}.csv", index=False)
 
 if __name__ == '__main__':
-    # scrape_hackathons()
+    scrape_hackathons()
     compile_csv()
     chunk_df()

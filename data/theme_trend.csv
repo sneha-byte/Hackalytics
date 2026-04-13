@@ -1,0 +1,494 @@
+period,theme,count
+2009-01-01,Web,0
+2009-01-01,COVID-19,0
+2009-01-01,Voice skills,0
+2009-01-01,Quantum,0
+2009-01-01,Gaming,0
+2009-01-01,DevOps,0
+2009-01-01,Machine Learning/AI,0
+2009-01-01,Serverless,0
+2009-01-01,IoT,0
+2009-01-01,Enterprise,0
+2009-01-01,Robotic Process Automation,0
+2009-01-01,Open Ended,0
+2009-01-01,Design,0
+2009-01-01,Cybersecurity,0
+2009-01-01,Mobile,0
+2009-01-01,Music/Art,0
+2009-01-01,Communication,0
+2009-01-01,Low/No Code,0
+2009-01-01,Blockchain,0
+2009-01-01,Databases,0
+2009-01-01,Beginner Friendly,0
+2009-01-01,AR/VR,0
+2009-01-01,Social Good,0
+2009-01-01,Lifehacks,0
+2009-01-01,Health,0
+2009-01-01,Education,0
+2009-01-01,E-commerce/Retail,0
+2009-01-01,Fintech,0
+2009-01-01,Productivity,0
+2010-01-01,Web,0
+2010-01-01,COVID-19,0
+2010-01-01,Voice skills,0
+2010-01-01,Quantum,0
+2010-01-01,Gaming,0
+2010-01-01,DevOps,0
+2010-01-01,Machine Learning/AI,0
+2010-01-01,Serverless,0
+2010-01-01,IoT,0
+2010-01-01,Enterprise,0
+2010-01-01,Robotic Process Automation,0
+2010-01-01,Open Ended,0
+2010-01-01,Design,0
+2010-01-01,Cybersecurity,0
+2010-01-01,Mobile,0
+2010-01-01,Music/Art,0
+2010-01-01,Communication,0
+2010-01-01,Low/No Code,0
+2010-01-01,Blockchain,0
+2010-01-01,Databases,0
+2010-01-01,Beginner Friendly,0
+2010-01-01,AR/VR,0
+2010-01-01,Social Good,0
+2010-01-01,Lifehacks,0
+2010-01-01,Health,0
+2010-01-01,Education,0
+2010-01-01,E-commerce/Retail,0
+2010-01-01,Fintech,0
+2010-01-01,Productivity,0
+2011-01-01,Web,0
+2011-01-01,COVID-19,0
+2011-01-01,Voice skills,0
+2011-01-01,Quantum,0
+2011-01-01,Gaming,0
+2011-01-01,DevOps,0
+2011-01-01,Machine Learning/AI,0
+2011-01-01,Serverless,0
+2011-01-01,IoT,0
+2011-01-01,Enterprise,0
+2011-01-01,Robotic Process Automation,0
+2011-01-01,Open Ended,0
+2011-01-01,Design,0
+2011-01-01,Cybersecurity,0
+2011-01-01,Mobile,0
+2011-01-01,Music/Art,0
+2011-01-01,Communication,0
+2011-01-01,Low/No Code,0
+2011-01-01,Blockchain,0
+2011-01-01,Databases,0
+2011-01-01,Beginner Friendly,0
+2011-01-01,AR/VR,0
+2011-01-01,Social Good,0
+2011-01-01,Lifehacks,0
+2011-01-01,Health,0
+2011-01-01,Education,0
+2011-01-01,E-commerce/Retail,0
+2011-01-01,Fintech,0
+2011-01-01,Productivity,0
+2012-01-01,Web,0
+2012-01-01,COVID-19,0
+2012-01-01,Voice skills,0
+2012-01-01,Quantum,0
+2012-01-01,Gaming,0
+2012-01-01,DevOps,0
+2012-01-01,Machine Learning/AI,0
+2012-01-01,Serverless,0
+2012-01-01,IoT,0
+2012-01-01,Enterprise,0
+2012-01-01,Robotic Process Automation,0
+2012-01-01,Open Ended,0
+2012-01-01,Design,0
+2012-01-01,Cybersecurity,0
+2012-01-01,Mobile,0
+2012-01-01,Music/Art,0
+2012-01-01,Communication,0
+2012-01-01,Low/No Code,0
+2012-01-01,Blockchain,0
+2012-01-01,Databases,0
+2012-01-01,Beginner Friendly,0
+2012-01-01,AR/VR,0
+2012-01-01,Social Good,0
+2012-01-01,Lifehacks,0
+2012-01-01,Health,0
+2012-01-01,Education,0
+2012-01-01,E-commerce/Retail,0
+2012-01-01,Fintech,0
+2012-01-01,Productivity,0
+2013-01-01,Web,0
+2013-01-01,COVID-19,0
+2013-01-01,Voice skills,0
+2013-01-01,Quantum,0
+2013-01-01,Gaming,0
+2013-01-01,DevOps,0
+2013-01-01,Machine Learning/AI,0
+2013-01-01,Serverless,0
+2013-01-01,IoT,0
+2013-01-01,Enterprise,0
+2013-01-01,Robotic Process Automation,0
+2013-01-01,Open Ended,0
+2013-01-01,Design,0
+2013-01-01,Cybersecurity,0
+2013-01-01,Mobile,0
+2013-01-01,Music/Art,0
+2013-01-01,Communication,0
+2013-01-01,Low/No Code,0
+2013-01-01,Blockchain,0
+2013-01-01,Databases,0
+2013-01-01,Beginner Friendly,0
+2013-01-01,AR/VR,0
+2013-01-01,Social Good,0
+2013-01-01,Lifehacks,0
+2013-01-01,Health,0
+2013-01-01,Education,0
+2013-01-01,E-commerce/Retail,0
+2013-01-01,Fintech,0
+2013-01-01,Productivity,0
+2014-01-01,Web,0
+2014-01-01,COVID-19,0
+2014-01-01,Voice skills,0
+2014-01-01,Quantum,0
+2014-01-01,Gaming,4
+2014-01-01,DevOps,0
+2014-01-01,Machine Learning/AI,2
+2014-01-01,Serverless,0
+2014-01-01,IoT,1
+2014-01-01,Enterprise,0
+2014-01-01,Robotic Process Automation,0
+2014-01-01,Open Ended,0
+2014-01-01,Design,0
+2014-01-01,Cybersecurity,0
+2014-01-01,Mobile,0
+2014-01-01,Music/Art,0
+2014-01-01,Communication,7
+2014-01-01,Low/No Code,0
+2014-01-01,Blockchain,1
+2014-01-01,Databases,0
+2014-01-01,Beginner Friendly,0
+2014-01-01,AR/VR,1
+2014-01-01,Social Good,8
+2014-01-01,Lifehacks,2
+2014-01-01,Health,0
+2014-01-01,Education,0
+2014-01-01,E-commerce/Retail,0
+2014-01-01,Fintech,4
+2014-01-01,Productivity,7
+2015-01-01,Web,0
+2015-01-01,COVID-19,0
+2015-01-01,Voice skills,0
+2015-01-01,Quantum,0
+2015-01-01,Gaming,0
+2015-01-01,DevOps,2
+2015-01-01,Machine Learning/AI,0
+2015-01-01,Serverless,0
+2015-01-01,IoT,4
+2015-01-01,Enterprise,0
+2015-01-01,Robotic Process Automation,0
+2015-01-01,Open Ended,0
+2015-01-01,Design,0
+2015-01-01,Cybersecurity,0
+2015-01-01,Mobile,0
+2015-01-01,Music/Art,0
+2015-01-01,Communication,7
+2015-01-01,Low/No Code,0
+2015-01-01,Blockchain,1
+2015-01-01,Databases,0
+2015-01-01,Beginner Friendly,0
+2015-01-01,AR/VR,0
+2015-01-01,Social Good,7
+2015-01-01,Lifehacks,4
+2015-01-01,Health,0
+2015-01-01,Education,0
+2015-01-01,E-commerce/Retail,0
+2015-01-01,Fintech,2
+2015-01-01,Productivity,8
+2016-01-01,Web,0
+2016-01-01,COVID-19,0
+2016-01-01,Voice skills,1
+2016-01-01,Quantum,0
+2016-01-01,Gaming,3
+2016-01-01,DevOps,3
+2016-01-01,Machine Learning/AI,1
+2016-01-01,Serverless,0
+2016-01-01,IoT,1
+2016-01-01,Enterprise,0
+2016-01-01,Robotic Process Automation,0
+2016-01-01,Open Ended,0
+2016-01-01,Design,0
+2016-01-01,Cybersecurity,1
+2016-01-01,Mobile,0
+2016-01-01,Music/Art,0
+2016-01-01,Communication,7
+2016-01-01,Low/No Code,0
+2016-01-01,Blockchain,5
+2016-01-01,Databases,0
+2016-01-01,Beginner Friendly,0
+2016-01-01,AR/VR,3
+2016-01-01,Social Good,10
+2016-01-01,Lifehacks,1
+2016-01-01,Health,0
+2016-01-01,Education,0
+2016-01-01,E-commerce/Retail,0
+2016-01-01,Fintech,1
+2016-01-01,Productivity,6
+2017-01-01,Web,0
+2017-01-01,COVID-19,0
+2017-01-01,Voice skills,3
+2017-01-01,Quantum,0
+2017-01-01,Gaming,0
+2017-01-01,DevOps,3
+2017-01-01,Machine Learning/AI,8
+2017-01-01,Serverless,0
+2017-01-01,IoT,2
+2017-01-01,Enterprise,0
+2017-01-01,Robotic Process Automation,0
+2017-01-01,Open Ended,0
+2017-01-01,Design,0
+2017-01-01,Cybersecurity,0
+2017-01-01,Mobile,0
+2017-01-01,Music/Art,0
+2017-01-01,Communication,7
+2017-01-01,Low/No Code,0
+2017-01-01,Blockchain,9
+2017-01-01,Databases,0
+2017-01-01,Beginner Friendly,0
+2017-01-01,AR/VR,0
+2017-01-01,Social Good,4
+2017-01-01,Lifehacks,1
+2017-01-01,Health,0
+2017-01-01,Education,0
+2017-01-01,E-commerce/Retail,0
+2017-01-01,Fintech,1
+2017-01-01,Productivity,4
+2018-01-01,Web,1
+2018-01-01,COVID-19,0
+2018-01-01,Voice skills,3
+2018-01-01,Quantum,0
+2018-01-01,Gaming,2
+2018-01-01,DevOps,2
+2018-01-01,Machine Learning/AI,7
+2018-01-01,Serverless,0
+2018-01-01,IoT,3
+2018-01-01,Enterprise,0
+2018-01-01,Robotic Process Automation,0
+2018-01-01,Open Ended,2
+2018-01-01,Design,0
+2018-01-01,Cybersecurity,1
+2018-01-01,Mobile,0
+2018-01-01,Music/Art,0
+2018-01-01,Communication,6
+2018-01-01,Low/No Code,0
+2018-01-01,Blockchain,25
+2018-01-01,Databases,0
+2018-01-01,Beginner Friendly,2
+2018-01-01,AR/VR,5
+2018-01-01,Social Good,11
+2018-01-01,Lifehacks,6
+2018-01-01,Health,0
+2018-01-01,Education,0
+2018-01-01,E-commerce/Retail,0
+2018-01-01,Fintech,0
+2018-01-01,Productivity,10
+2019-01-01,Web,1
+2019-01-01,COVID-19,0
+2019-01-01,Voice skills,4
+2019-01-01,Quantum,0
+2019-01-01,Gaming,12
+2019-01-01,DevOps,7
+2019-01-01,Machine Learning/AI,52
+2019-01-01,Serverless,0
+2019-01-01,IoT,16
+2019-01-01,Enterprise,0
+2019-01-01,Robotic Process Automation,0
+2019-01-01,Open Ended,1
+2019-01-01,Design,1
+2019-01-01,Cybersecurity,4
+2019-01-01,Mobile,0
+2019-01-01,Music/Art,0
+2019-01-01,Communication,28
+2019-01-01,Low/No Code,0
+2019-01-01,Blockchain,41
+2019-01-01,Databases,0
+2019-01-01,Beginner Friendly,2
+2019-01-01,AR/VR,16
+2019-01-01,Social Good,64
+2019-01-01,Lifehacks,9
+2019-01-01,Health,0
+2019-01-01,Education,0
+2019-01-01,E-commerce/Retail,0
+2019-01-01,Fintech,17
+2019-01-01,Productivity,22
+2020-01-01,Web,1
+2020-01-01,COVID-19,179
+2020-01-01,Voice skills,6
+2020-01-01,Quantum,0
+2020-01-01,Gaming,20
+2020-01-01,DevOps,31
+2020-01-01,Machine Learning/AI,123
+2020-01-01,Serverless,0
+2020-01-01,IoT,32
+2020-01-01,Enterprise,0
+2020-01-01,Robotic Process Automation,0
+2020-01-01,Open Ended,3
+2020-01-01,Design,1
+2020-01-01,Cybersecurity,25
+2020-01-01,Mobile,0
+2020-01-01,Music/Art,1
+2020-01-01,Communication,46
+2020-01-01,Low/No Code,1
+2020-01-01,Blockchain,43
+2020-01-01,Databases,0
+2020-01-01,Beginner Friendly,7
+2020-01-01,AR/VR,33
+2020-01-01,Social Good,291
+2020-01-01,Lifehacks,37
+2020-01-01,Health,31
+2020-01-01,Education,2
+2020-01-01,E-commerce/Retail,0
+2020-01-01,Fintech,36
+2020-01-01,Productivity,91
+2021-01-01,Web,57
+2021-01-01,COVID-19,84
+2021-01-01,Voice skills,1
+2021-01-01,Quantum,1
+2021-01-01,Gaming,42
+2021-01-01,DevOps,29
+2021-01-01,Machine Learning/AI,147
+2021-01-01,Serverless,0
+2021-01-01,IoT,33
+2021-01-01,Enterprise,38
+2021-01-01,Robotic Process Automation,0
+2021-01-01,Open Ended,197
+2021-01-01,Design,74
+2021-01-01,Cybersecurity,21
+2021-01-01,Mobile,27
+2021-01-01,Music/Art,7
+2021-01-01,Communication,41
+2021-01-01,Low/No Code,35
+2021-01-01,Blockchain,70
+2021-01-01,Databases,0
+2021-01-01,Beginner Friendly,384
+2021-01-01,AR/VR,33
+2021-01-01,Social Good,373
+2021-01-01,Lifehacks,27
+2021-01-01,Health,108
+2021-01-01,Education,187
+2021-01-01,E-commerce/Retail,16
+2021-01-01,Fintech,62
+2021-01-01,Productivity,56
+2022-01-01,Web,107
+2022-01-01,COVID-19,15
+2022-01-01,Voice skills,2
+2022-01-01,Quantum,2
+2022-01-01,Gaming,36
+2022-01-01,DevOps,14
+2022-01-01,Machine Learning/AI,119
+2022-01-01,Serverless,0
+2022-01-01,IoT,33
+2022-01-01,Enterprise,34
+2022-01-01,Robotic Process Automation,1
+2022-01-01,Open Ended,342
+2022-01-01,Design,77
+2022-01-01,Cybersecurity,20
+2022-01-01,Mobile,37
+2022-01-01,Music/Art,18
+2022-01-01,Communication,20
+2022-01-01,Low/No Code,40
+2022-01-01,Blockchain,105
+2022-01-01,Databases,3
+2022-01-01,Beginner Friendly,568
+2022-01-01,AR/VR,28
+2022-01-01,Social Good,341
+2022-01-01,Lifehacks,14
+2022-01-01,Health,78
+2022-01-01,Education,196
+2022-01-01,E-commerce/Retail,9
+2022-01-01,Fintech,56
+2022-01-01,Productivity,34
+2023-01-01,Web,129
+2023-01-01,COVID-19,2
+2023-01-01,Voice skills,2
+2023-01-01,Quantum,4
+2023-01-01,Gaming,39
+2023-01-01,DevOps,22
+2023-01-01,Machine Learning/AI,226
+2023-01-01,Serverless,0
+2023-01-01,IoT,35
+2023-01-01,Enterprise,21
+2023-01-01,Robotic Process Automation,13
+2023-01-01,Open Ended,327
+2023-01-01,Design,77
+2023-01-01,Cybersecurity,23
+2023-01-01,Mobile,32
+2023-01-01,Music/Art,10
+2023-01-01,Communication,21
+2023-01-01,Low/No Code,94
+2023-01-01,Blockchain,81
+2023-01-01,Databases,35
+2023-01-01,Beginner Friendly,607
+2023-01-01,AR/VR,28
+2023-01-01,Social Good,295
+2023-01-01,Lifehacks,5
+2023-01-01,Health,58
+2023-01-01,Education,163
+2023-01-01,E-commerce/Retail,13
+2023-01-01,Fintech,53
+2023-01-01,Productivity,44
+2024-01-01,Web,158
+2024-01-01,COVID-19,0
+2024-01-01,Voice skills,5
+2024-01-01,Quantum,6
+2024-01-01,Gaming,36
+2024-01-01,DevOps,16
+2024-01-01,Machine Learning/AI,332
+2024-01-01,Serverless,0
+2024-01-01,IoT,24
+2024-01-01,Enterprise,29
+2024-01-01,Robotic Process Automation,13
+2024-01-01,Open Ended,311
+2024-01-01,Design,95
+2024-01-01,Cybersecurity,24
+2024-01-01,Mobile,41
+2024-01-01,Music/Art,15
+2024-01-01,Communication,13
+2024-01-01,Low/No Code,98
+2024-01-01,Blockchain,66
+2024-01-01,Databases,41
+2024-01-01,Beginner Friendly,692
+2024-01-01,AR/VR,27
+2024-01-01,Social Good,335
+2024-01-01,Lifehacks,13
+2024-01-01,Health,70
+2024-01-01,Education,183
+2024-01-01,E-commerce/Retail,8
+2024-01-01,Fintech,35
+2024-01-01,Productivity,48
+2025-01-01,Web,187
+2025-01-01,COVID-19,0
+2025-01-01,Voice skills,18
+2025-01-01,Quantum,6
+2025-01-01,Gaming,34
+2025-01-01,DevOps,20
+2025-01-01,Machine Learning/AI,554
+2025-01-01,Serverless,5
+2025-01-01,IoT,64
+2025-01-01,Enterprise,36
+2025-01-01,Robotic Process Automation,17
+2025-01-01,Open Ended,358
+2025-01-01,Design,100
+2025-01-01,Cybersecurity,40
+2025-01-01,Mobile,39
+2025-01-01,Music/Art,15
+2025-01-01,Communication,20
+2025-01-01,Low/No Code,126
+2025-01-01,Blockchain,55
+2025-01-01,Databases,46
+2025-01-01,Beginner Friendly,801
+2025-01-01,AR/VR,34
+2025-01-01,Social Good,376
+2025-01-01,Lifehacks,17
+2025-01-01,Health,98
+2025-01-01,Education,219
+2025-01-01,E-commerce/Retail,17
+2025-01-01,Fintech,68
+2025-01-01,Productivity,60

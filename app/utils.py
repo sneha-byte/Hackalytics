@@ -1,18 +1,14 @@
 from collections import defaultdict
 from pathlib import Path
-import ast
-
-import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-from wordcloud import WordCloud
+import pydeck as pdk
 
 APP_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_DIR.parent
 DATA_DIR = PROJECT_ROOT / "data"
 
 PROCESSED_HACKATHONS_PATH = DATA_DIR / "processed_hackathons.csv"
-PROJECTS_PATH = DATA_DIR / "projects.csv"
 THEME_TREND_PATH = DATA_DIR / "theme_trend.csv"
 TOOL_TREND_PATH = DATA_DIR / "tool_trend.csv"
 WORD_CLOUD_PATH = DATA_DIR / "word_cloud_output.csv"
@@ -40,40 +36,16 @@ def apply_global_css():
     st.markdown(
         """
         <style>
-        .block-container {
-            padding-top: 1.5rem;
-            padding-bottom: 2rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            max-width: 1400px;
-        }
-
-        .main-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-        }
-
-        .subtitle {
-            font-size: 1.05rem;
-            color: #667085;
-            margin-bottom: 1.25rem;
-        }
-
-        div[data-testid="stMetric"] {
-            background: #f8fafc;
-            border: 1px solid #e5e7eb;
+        div.stMetric {
+            background: light-dark(#f8fafc, #2b2b2b);
+            border: 1px solid light-dark(#e5e7eb, #8f8f8f);
             border-radius: 16px;
             padding: 14px 16px;
         }
 
-        div[data-testid="stSlider"] label p {
+        div.stSlider label p {
             font-size: 1.05rem !important;
             font-weight: 700 !important;
-        }
-
-        div[data-baseweb="slider"] > div > div {
-            height: 8px !important;
         }
         </style>
         """,
@@ -91,14 +63,15 @@ def render_sidebar(show_home_message=False):
             st.write(f"Data range: **{MIN_YEAR}–{MAX_YEAR}**")
             return None
 
+        default_year = st.session_state.get("selected_year", MAX_YEAR)
         year = st.slider(
             "Select year",
             min_value=MIN_YEAR,
             max_value=MAX_YEAR,
+            value=default_year,
             key="selected_year",
             help="This selected year stays the same across the other pages.",
         )
-        st.caption(f"Currently viewing **{year}**")
         return year
 
 
@@ -107,31 +80,10 @@ def load_processed_hackathons():
     return pd.read_csv(PROCESSED_HACKATHONS_PATH)
 
 @st.cache_data
-def load_projects():
-    return pd.read_csv(PROJECTS_PATH)
-
-@st.cache_data
-def load_theme_trend():
-    df = pd.read_csv(THEME_TREND_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
-    return df
-
-@st.cache_data
-def load_tool_trend():
-    df = pd.read_csv(TOOL_TREND_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
-    return df
-
-@st.cache_data
-def load_word_cloud():
-    df = pd.read_csv(WORD_CLOUD_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
-    return df
-
-@st.cache_data
-def load_location_trend():
-    df = pd.read_csv(LOCATION_TREND_PATH)
-    df["year"] = pd.to_datetime(df["period"], errors="coerce").dt.year
+def load_trend_file(file_path):
+    df = pd.read_csv(file_path)
+    df["period"] = pd.to_datetime(df["period"], errors="coerce")
+    df["year"] = df["period"].dt.year
     return df
 
 
@@ -163,20 +115,15 @@ def top_n(df, group_col, value_col="count", n=10):
 @st.cache_data
 def build_home_metrics():
     hackathons = load_processed_hackathons()
-    projects = load_projects()
-    theme_trend = load_theme_trend()
-    tool_trend = load_tool_trend()
-    location_trend = load_location_trend()
+    theme_trend = load_trend_file(THEME_TREND_PATH)
+    tool_trend = load_trend_file(TOOL_TREND_PATH)
+    location_trend = load_trend_file(LOCATION_TREND_PATH)
 
     all_theme_names = theme_trend["theme"].unique()
     unique_tools = len(tool_trend["tool"].unique())
 
     total_hackathons = len(hackathons)
-    total_projects = len(projects)
     unique_themes = len(all_theme_names)
-
-    top_themes_df = top_n(theme_trend, "theme", "count", 10)
-    top_tools_df = top_n(tool_trend, "tool", "count", 10)
 
     location_counts = defaultdict(int)
     for _, row in location_trend.iterrows():
@@ -191,33 +138,56 @@ def build_home_metrics():
 
     return {
         "total_hackathons": total_hackathons,
-        "total_projects": total_projects,
+        "total_projects": 147760,
         "unique_themes": unique_themes,
         "unique_tools": unique_tools,
-        "top_themes": top_themes_df,
-        "top_tools": top_tools_df,
         "top_locations": location_df,
     }
 
+def render_map(df, tooltip):
+    layer = pdk.Layer(
+        "ScatterplotLayer",
+        data=df,
+        get_position="[longitude, latitude]",
+        get_radius="radius",
+        get_fill_color=[255, 99, 132, 180],
+        get_line_color=[255, 255, 255, 200],
+        pickable=True,
+        opacity=0.8,
+        stroked=True,
+        filled=True,
+        radius_min_pixels=4,
+        radius_max_pixels=40,
+        line_width_min_pixels=1,
+    )
 
-def make_wordcloud_figure(word_df, year):
-    fig, ax = plt.subplots(figsize=(10, 4.8))
+    view_state = pdk.ViewState(
+        latitude=20,
+        longitude=0,
+        zoom=1.2,
+        pitch=0,
+    )
 
-    if word_df.empty:
-        ax.text(0.5, 0.5, f"No word cloud data for {year}", ha="center", va="center", fontsize=16)
-        ax.axis("off")
-        return fig
+    st.pydeck_chart(
+        pdk.Deck(
+            layers=[layer],
+            initial_view_state=view_state,
+            tooltip=tooltip,
+            map_style="road",
+        ),
+    )
 
-    frequencies = dict(zip(word_df["word"], word_df["count"]))
+def parse_coordinates(coord):
+    try:
+        if pd.isna(coord):
+            return None, None
 
-    wc = WordCloud(
-        width=1200,
-        height=550,
-        background_color="white",
-        collocations=False,
-        max_words=80,
-    ).generate_from_frequencies(frequencies)
+        coord = str(coord).strip().strip("(").strip(")")
+        lat_str, lon_str = coord.split(",")
 
-    ax.imshow(wc, interpolation="bilinear")
-    ax.axis("off")
-    return fig
+        latitude = float(lat_str.strip())
+        longitude = float(lon_str.strip())
+
+        return latitude, longitude
+    except Exception:
+        return None, None

@@ -1,6 +1,6 @@
 .idea
 .venv
-*.csv
-data/
+data/outputs
+data/projects.csv
 *.pyc
 .env

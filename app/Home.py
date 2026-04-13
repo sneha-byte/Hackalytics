@@ -1,14 +1,19 @@
+import math
+import plotly.graph_objects as go
 import streamlit as st
-from utils import init_page, render_sidebar, build_home_metrics
+from pathlib import Path
+import pandas as pd
+from utils import init_page, render_sidebar, build_home_metrics, THEME_TREND_PATH, load_trend_file, TOOL_TREND_PATH, \
+    render_map, parse_coordinates
 
 init_page()
 render_sidebar(show_home_message=True)
 
-st.markdown('<div class="main-title">Hackalytics</div>', unsafe_allow_html=True)
-st.markdown(
-    '<div class="subtitle">Overall dashboard across all years. Use the other pages to explore one year at a time.</div>',
-    unsafe_allow_html=True,
-)
+BASE_DIR = Path(__file__).resolve().parents[1]
+DATA_PATH = BASE_DIR / "data" / "processed_hackathons.csv"
+
+st.title('Hackalytics')
+st.write("Overall dashboard across all years. Use the other pages to explore one year at a time.")
 
 metrics = build_home_metrics()
 
@@ -20,21 +25,107 @@ c4.metric("Unique Tools", f"{metrics['unique_tools']:,}")
 
 st.divider()
 
-left, right = st.columns(2)
+def plot_top(trend_file, column_name, default_selection=None):
+    trend_df = load_trend_file(trend_file)
 
-with left:
+    all_options = trend_df[column_name].unique().tolist()
+    options = st.multiselect(
+        "Select keywords",
+        all_options,
+        default=default_selection or all_options[:5]
+    )
+
+    trend_df = trend_df[trend_df[column_name].isin(options)]
+
+    top = (
+        trend_df.groupby(column_name)["count"]
+        .sum()
+        .sort_values(ascending=False)
+        .index
+        .tolist()
+    )
+    df_top = trend_df[trend_df[column_name].isin(top)].copy()
+
+    df_top["period"] = df_top["period"].dt.year
+    pivot = (
+        df_top.pivot(index="period", columns=column_name, values="count")
+        .fillna(0)
+    )
+
+    # --- Plot with Plotly ---
+    fig = go.Figure()
+
+    for tool in pivot.columns:
+        fig.add_trace(
+            go.Scatter(
+                x=pivot.index,
+                y=pivot[tool],
+                mode="lines+markers",
+                name=tool
+            )
+        )
+
+    fig.update_layout(
+        title=f"Usage of {column_name.title()} Over Time",
+        xaxis_title="Year",
+        yaxis_title="Count",
+        xaxis=dict(range=[2008, 2026]),
+        template="plotly_white",
+        hovermode="x unified"
+    )
+
+    # Show in Streamlit
+    st.plotly_chart(fig)
+
+with st.container():
     st.subheader("What problems have hackers been focused on?")
-    st.bar_chart(metrics["top_themes"], x="theme", y="count", horizontal=True, sort=False)
+    plot_top(
+        THEME_TREND_PATH,
+        "theme",
+        ["COVID-19", "Social Good", "Beginner Friendly", "Open Ended", "Machine Learning/AI", "Gaming"]
+    )
 
+with st.container():
     st.subheader("What tools have hackers been using?")
-    st.bar_chart(metrics["top_tools"], x="tool", y="count", horizontal=True, sort=False)
+    plot_top(TOOL_TREND_PATH, "tool", ["python", "javascript", "html", "web", "ios", "gemini"])
 
-with right:
+@st.cache_data
+def load_map_data():
+    df = pd.read_csv(DATA_PATH)
+
+    # turn "(lat, lon)" into separate numeric columns
+    df[["latitude", "longitude"]] = df["coordinate"].apply(
+        lambda x: pd.Series(parse_coordinates(x))
+    )
+
+    df = df.dropna(subset=["latitude", "longitude"]).copy()
+
+    # group same locations together so circle size reflects number of hackathons there
+    map_df = (
+        df.groupby(["geo_location", "latitude", "longitude"])
+        .size()
+        .reset_index(name="count")
+    )
+
+    # circle size
+    map_df["radius"] = map_df["count"].apply(lambda x: math.log(x) * 15000)
+
+    return map_df
+
+
+with st.container():
     st.subheader("Where are hackathons being held?")
-    st.bar_chart(metrics["top_locations"], x="location", y="count", horizontal=True, sort=False)
 
-st.divider()
-st.info(
-    "The three analysis pages share one year slider using Streamlit session state, "
-    "so when you switch pages the selected year stays the same."
-)
+    map_df = load_map_data()
+
+    st.caption("Each circle represents a hackathon location. Bigger circles mean more hackathons were held there.")
+
+    tooltip = {
+        "html": "<b>{geo_location}</b><br/>Hackathons: {count}",
+        "style": {
+            "backgroundColor": "rgba(0, 0, 0, 0.75)",
+            "color": "white",
+        },
+    }
+
+    render_map(map_df, tooltip)
