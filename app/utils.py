@@ -179,7 +179,6 @@ def render_map(df, tooltip):
             tooltip=tooltip,
             map_style="road",
         ),
-        use_container_width=True,
     )
 
 def parse_coordinates(coord):

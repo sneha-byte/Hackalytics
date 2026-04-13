@@ -75,7 +75,7 @@ def plot_top(trend_file, column_name, default_selection=None):
     )
 
     # Show in Streamlit
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig)
 
 with st.container():
     st.subheader("What problems have hackers been focused on?")

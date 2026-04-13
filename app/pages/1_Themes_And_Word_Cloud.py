@@ -47,12 +47,12 @@ col1, col2 = st.columns([1.1, 1])
 
 with col1:
     st.markdown("### Theme Chart")
-    st.bar_chart(top_themes_df, x="theme", y="count", use_container_width=True, sort=False, horizontal=True)
+    st.bar_chart(top_themes_df, x="theme", y="count", sort=False, horizontal=True)
 
 with col2:
     st.markdown("### Word Cloud")
     if wordcloud_image_path.exists():
-        st.image(str(wordcloud_image_path), use_container_width=True)
+        st.image(str(wordcloud_image_path))
     else:
         st.info(f"No word cloud image found for {year}")
 
@@ -73,7 +73,7 @@ with st.container():
                 st.metric(theme_name, current_count, delta=current_count - prev_value)
 
 with st.expander("Preview filtered theme data"):
-    st.dataframe(theme_year, use_container_width=True)
+    st.dataframe(theme_year)
 
 with st.expander("Preview top themes used in chart"):
-    st.dataframe(top_themes_df, use_container_width=True)
+    st.dataframe(top_themes_df)

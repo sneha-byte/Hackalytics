@@ -168,4 +168,4 @@ display_df = df_non_filtered[
     ["title", "geo_location", "locality", "registrations_count", "url"]
 ].sort_values("registrations_count", ascending=False)
 
-st.dataframe(display_df, use_container_width=True)
+st.dataframe(display_df)

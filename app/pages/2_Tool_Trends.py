@@ -31,7 +31,7 @@ with left:
     if top_tools_df.empty:
         st.warning(f"No tool data found for {year}.")
     else:
-        st.bar_chart(top_tools_df, x="tool", y="count", use_container_width=True, sort=False)
+        st.bar_chart(top_tools_df, x="tool", y="count", sort=False)
 
 with right:
     st.subheader(f"Tool usage in {year}")
@@ -74,4 +74,4 @@ with st.container():
 
 st.divider()
 st.subheader("Tool detail table")
-st.dataframe(top_tools_df, use_container_width=True, hide_index=True)
+st.dataframe(top_tools_df, hide_index=True)
