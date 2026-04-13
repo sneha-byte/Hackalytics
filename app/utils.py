@@ -36,20 +36,16 @@ def apply_global_css():
     st.markdown(
         """
         <style>
-        div[data-testid="stMetric"] {
-            background: light-dark(#f8fafc, #0e1117);
-            border: 1px solid #e5e7eb;
+        div.stMetric {
+            background: light-dark(#f8fafc, #2b2b2b);
+            border: 1px solid light-dark(#e5e7eb, #8f8f8f);
             border-radius: 16px;
             padding: 14px 16px;
         }
 
-        div[data-testid="stSlider"] label p {
+        div.stSlider label p {
             font-size: 1.05rem !important;
             font-weight: 700 !important;
-        }
-
-        div[data-baseweb="slider"] > div > div {
-            height: 8px !important;
         }
         </style>
         """,
